@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8" />
         <title>jstanton.io</title>
         <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon/apple-touch-icon.png') }}">
         <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon/favicon.ico') }}">
@@ -18,8 +19,13 @@
             <div class="splash_control">
                 <h1>{{ name }}</h1>
                 <p>{{ game_dev }}</p>
-                <a href="{{ enter_link }}">
+                <a href="{{ url_for('index') }}{{ query_current_lang }}">
                     <button type="button">{{ button_enter }}</button>
+                </a>
+            </div>
+            <div class="langauge_select_button">
+                <a href="{{ self_url }}{{ query_toggle_lang }}">
+                    <button type="button">{{ button_lang }}</button>
                 </a>
             </div>
     </body>

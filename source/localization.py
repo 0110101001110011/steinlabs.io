@@ -2,14 +2,21 @@
 A module that serves string values according to the provided language setting.
 '''
 
-ALLOWED_LANGUAGES = ['EN', 'JP']
+from flask import request
+
+STR_EN = 'EN'
+STR_JP = 'JP'
+ALLOWED_LANGUAGES = [STR_EN, STR_JP]
 ERROR_STRING = 'INVALID STRING REFERENCE'
 ERROR_LANG = 'INVALID LANGUAGE STRING'
+JP_QUERY_PARAMS = '?lang=JP'
 
 STRING_VALUES = {
     'name': ('James Einosuke Stanton', 'スタントン ジェームズ 瑛之助'),
     'game_developer': ('Game Developer', 'ゲーム開発者'),
-    'enter': ('Enter', '入る')
+    'enter': ('Enter', '入る'),
+    'other_lang': ('日本語', 'ENG'),
+    'about_me': ('About me', '自己紹介')
 }
 
 def get_string(string_reference: str, language: str):
@@ -45,6 +52,27 @@ def sanitize_lang_string(arg: str) -> str:
     '''
 
     if not arg or arg not in ALLOWED_LANGUAGES:
-        return 'EN'
+        return STR_EN
 
     return arg
+
+def get_lang_strings(in_request_args: request) -> dict:
+    '''
+    Takes a request arg dict (request.url) and identifies the appropriate query params and language identifier.
+
+    Returns a dictionary that looks something like this:
+
+    {
+        lang: 'EN'
+        query_param: ''
+        query_param_toggle: 'lang=JP'
+    }
+    '''
+
+    output_dictionary = {}
+
+    output_dictionary['lang'] = sanitize_lang_string(in_request_args.get('lang'))
+    output_dictionary['query_param'] = '' if output_dictionary['lang'] == STR_EN else JP_QUERY_PARAMS
+    output_dictionary['query_param_toggle'] = '' if output_dictionary['query_param'] == JP_QUERY_PARAMS else JP_QUERY_PARAMS
+
+    return output_dictionary

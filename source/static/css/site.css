@@ -1,21 +1,29 @@
 /* Font */
 body {
-    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+    font-family: "Futura", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
     background-color: #010c2b
 }
 
 /* Style the video: 100% width and height to cover the entire window */
 #splash_video {
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -o-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
     position: fixed;
-    right: 0;
-    bottom: 0;
-    min-width: 100%; 
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
     min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
 }
 
 /* Splash screen menu box */
 .splash_control {
-    color: #ffdbff;
+    color: #ffffff;
     font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
     line-height: calc(1.3em + (1.5 - 1.2) * ((100vw - 300px)/(1600 - 300)));    
     position: absolute;
@@ -24,6 +32,19 @@ body {
     width: 100%;
     transform: translate(-50%, -50%);
     text-align: center;
+    text-shadow: 0.4vh 0.4vh #0000004f;
+}
+
+/* Floating language toggle */
+.langauge_select_button {
+    color: #ffdbff;
+    font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+    line-height: calc(1.3em + (1.5 - 1.2) * ((100vw - 300px)/(1600 - 300)));    
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: auto;
+    text-align: right;
 }
 
 /* h1 padding for splash control */
@@ -32,8 +53,8 @@ body {
     padding: 1vh;
 }
 
-/* Paragraph padding for splash control */
-.splash_control p {
+/* Paragraph padding */
+p {
     margin: 0;
     padding: 0;
 }
@@ -45,7 +66,7 @@ button {
     border: solid 0.2vh #d4d4d4;
     display: inline-block;
     margin: 2vh;
-    padding: 2vh;
+    padding: 0.8em;
     font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
     line-height: 1vh;
     appearance: none;
@@ -67,4 +88,37 @@ button.active {
 
 button:focus {
     outline: none
+}
+
+#navbar {
+    overflow: hidden;
+    background-color: #00000000;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+#navbar a {
+    float: right;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 0;
+    text-decoration: none;
+}
+
+.navbar-item {
+    margin: 1vh;
+    text-align: right;
+}
+
+.body-content {
+    padding: 1vh;
+    color: #ffffff;
+}
+
+#page_body {
+    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+    margin: 0;
+    padding: 0;
 }

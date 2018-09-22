@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>jstanton.io - Index</title>
+        <title>{% block title %}{% endblock %}</title>
         <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon/apple-touch-icon.png') }}">
         <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon/favicon.ico') }}">
         <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon/favicon-16x16.png') }}">
@@ -12,7 +12,22 @@
         <meta name="theme-color" content="#d03d3d">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/site.css')}}">
     </head>
-    <body>
-        <h1>Index Page</h1>
-    </body>
+
+    <body id="page_body">
+        <div id="navbar">
+            <a href="{{ self_url }}{{ query_toggle_lang }}" class="navbar-item">{{ button_lang }}</a>
+            <a href="{{ url_for('index') }}{{ query_current_lang }}" class="navbar-item">About</a>
+            <a href="{{ url_for('splash') }}{{ query_current_lang }}" class="navbar-item">Contact</a>
+            <a href="{{ url_for('index') }}{{ query_current_lang }}" class="navbar-item">Project Index</a>
+        </div>
+
+        <div class="body-content">
+            {% block content %}
+            {% endblock %}
+            <hr/>
+            <footer>
+                <p>&copy; 2018</p>
+            </footer>
+        </div>
+</body>
 </html>
