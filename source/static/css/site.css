@@ -1,0 +1,70 @@
+/* Font */
+body {
+    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+    background-color: #010c2b
+}
+
+/* Style the video: 100% width and height to cover the entire window */
+#splash_video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+}
+
+/* Splash screen menu box */
+.splash_control {
+    color: #ffdbff;
+    font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+    line-height: calc(1.3em + (1.5 - 1.2) * ((100vw - 300px)/(1600 - 300)));    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+/* h1 padding for splash control */
+.splash_control h1 {
+    margin: 1vh;
+    padding: 1vh;
+}
+
+/* Paragraph padding for splash control */
+.splash_control p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Button */
+button {
+    color: #d4d4d4;
+    background: rgba(235, 252, 255, 0.2);
+    border: solid 0.2vh #d4d4d4;
+    display: inline-block;
+    margin: 2vh;
+    padding: 2vh;
+    font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+    line-height: 1vh;
+    appearance: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+button:hover,
+button.hover {
+    border-color: #cfcfcf;
+    background: rgba(165, 241, 255, 0.4);
+    color: #cfcfcf;
+}
+button:active,
+button.active {
+    border-color: #ffffff;
+    background: rgba(165, 241, 255, 0.3);
+    color: #ffffff;
+}
+
+button:focus {
+    outline: none
+}

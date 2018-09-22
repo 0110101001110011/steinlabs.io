@@ -1,4 +1,5 @@
 from flask import Flask
+from routing import init_routes
 
 def create_app(test: bool = False):
     '''
@@ -7,8 +8,6 @@ def create_app(test: bool = False):
     
     app = Flask(__name__)
 
-    @app.route("/")
-    def home():
-        return 'Hello, Flask!'
+    init_routes(app)
 
     return app
