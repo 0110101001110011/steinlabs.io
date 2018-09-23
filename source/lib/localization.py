@@ -12,12 +12,15 @@ ERROR_LANG = 'INVALID LANGUAGE STRING'
 JP_QUERY_PARAMS = '?lang=JP'
 
 STRING_VALUES = {
+    'site_name': ('jstanton.io', 'jstanton.io'),
     'name': ('James Einosuke Stanton', 'スタントン ジェームズ 瑛之助'),
     'game_developer': ('Game Developer', 'ゲーム開発者'),
     'enter': ('Enter', '入る'),
     'other_lang': ('日本語', 'ENG'),
-    'about_me': ('About me', '自己紹介'),
-    'powered_by_flask': ('Powered by Flask', 'FLASKと開発されたサイトです')
+    'powered_by_flask': ('Powered by Flask', 'FLASKと開発されたサイトです'),
+    'title_about_me': ('About Me', '自己紹介'),
+    'title_index': ('Index Page', '索引'),
+    'title_contact': ('Contact', '連絡方法')
 }
 
 def get_string(string_reference: str, language: str):
