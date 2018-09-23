@@ -26,7 +26,21 @@
             {% endblock %}
             <hr/>
             <footer>
-                <p>&copy; 2018</p>
+                <div id="footer-icons">
+                    <a href="{{ url_github }}">
+                        <img src="{{ url_for('static', filename='cdn/icons/github_light.png') }}" alt="GITHUB">
+                    </a>
+                    <a href="{{ url_linkedin }}">
+                        <img src="{{ url_for('static', filename='cdn/icons/linkedin_light.png') }}" alt="LINKEDIN">
+                    </a>
+                    <a href="mailto:{{ email_address }}">
+                        <img src="{{ url_for('static', filename='cdn/icons/email_light.png') }}" alt="EMAIL">
+                    </a>
+                </div>
+                <p>&copy; 2018 {{ name }}</p>
+                <p>
+                    <a href="http://flask.pocoo.org/">{{ powered_by_flask }}</a>  
+                </p>
             </footer>
         </div>
 </body>

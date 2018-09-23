@@ -1,5 +1,5 @@
 env/
 __pycache__
 .vscode/
-source/static/video/
-source/static/images/
+source/static/cdn/video/
+source/static/cdn/images/

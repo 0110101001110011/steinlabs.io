@@ -16,7 +16,8 @@ STRING_VALUES = {
     'game_developer': ('Game Developer', 'ゲーム開発者'),
     'enter': ('Enter', '入る'),
     'other_lang': ('日本語', 'ENG'),
-    'about_me': ('About me', '自己紹介')
+    'about_me': ('About me', '自己紹介'),
+    'powered_by_flask': ('Powered by Flask', 'FLASKと開発されたサイトです')
 }
 
 def get_string(string_reference: str, language: str):

@@ -54,7 +54,7 @@ body {
 }
 
 /* Paragraph padding */
-p {
+.splash_control p {
     margin: 0;
     padding: 0;
 }
@@ -102,7 +102,6 @@ button:focus {
     float: right;
     display: block;
     color: #f2f2f2;
-    text-align: center;
     padding: 0;
     text-decoration: none;
 }
@@ -121,4 +120,34 @@ button:focus {
     font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
     margin: 0;
     padding: 0;
+}
+
+/* Footer */
+footer a {
+    color: #ff82e0;
+    text-align: center;
+    padding: 0;
+    text-decoration: none;
+    margin: 0;
+    font-size: calc(10px + (16 - 10) * ((100vw - 300px) / (1600 - 300)));
+}
+
+footer p {
+    color: #f2f2f2;
+    text-align: center;
+    padding: 0;
+    text-decoration: none;
+    margin: 0;
+    font-size: calc(10px + (16 - 10) * ((100vw - 300px) / (1600 - 300)));
+}
+
+#footer-icons {
+    display: table;
+    margin: 0 auto;
+}
+
+#footer-icons img {
+    width: 3vh;
+    height: auto;
+    margin: 0 1vh;
 }
