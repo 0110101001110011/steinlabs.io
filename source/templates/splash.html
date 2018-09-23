@@ -13,7 +13,7 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/site.css')}}">
     </head>
     <body>
-            <video autoplay muted loop id="splash_video">
+            <video autoplay muted preload loop id="splash_video">
                 <source src="{{ url_for('static', filename='cdn/video/starlight_angel.mp4') }}" type="video/mp4">
             </video>                
             <div class="splash_control">
