@@ -4,7 +4,7 @@ Defines routes for this site
 
 from datetime import datetime
 from flask import render_template, Flask, request
-from .constants import URL_GITHUB, URL_LINKEDIN, MAIL_ADDDRESS
+from .constants import URL_GITHUB, URL_LINKEDIN, MAIL_ADDDRESS, URL_SPLASH_VIDEO
 from .localization import get_string, get_lang_strings, get_default_kwargs
 
 def init_routes(app: Flask):
@@ -25,7 +25,8 @@ def splash():
         button_lang=get_string('other_lang', lang_strings.get('lang')).upper(),
         query_toggle_lang=lang_strings.get('query_param_toggle'),
         query_current_lang=lang_strings.get('query_param'),
-        self_url=request.base_url
+        self_url=request.base_url,
+        gfy_splash_video_url=URL_SPLASH_VIDEO
     )
 
 def index():
