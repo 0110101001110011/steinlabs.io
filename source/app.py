@@ -1,5 +1,5 @@
 from flask import Flask
-from routing import init_routes
+from lib.routing import init_routes
 
 def create_app(test: bool = False):
     '''
