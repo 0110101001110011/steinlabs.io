@@ -12,7 +12,7 @@ def init_routes(app: Flask):
 
 def splash():
     lang_strings = get_lang_strings(request.args)
-    print(lang_strings.get('toggle_lang_url'))
+
     return render_template('splash.html',
         name=get_string('name', lang_strings.get('lang')).upper(),
         game_dev=get_string('game_developer', lang_strings.get('lang')),
@@ -30,6 +30,7 @@ def index():
     
 def about():
     lang_strings = get_lang_strings(request.args)
+    
     return render_template('project.html',
         page_title=get_string('about_me', lang_strings.get('lang')), 
         button_lang=get_string('other_lang', lang_strings.get('lang')).upper(),
