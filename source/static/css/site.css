@@ -74,7 +74,7 @@ button {
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
 
-    color: #d4d4d4;
+    color: #ffffff;
     background: rgba(0,0,0,0);
     border: solid 0.2vh #ffffff;
     display: inline-block;

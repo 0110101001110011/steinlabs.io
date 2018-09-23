@@ -2,7 +2,9 @@
 A module that serves string values according to the provided language setting.
 '''
 
+from datetime import datetime
 from flask import request
+from .constants import URL_GITHUB, URL_LINKEDIN, MAIL_ADDDRESS
 
 STR_EN = 'EN'
 STR_JP = 'JP'
@@ -22,6 +24,28 @@ STRING_VALUES = {
     'title_index': ('Index Page', '索引'),
     'title_contact': ('Contact', '連絡方法')
 }
+
+def get_default_kwargs(lang_strings: dict):
+    '''
+    Returns a dictionary representing the kwargs that are always passed to html rendering tasks
+    '''
+    kwargs_out = dict(
+        button_lang=get_string('other_lang', lang_strings.get('lang')).upper(),
+        query_toggle_lang=lang_strings.get('query_param_toggle'),
+        query_current_lang=lang_strings.get('query_param'),
+        self_url=request.base_url,
+        name=get_string('name', lang_strings.get('lang')),
+        current_year=datetime.now().year,
+        powered_by_flask=get_string('powered_by_flask', lang_strings.get('lang')),
+        url_github=URL_GITHUB,
+        url_linkedin=URL_LINKEDIN,
+        email_address=MAIL_ADDDRESS,
+        link_text_about_me=get_string('title_about_me', lang_strings.get('lang')),
+        link_text_index=get_string('title_index', lang_strings.get('lang')),
+        link_text_contact=get_string('title_contact', lang_strings.get('lang'))
+    )
+
+    return kwargs_out
 
 def get_string(string_reference: str, language: str):
     '''
