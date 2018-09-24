@@ -1,7 +1,14 @@
+:root {
+    --color-bg-blue:#010c2b;
+    --color-teal:#25a9c0;
+    --color-pink:
+}
+
+
 /* Font */
 body {
     font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-    background-color: #010c2b
+    background-color: var(--color-bg-blue)
 }
 
 a {
@@ -128,10 +135,19 @@ b {
 }
 
 .body-content {
-    margin: 40px auto;
+    margin: 60px 20% 0 20%;
     padding: 1vw;
     color: #ffffff;
     font-size: calc(10px + (16 - 10) * ((100vw - 300px) / (1600 - 300)));
+}
+
+@media only screen and (max-width: 600px) {
+    .body-content {
+        margin: 60px 2% 0 2%;
+        padding: 1vw;
+        color: #ffffff;
+        font-size: calc(10px + (16 - 10) * ((100vw - 300px) / (1600 - 300)));
+    }
 }
 
 #page_body {
@@ -235,8 +251,7 @@ h3 {
 }
 
 .navbar {
-    /* overflow: hidden; */
-    background-color: rgba(11, 32, 80, 0.9);
+    background-color: white;
     position: fixed;
     right: 0;
     left: 0;
@@ -245,12 +260,16 @@ h3 {
 
 .navbar a {
     float: right;
-    font-size: 16px;
-    color: white;
+    font-size: calc(8px + (16 - 8) * ((100vw - 300px) / (1600 - 300)));
+    color: var(--color-bg-blue);
     text-align: center;
-    padding: 14px 16px;
+    padding: 20px 24px;
     text-decoration: none;
     line-height: 2vh;
+    -webkit-transition: color 0.2s ease;
+    -moz-transition: color 0.2s ease;
+    -o-transition: color 0.2s ease;
+    transition: color 0.2s ease;
 }
 
 .dropdown {
@@ -259,43 +278,72 @@ h3 {
 }
 
 .dropdown .dropbtn {
-    font-size: 16px;    
+    font-size: calc(8px + (16 - 8) * ((100vw - 300px) / (1600 - 300)));   
     border: none;
     outline: none;
-    color: white;
-    padding: 14px 16px;
+    color: var(--color-bg-blue);
+    padding: 20px 24px;
     background-color: inherit;
     font-family: inherit;
     margin: 0;
     line-height: 2vh;
+    -webkit-transition: color 0.2s ease;
+    -moz-transition: color 0.2s ease;
+    -o-transition: color 0.2s ease;
+    transition: color 0.2s ease;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
-    color: #ff82e0;
+.navbar a:hover, .dropbtn:hover, .dropdown:hover  {
+    color: var(--color-teal);
+    -webkit-transition: color 0.2s ease;
+    -moz-transition: color 0.2s ease;
+    -o-transition: color 0.2s ease;
+    transition: color 0.2s ease;
 }
 
 .dropdown-content {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
     position: absolute;
-    background-color: rgba(11, 32, 80, 0.9);
+    background-color: rgba(255, 255, 255, 0.9);
     width: 100%;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 0 0 0 1vw;
+    overflow: hidden;
     z-index: 1;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .dropdown-content a {
     float: none;
-    color: white;
+    color: var(--color-bg-blue);
     padding: 12px 16px;
     text-decoration: none;
     display: block;
     text-align: left;
+    -webkit-transition: color 0.2s ease;
+    -moz-transition: color 0.2s ease;
+    -o-transition: color 0.2s ease;
+    transition: color 0.2s ease;
 }
 
 .dropdown-content a:hover {
-    color: #ff82e0;
+    color: var(--color-teal);
+    background-color: rgba(255, 255, 255, 1);
+    -webkit-transition: color 0.2s ease;
+    -moz-transition: color 0.2s ease;
+    -o-transition: color 0.2s ease;
+    transition: color 0.2s ease;
 }
 
 .dropdown:hover .dropdown-content {
-    display: block;
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition: visibility 0.2s, opacity 0.2s ease;
+    -moz-transition: visibility 0.2s, opacity 0.2s ease;
+    -o-transition: visibility 0.2s, opacity 0.2s ease;
+    transition: visibility 0.2s, opacity 0.2s ease;
 }
