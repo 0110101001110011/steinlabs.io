@@ -4,7 +4,8 @@ A module that serves string values according to the provided language setting.
 
 from datetime import datetime
 from flask import request
-from .constants import URL_GITHUB, URL_LINKEDIN, MAIL_ADDDRESS
+from .constants import URL_GITHUB, URL_LINKEDIN, MAIL_ADDDRESS, wrap_color, COLOR_PINK
+from .text_blocks import about_me
 
 STR_EN = 'EN'
 STR_JP = 'JP'
@@ -19,10 +20,12 @@ STRING_VALUES = {
     'game_developer': ('Game Developer', 'ゲーム開発者'),
     'enter': ('Enter', '入る'),
     'other_lang': ('日本語', 'ENG'),
-    'powered_by_flask': ('Powered by Flask', 'FLASKと開発されたサイトです'),
+    'powered_by_flask': ('Powered by {}'.format(wrap_color('Flask', COLOR_PINK)), '{}と開発されたサイトです'.format(wrap_color('FLASK', COLOR_PINK))),
     'title_about_me': ('About Me', '自己紹介'),
     'title_index': ('Index Page', '索引'),
-    'title_contact': ('Contact', '連絡方法')
+    'title_contact': ('Contact', '連絡方法'),
+    'nav_dropdown_text': ('Navigation', 'ナビゲーション'),
+    'about_me_content': (about_me.TEXT_EN.format(highlight_color=COLOR_PINK), about_me.TEXT_JP.format(highlight_color=COLOR_PINK))
 }
 
 def get_default_kwargs(lang_strings: dict):
@@ -42,7 +45,9 @@ def get_default_kwargs(lang_strings: dict):
         email_address=MAIL_ADDDRESS,
         link_text_about_me=get_string('title_about_me', lang_strings.get('lang')),
         link_text_index=get_string('title_index', lang_strings.get('lang')),
-        link_text_contact=get_string('title_contact', lang_strings.get('lang'))
+        link_text_contact=get_string('title_contact', lang_strings.get('lang')),
+        nav_dropdown_text=get_string('nav_dropdown_text', lang_strings.get('lang')),
+        site_name=get_string('site_name', lang_strings.get('lang'))
     )
 
     return kwargs_out

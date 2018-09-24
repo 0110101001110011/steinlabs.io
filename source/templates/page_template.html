@@ -11,18 +11,25 @@
         <meta name="msapplication-TileColor" content="#00aba9">
         <meta name="theme-color" content="#d03d3d">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/site.css')}}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
-
     <body id="page_body">
-        <div id="navbar">
-            <a href="{{ self_url }}{{ query_toggle_lang }}" class="navbar-item">{{ button_lang }}</a>
-            <a href="{{ url_for('about') }}{{ query_current_lang }}" class="navbar-item">{{ link_text_about_me }}</a>
-            <a href="{{ url_for('contact') }}{{ query_current_lang }}" class="navbar-item">{{ link_text_contact }}</a>
-            <a href="{{ url_for('index') }}{{ query_current_lang }}" class="navbar-item">{{ link_text_index }}</a>
+        <div class="navbar">
+            <a href="{{ self_url }}{{ query_toggle_lang }}">{{ button_lang }}</a>
+            <div class="dropdown">
+                <button class="dropbtn">{{ nav_dropdown_text }} 
+                    <i>▼</i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('index') }}{{ query_current_lang }}">{{ link_text_index }}</a>
+                    <a href="{{ url_for('about') }}{{ query_current_lang }}">{{ link_text_about_me }}</a>
+                    <a href="{{ url_for('contact') }}{{ query_current_lang }}">{{ link_text_contact }}</a>
+                </div>
+            </div> 
+            <a style="float:left" href="{{ self_url }}">{{ site_name }}</a>
         </div>
-
         <div class="body-content">
-            <h2>{{ content_title }}</h2>
+            <h2>{{ content_title|safe }}</h2>
             {% block content %}
             {% endblock %}
             <hr/>
@@ -40,7 +47,7 @@
                 </div>
                 <p>&copy; {{ current_year }} {{ name }}</p>
                 <p>
-                    <a href="http://flask.pocoo.org/">{{ powered_by_flask }}</a>  
+                    <a href="http://flask.pocoo.org/">{{ powered_by_flask|safe }}</a>  
                 </p>
             </footer>
         </div>

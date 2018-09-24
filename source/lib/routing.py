@@ -4,7 +4,7 @@ Defines routes for this site
 
 from datetime import datetime
 from flask import render_template, Flask, request
-from .constants import URL_GITHUB, URL_LINKEDIN, MAIL_ADDDRESS, URL_SPLASH_VIDEO
+from .constants import URL_GITHUB, URL_LINKEDIN, MAIL_ADDDRESS, URL_SPLASH_VIDEO, wrap_color, COLOR_PINK
 from .localization import get_string, get_lang_strings, get_default_kwargs
 
 def init_routes(app: Flask):
@@ -35,7 +35,7 @@ def index():
 
     return render_template('info_page.html', **default_kwargs,
         content_title=get_string('title_index', lang_strings.get('lang')),
-        page_title=get_string('site_name', lang_strings.get('lang')) + '-' + get_string('title_index', lang_strings.get('lang')), 
+        page_title=get_string('site_name', lang_strings.get('lang')) + ' - ' + get_string('title_index', lang_strings.get('lang')), 
         text_content="HELLO WORLD - INDEX"
     )
     
@@ -45,8 +45,8 @@ def about():
 
     return render_template('info_page.html', **default_kwargs,
         content_title=get_string('title_about_me', lang_strings.get('lang')),
-        page_title=get_string('site_name', lang_strings.get('lang')) + '-' + get_string('title_about_me', lang_strings.get('lang')), 
-        text_content="HELLO WORLD - ABOUT"
+        page_title=get_string('site_name', lang_strings.get('lang')) + ' - ' + get_string('title_about_me', lang_strings.get('lang')), 
+        text_content=get_string('about_me_content', lang_strings.get('lang'))
     )
 
 def contact():
@@ -55,6 +55,6 @@ def contact():
 
     return render_template('info_page.html', **default_kwargs,
         content_title=get_string('title_contact', lang_strings.get('lang')),
-        page_title=get_string('site_name', lang_strings.get('lang')) + '-' + get_string('title_contact', lang_strings.get('lang')), 
+        page_title=get_string('site_name', lang_strings.get('lang')) + ' - ' + get_string('title_contact', lang_strings.get('lang')), 
         text_content="HELLO WORLD - CONTACT"
     )
