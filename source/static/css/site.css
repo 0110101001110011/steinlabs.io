@@ -1,7 +1,7 @@
 :root {
-    --color-bg-blue:#010c2b;
-    --color-teal:#25a9c0;
-    --color-pink:
+    --color-bg-blue: #020d1a;
+    --color-teal: #25a9c0;
+    --color-pink: #ff82e0;
 }
 
 
@@ -36,11 +36,11 @@ b {
     width: auto;
     height: auto;
     z-index: -100;
-    -webkit-animation: fadein 4s; /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadein 4s; /* Firefox < 16 */
-    -ms-animation: fadein 4s; /* Internet Explorer */
-    -o-animation: fadein 4s; /* Opera < 12.1 */
-    animation: fadein 4s;
+    -webkit-animation: fadein 6s ease-out; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 6s ease-out; /* Firefox < 16 */
+    -ms-animation: fadein 6s ease-out; /* Internet Explorer */
+    -o-animation: fadein 6s ease-out; /* Opera < 12.1 */
+    animation: fadein 6s ease-out;
 }
 
 /* Splash screen menu box */
