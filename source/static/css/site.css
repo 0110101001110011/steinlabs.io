@@ -4,11 +4,16 @@
     --color-pink: #ff82e0;
 }
 
-
-/* Font */
 body {
     font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-    background-color: var(--color-bg-blue)
+    background-color: var(--color-bg-blue);
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
 }
 
 a {
@@ -21,40 +26,20 @@ b {
     font-weight: 600;
 }
 
-/* Style the video: 100% width and height to cover the entire window */
-#splash_video {
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -ms-transform: translateX(-50%) translateY(-50%);
-    -o-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: -100;
-    -webkit-animation: fadein 6s ease-out; /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadein 6s ease-out; /* Firefox < 16 */
-    -ms-animation: fadein 6s ease-out; /* Internet Explorer */
-    -o-animation: fadein 6s ease-out; /* Opera < 12.1 */
-    animation: fadein 6s ease-out;
-}
-
 /* Splash screen menu box */
 .splash_control {
     color: #ffffff;
-    font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
-    line-height: calc(1.3em + (1.5 - 1.2) * ((100vw - 300px)/(1600 - 300)));    
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    transform: translate(-50%, -50%);
+    font-size: calc(16px + (28 - 16) * ((100vw - 300px) / (1600 - 300)));
     text-align: center;
-    text-shadow: 0.1em 0.1em rgba(0, 0, 0, 0.3);
+    text-shadow: 0.1em 0.1em rgba(0, 0, 0, 0.6);
+    display: table-cell;
+    height: 100%;
+    vertical-align: middle;
+}
+.wrapper {
+    height: 100%;
+    width: 100%;
+    display: table;
 }
 
 /* Floating language toggle */
@@ -71,22 +56,16 @@ b {
 
 /* h1 padding for splash control */
 .splash_control h1 {
-    margin: 1vw;
-    padding: 1vw;
+    margin: 0;
+    padding: 0;
 }
 
 .splash_control p {
     font-size: calc(10px + (20 - 10) * ((100vw - 300px) / (1600 - 300)));
     font-style: normal;
-    margin: 1vw;
-    padding: 1vw;
-    text-shadow: none;
-}
-
-/* Paragraph padding */
-.splash_control p {
     margin: 0;
     padding: 0;
+    text-shadow: 0.05em 0.05em rgba(0, 0, 0, 0.6);
 }
 
 /* Button */
@@ -135,19 +114,12 @@ b {
 }
 
 .body-content {
-    margin: 60px 20% 0 20%;
-    padding: 1vw;
+    max-width: 800px;
+    margin: auto;
+    margin-top: 30px;
+    padding: 3vw;
     color: #ffffff;
-    font-size: calc(10px + (16 - 10) * ((100vw - 300px) / (1600 - 300)));
-}
-
-@media only screen and (max-width: 600px) {
-    .body-content {
-        margin: 60px 2% 0 2%;
-        padding: 1vw;
-        color: #ffffff;
-        font-size: calc(10px + (16 - 10) * ((100vw - 300px) / (1600 - 300)));
-    }
+    font-size: calc(10px + (14 - 10) * ((100vw - 300px) / (1600 - 300)));
 }
 
 #page_body {
@@ -196,21 +168,6 @@ footer p {
     user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
-.youtube-video-container {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%;
-}
-
-.youtube-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
 h2 {
     margin: 0;
     font-size: calc(20px + (26 - 20) * ((100vw - 300px) / (1600 - 300)));
@@ -256,20 +213,41 @@ h3 {
     right: 0;
     left: 0;
     top: 0;
+    border-bottom: 1px solid var(--color-teal);
 }
 
 .navbar a {
     float: right;
-    font-size: calc(8px + (16 - 8) * ((100vw - 300px) / (1600 - 300)));
+    font-size: calc(8px + (14 - 8) * ((100vw - 300px) / (1600 - 300)));
     color: var(--color-bg-blue);
     text-align: center;
     padding: 20px 24px;
     text-decoration: none;
-    line-height: 2vh;
+    line-height: 14px;
     -webkit-transition: color 0.2s ease;
     -moz-transition: color 0.2s ease;
     -o-transition: color 0.2s ease;
     transition: color 0.2s ease;
+}
+
+.navbar-text {
+    float: left;
+    font-size: calc(8px + (14 - 8) * ((100vw - 300px) / (1600 - 300)));
+    color: var(--color-bg-blue);
+    text-align: center;
+    padding: 20px 5px;
+    text-decoration: none;
+    line-height: 14px;
+    -webkit-transition: color 0.2s ease;
+    -moz-transition: color 0.2s ease;
+    -o-transition: color 0.2s ease;
+    transition: color 0.2s ease;
+}
+
+.navbar a.navbar-left {
+    float: left;
+    font-style: italic;
+    padding: 20px 5px 20px 24px;
 }
 
 .dropdown {
@@ -278,7 +256,7 @@ h3 {
 }
 
 .dropdown .dropbtn {
-    font-size: calc(8px + (16 - 8) * ((100vw - 300px) / (1600 - 300)));   
+    font-size: calc(8px + (14 - 8) * ((100vw - 300px) / (1600 - 300)));
     border: none;
     outline: none;
     color: var(--color-bg-blue);
@@ -286,7 +264,7 @@ h3 {
     background-color: inherit;
     font-family: inherit;
     margin: 0;
-    line-height: 2vh;
+    line-height: 14px;
     -webkit-transition: color 0.2s ease;
     -moz-transition: color 0.2s ease;
     -o-transition: color 0.2s ease;
@@ -308,7 +286,7 @@ h3 {
     background-color: rgba(255, 255, 255, 0.9);
     width: 100%;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    border-radius: 0 0 0 1vw;
+    border-radius: 0 0 0 0.5vw;
     overflow: hidden;
     z-index: 1;
     -webkit-transition: all 0.2s ease;
@@ -333,17 +311,87 @@ h3 {
 .dropdown-content a:hover {
     color: var(--color-teal);
     background-color: rgba(255, 255, 255, 1);
-    -webkit-transition: color 0.2s ease;
-    -moz-transition: color 0.2s ease;
-    -o-transition: color 0.2s ease;
-    transition: color 0.2s ease;
+    -webkit-transition: color 0.2s ease-out;
+    -moz-transition: color 0.2s ease-out;
+    -ms-transition: color 0.2s ease-out;
+    -o-transition: color 0.2s ease-out;
+    transition: color 0.2s ease-out;
 }
 
 .dropdown:hover .dropdown-content {
     visibility: visible;
     opacity: 1;
-    -webkit-transition: visibility 0.2s, opacity 0.2s ease;
-    -moz-transition: visibility 0.2s, opacity 0.2s ease;
-    -o-transition: visibility 0.2s, opacity 0.2s ease;
-    transition: visibility 0.2s, opacity 0.2s ease;
+    -webkit-transition: visibility 0.2s, opacity 0.2s ease-out;
+    -moz-transition: visibility 0.2s, opacity 0.2s ease-out;
+    -ms-transition: visibility 0.2s, opacity 0.2s ease-out;
+    -o-transition: visibility 0.2s, opacity 0.2s ease-out;
+    transition: visibility 0.2s, opacity 0.2s ease-out;
+}
+
+.video-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden; 
+}
+
+.video-wrapper video {
+    width: 100vw;
+    height: 56.25vw; /* Given a 16:9 aspect ratio, 9/16*100 = 56.25 */
+    min-height: 100vh;
+    min-width: 177.77vh; /* Given a 16:9 aspect ratio, 16/9*100 = 177.77 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -o-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.color-fade-out {
+    position: fixed;
+    background-color: var(--color-bg-blue);
+    height: 100%;
+    width: 100%;
+    -webkit-animation: fadeout 2s ease-in; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadeout 2s ease-in; /* Firefox < 12 */
+    -ms-animation: fadeout 2s ease-in; /* Internet Explorer */
+    -o-animation: fadeout 2s ease-in; /* Opera < 12.1 */
+    animation: fadeout 2s ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Firefox < 06 */
+@-moz-keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Safari, Chrome and Opera > 02.0 */
+@-webkit-keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Opera < 02.0 */
+@-o-keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
 }

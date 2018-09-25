@@ -8,6 +8,6 @@ def create_app(test: bool = False):
     
     app = Flask(__name__)
 
-    init_routes(app)
+    init_routes(app)   
 
     return app

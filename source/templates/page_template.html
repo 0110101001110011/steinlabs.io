@@ -26,7 +26,9 @@
                     <a href="{{ url_for('contact') }}{{ query_current_lang }}">{{ link_text_contact }}</a>
                 </div>
             </div> 
-            <a style="float:left; font-style: italic" href="{{ self_url }}">{{ site_name }}</a>
+            <a class="navbar-left" href="./">{{ site_name }}</a>
+            <div class="navbar-text">▶</div>
+            <div class="navbar-text">{{ navbar_locator_text }}</div>
         </div>
         <div class="body-content">
             <h2>{{ content_title|safe }}</h2>
