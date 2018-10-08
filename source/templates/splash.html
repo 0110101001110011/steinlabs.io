@@ -3,27 +3,32 @@
     <head>
         <meta charset="utf-8" />
         <title>{{ page_title }}</title>
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='cdn/icons/favicon/apple-touch-icon.png') }}">
-        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='cdn/icons/favicon/favicon.ico') }}">
-        <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='cdn/icons/favicon/favicon-16x16.png') }}">
-        <link rel="manifest" href="{{ url_for('static', filename='cdn/icons/favicon/site.webmanifest') }}">
-        <link rel="mask-icon" href="{{ url_for('static', filename='cdn/icons/favicon/safari-pinned-tab.svg') }}" color="#087dff">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='icons/favicon/apple-touch-icon.png') }}">
+        <link rel="shortcut icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='icons/favicon/favicon.ico') }}">
+        <link rel="shortcut icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='icons/favicon/favicon-16x16.png') }}">
+        <link rel="manifest" href="{{ url_for('static', filename='icons/favicon/site.webmanifest') }}">
+        <link rel="mask-icon" href="{{ url_for('static', filename='icons/favicon/safari-pinned-tab.svg') }}" color="#087dff">
         <meta name="msapplication-TileColor" content="#00aba9">
         <meta name="theme-color" content="#d03d3d">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/site.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/site.css')}}">      
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="{{ url_for('static', filename='js/splash.js') }}"></script>
     </head>
     <body>
         <div class="video-wrapper" center no-repeat>
-            <video autoplay muted loop>
-                <source src="{{ video_url }}" type="video/mp4">
+            <video autoplay muted loop preload="auto" id="splash-video">
+                <source src="{{ splash_video_url }}" type="video/mp4">
+                <source src="{{ splash_image_url }}" type="image/jpg">
             </video>
-            <div class="color-fade-out"></div>
+            <div class="video-fader black-overlay" id="video-fader"></div>
         </div>
         <div class="wrapper">
             <div class="splash_control">
-                <h1 class="noselect">{{ name }}</h1>
+                <div class="word-break-control noselect">
+                    {{ splash_name_block|safe }}
+                </div>
                 <p class="noselect">{{ game_dev }}</p>
-                <a href="{{ url_for('index') }}{{ query_current_lang }}">
+                <a href="{{ url_for('about') }}{{ query_current_lang }}">
                     <button class="noselect splashbutton" type="button">{{ button_enter }}</button>
                 </a>
             </div>
@@ -34,7 +39,4 @@
             </div>
         </div>
     </body>
-    <footer>
-        <script> </script>
-    </footer>
 </html>

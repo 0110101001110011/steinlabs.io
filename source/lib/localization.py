@@ -3,9 +3,8 @@ A module that serves string values according to the provided language setting.
 '''
 
 from datetime import datetime
-from flask import request
-from .constants import URL_GITHUB, URL_LINKEDIN, MAIL_ADDDRESS, wrap_color, COLOR_PINK
-from .text_blocks import about_me
+from flask import request, url_for
+from .constants import URL_GITHUB, URL_LINKEDIN, MAIL_ADDDRESS, SPLASH_VIDEO_CDN_PATH, SPLASH_ALT_IMAGE_CDN_PATH, wrap_color, COLOR
 
 STR_EN = 'EN'
 STR_JP = 'JP'
@@ -16,16 +15,19 @@ JP_QUERY_PARAMS = '?lang=JP'
 
 STRING_VALUES = {
     'site_name': ('jstanton.io', 'jstanton.io'),
-    'name': ('James Einosuke Stanton', 'スタントン ジェームズ 瑛之助'),
+    'splash_name': ('<div class="word-break-control-inner"><div class="word-break-word">James</div><div class="word-break-word">Einosuke</div></div><div class="word-break-word">Stanton</div>', '<div class="word-break-word">スタントン</div><div class="word-break-control-inner"><div class="word-break-word">ジェームズ</div><div class="word-break-word">瑛之助</div></div>'),
+    'name': ('James Einosuke Stanton', 'スタントン ジェームズ&nbsp;瑛之助'),
     'game_developer': ('Game Developer', 'ゲーム開発者'),
     'enter': ('Enter', '入る'),
     'other_lang': ('日本語', 'ENG'),
-    'powered_by_flask': ('Powered by {}'.format(wrap_color('Flask', COLOR_PINK)), '{}と開発されたサイトです'.format(wrap_color('FLASK', COLOR_PINK))),
+    'about_this_site': (wrap_color('About this site', COLOR['NEONTEAL']), wrap_color('このサイトについて', COLOR['NEONTEAL'])),
     'title_about_me': ('About Me', '自己紹介'),
-    'title_index': ('Index Page', '索引'),
+    'title_projects': ('Projects', '作品'),
     'title_contact': ('Contact', '連絡方法'),
-    'nav_dropdown_text': ('Navigation', 'ナビゲーション'),
-    'about_me_content': (about_me.TEXT_EN.format(highlight_color=COLOR_PINK), about_me.TEXT_JP.format(highlight_color=COLOR_PINK))
+    'title_cv': ('CV', '履歴書'),
+    'title_site_info': ('About this site', 'このサイトについて'),
+    'info_text': ('Info', '情報'),
+    'lang_text': ('言語', 'Language')
 }
 
 def get_default_kwargs(lang_strings: dict):
@@ -39,15 +41,35 @@ def get_default_kwargs(lang_strings: dict):
         self_url=request.base_url,
         name=get_string('name', lang_strings.get('lang')),
         current_year=datetime.now().year,
-        powered_by_flask=get_string('powered_by_flask', lang_strings.get('lang')),
-        url_github=URL_GITHUB,
-        url_linkedin=URL_LINKEDIN,
-        email_address=MAIL_ADDDRESS,
+        about_this_site=get_string('about_this_site', lang_strings.get('lang')),
         link_text_about_me=get_string('title_about_me', lang_strings.get('lang')),
-        link_text_index=get_string('title_index', lang_strings.get('lang')),
+        link_text_projects=get_string('title_projects', lang_strings.get('lang')),
         link_text_contact=get_string('title_contact', lang_strings.get('lang')),
+        link_text_cv=get_string('title_cv', lang_strings.get('lang')),
         nav_dropdown_text=get_string('nav_dropdown_text', lang_strings.get('lang')),
-        site_name=get_string('site_name', lang_strings.get('lang'))
+        site_name=get_string('site_name', lang_strings.get('lang')),
+        info_text=get_string('info_text', lang_strings.get('lang')),
+        lang_text=get_string('lang_text', lang_strings.get('lang'))
+    )
+
+    return kwargs_out
+
+def get_splash_kwargs(lang_strings: dict):
+    '''
+    Returns a dictionary representing the kwargs that are always passed to the splash screen rendering task
+    '''
+    kwargs_out = dict(    
+        page_title= get_string('site_name', lang_strings.get('lang')), 
+        splash_name_block=get_string('splash_name', lang_strings.get('lang')),
+        game_dev=get_string('game_developer', lang_strings.get('lang')).upper(),
+        button_enter=get_string('enter', lang_strings.get('lang')).upper(),
+        link_enter=request.url_root + 'projects' + lang_strings.get('query_param'), 
+        button_lang=get_string('other_lang', lang_strings.get('lang')).upper(),
+        query_toggle_lang=lang_strings.get('query_param_toggle'),
+        query_current_lang=lang_strings.get('query_param'),
+        self_url=request.base_url,
+        splash_video_url=url_for('static', filename=SPLASH_VIDEO_CDN_PATH),
+        splash_image_url=url_for('static', filename=SPLASH_ALT_IMAGE_CDN_PATH)
     )
 
     return kwargs_out
