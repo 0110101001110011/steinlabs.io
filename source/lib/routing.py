@@ -49,9 +49,9 @@ def site_info():
 
     return render_template('siteinfo/siteinfo' + lang_strings.get('lang') + '.html' , **default_kwargs,
         content_title=get_string('title_site_info', lang_strings.get('lang')),
-        page_title=get_string('site_name', lang_strings.get('lang')) + ' - ' + get_string('title_about_me', lang_strings.get('lang')), 
+        page_title=get_string('site_name', lang_strings.get('lang')) + ' - ' + get_string('title_site_info', lang_strings.get('lang')), 
         text_content=get_string('about_me_content', lang_strings.get('lang')),
-        navbar_locator_text=get_string('title_about_me', lang_strings.get('lang')).lower()
+        navbar_locator_text=get_string('title_site_info', lang_strings.get('lang')).lower()
     )
 
 def contact():
@@ -61,7 +61,6 @@ def contact():
     return render_template('contact/contact' + lang_strings.get('lang') + '.html' , **default_kwargs,
         content_title=get_string('title_contact', lang_strings.get('lang')),
         page_title=get_string('site_name', lang_strings.get('lang')) + ' - ' + get_string('title_contact', lang_strings.get('lang')), 
-        text_content="HELLO WORLD - CONTACT",
         navbar_locator_text=get_string('title_contact', lang_strings.get('lang')).lower()
     )
 
@@ -71,7 +70,6 @@ def cv():
 
     return render_template('cv/cv' + lang_strings.get('lang') + '.html' , **default_kwargs,
         content_title=get_string('title_cv', lang_strings.get('lang')),
-        page_title=get_string('site_name', lang_strings.get('lang')) + ' - ' + get_string('title_projects', lang_strings.get('lang')), 
-        text_content="HELLO WORLD - projects",
-        navbar_locator_text=get_string('title_projects', lang_strings.get('lang')).lower()
+        page_title=get_string('site_name', lang_strings.get('lang')) + ' - ' + get_string('title_cv', lang_strings.get('lang')), 
+        navbar_locator_text=get_string('title_cv', lang_strings.get('lang')).lower()
     )
