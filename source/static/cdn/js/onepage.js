@@ -2,7 +2,8 @@ var SCROLL_TARGET = document.getElementById("scroll-target");
 var LAST_Y_POS = 0;
 var LAST_SCROLL_DIR = 'UP';
 var CURRENT_INDEX = 0;
-var MAX_INDEX = 2;
+var MAX_INDEX = Math.max(document.getElementsByClassName("section-base").length - 1, 0);
+console.log(MAX_INDEX);
 
 // Credit https://coderwall.com/p/hujlhg/smooth-scrolling-without-jquery
 var smooth_scroll_to = function (element, target, duration) {
@@ -97,6 +98,8 @@ SCROLL_TARGET.addEventListener('touchmove', function (e) {
     e.preventDefault();
     scroll(LAST_Y_POS - e.changedTouches[0].clientY);
 });
+
+// TODO Add other scrolling methods such as middle click and arrow keys and pageupdown
 
 window.onresize = function(event) {
     target = SCROLL_TARGET.scrollTop;
