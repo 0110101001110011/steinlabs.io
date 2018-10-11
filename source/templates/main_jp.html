@@ -16,11 +16,25 @@
 </head>
 
 <body>
-    <div class="entry-wrapper">
-        <h4>スタントン ジェームズ 瑛之助</h4>
-        <p>ゲーム開発者</p>
-        <a href="{{ url_for('site_en') }}">入る</a>
-    </div>
+    <div class="page-outer">
+        <div class="page-inner" id="scroll-target">
+            <div id="s0" class="section-base section-top">
+                <h2 class="top noselect">スタントン<span style="font-size: 0;"> </span>ジェームズ<span style="font-size: 0;"> </span>瑛之助</h2>
+                <h2 class="top noselect">ゲーム開発者</h2>
+            </div>
+            <div id="s1" class="section-base section-about">
+
+            </div>
+            <div id="s2" class="section-base section-contact">
+
+            </div>
+            <div id="s3" class="section-base section-projects1">
+
+            </div>
+        </div>
+    </div>    
+    <script src="{{ url_for('static', filename='js/zenscroll.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/onepage.js') }}"></script>
 </body>
 
 </html>

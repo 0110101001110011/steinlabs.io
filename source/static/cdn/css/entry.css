@@ -44,8 +44,7 @@ h2.top {
     overflow: auto;
     height: 100%;
     width: 100vw;
-    padding-right: 17px; /* exact value is given in JavaScript code */
-
+    /* padding-right: 17px;  */
 }
 
 .section-base {
@@ -70,6 +69,10 @@ h2.top {
 
 .section-contact {
     background-color: rgb(36, 5, 33);
+}
+
+.section-projects1 {
+    background-color: rgb(5, 34, 36);
 }
 
 @media only screen and (max-height: 930px) {     

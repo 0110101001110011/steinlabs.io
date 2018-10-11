@@ -1,118 +1,98 @@
 var SCROLL_TARGET = document.getElementById("scroll-target");
 var LAST_Y_POS = 0;
-var LAST_SCROLL_DIR = 'UP';
+var LAST_SCROLL_DELTA = 0;
 var CURRENT_INDEX = 0;
 var MAX_INDEX = Math.max(document.getElementsByClassName("section-base").length - 1, 0);
-console.log(MAX_INDEX);
+const TIME_PER_PAGE = 500;
+const ZS = zenscroll.createScroller(SCROLL_TARGET, 500, 0);
 
-// Credit https://coderwall.com/p/hujlhg/smooth-scrolling-without-jquery
-var smooth_scroll_to = function (element, target, duration) {
-    target = Math.round(target);
-    duration = Math.round(duration);
-    if (duration < 0) {
-        return Promise.reject("bad duration");
-    }
-    if (duration === 0) {
-        element.scrollTop = target;
-        return Promise.resolve();
-    }
-
-    var start_time = Date.now();
-    var end_time = start_time + duration;
-
-    var start_top = element.scrollTop;
-    var distance = target - start_top;
-
-    var delta = Math.min(Math.max(distance, -1), 1);
-
-    // based on http://en.wikipedia.org/wiki/Smoothstep
-    var smooth_step = function (start, end, point) {
-        if (point <= start) { return 0; }
-        if (point >= end) { return 1; }
-        var x = (point - start) / (end - start);
-        return x * x * (3 - 2 * x);
-    }
-
-    return new Promise(function (resolve, reject) {
-        var previous_top = element.scrollTop;
-
-        var scroll_frame = function () {
-            if (element.scrollTop != previous_top) {
-                return;
-            }
-
-            if (delta < 0) {
-                LAST_SCROLL_DIR = 'UP';
-            } else {
-                LAST_SCROLL_DIR = 'DOWN';
-            }
-            
-            var now = Date.now();
-            var point = smooth_step(start_time, end_time, now);
-            var frameTop = Math.round(start_top + (distance * point));
-            element.scrollTop = frameTop;
-
-            if (now >= end_time) {
-                CURRENT_INDEX = Math.min(Math.max(CURRENT_INDEX + delta, 0), MAX_INDEX);
-                resolve();
-                return;
-            }
-
-            if (element.scrollTop === previous_top
-                && element.scrollTop !== frameTop) {
-                CURRENT_INDEX = Math.min(Math.max(CURRENT_INDEX + delta, 0), MAX_INDEX);
-                resolve();
-                return;
-            }
-
-            previous_top = element.scrollTop;
-
-            setTimeout(scroll_frame, 0);
-        }
-
-        setTimeout(scroll_frame, 0);
-    });
+function clamp(a, min, max) {
+    return Math.min(Math.max(a, min), max);
 }
 
-function getCurrentWindowHeight() {
-    return window.innerHeight;
+function getScrollbarWidth() {
+    return window.innerWidth - SCROLL_TARGET.clientWidth;
 }
 
-function scroll(deltaY) {
-    var delta = Math.min(Math.max(deltaY, -1), 1) * getCurrentWindowHeight();
-    smooth_scroll_to(SCROLL_TARGET, SCROLL_TARGET.scrollTop + delta, 1000);
+function scrollToSection(sectionid) {
+    targetIndex = sectionid.substring(1, sectionid.length);
+    difference = targetIndex - CURRENT_INDEX;
+    LAST_SCROLL_DELTA = clamp(difference, -1, 1);
+
+    CURRENT_INDEX = clamp(CURRENT_INDEX + difference, 0, MAX_INDEX);
+
+    time = TIME_PER_PAGE * Math.ceil((Math.abs(difference) / 2));
+    ZS.to(document.getElementById(sectionid), time);
 }
 
+SCROLL_TARGET.style.paddingRight = getScrollbarWidth().toString() + "px";
 
-SCROLL_TARGET.addEventListener('touchstart', function (e) {
-    LAST_Y_POS = e.changedTouches[0].clientY;
-});
+function scroll(deltaY, hops = 1) {
+    if (ZS.moving()) {
+        return;
+    }
+
+    LAST_SCROLL_DELTA = clamp(deltaY, -1, 1);
+    CURRENT_INDEX = clamp(CURRENT_INDEX + LAST_SCROLL_DELTA * hops, 0, MAX_INDEX);
+    id = "s" + CURRENT_INDEX;
+    time = TIME_PER_PAGE * Math.ceil((Math.abs(hops) / 2));
+    ZS.to(document.getElementById(id), time);
+}
 
 SCROLL_TARGET.addEventListener('wheel', function (e) {
-    e.preventDefault();
     scroll(e.deltaY);
-    console.log(CURRENT_INDEX);
+    e.preventDefault();
+});
+
+SCROLL_TARGET.addEventListener('touchstart', function (e) {
+    LAST_Y_POS = e.targetTouches[0].clientY;
 });
 
 SCROLL_TARGET.addEventListener('touchmove', function (e) {
+    scroll(LAST_Y_POS - e.targetTouches[0].clientY);
     e.preventDefault();
-    scroll(LAST_Y_POS - e.changedTouches[0].clientY);
+    LAST_Y_POS = e.targetTouches[0].clientY;
 });
 
-// TODO Add other scrolling methods such as middle click and arrow keys and pageupdown
+window.addEventListener('keydown', function (e) {
+    kc = e.keyCode;
 
-window.onresize = function(event) {
-    target = SCROLL_TARGET.scrollTop;
-    console.log(LAST_SCROLL_DIR);
-    if (LAST_SCROLL_DIR == 'UP'){
-        CURRENT_INDEX = Math.max(CURRENT_INDEX - 1, 0);
-        target = getCurrentWindowHeight() * CURRENT_INDEX;
-    } else {
-        CURRENT_INDEX = Math.min(CURRENT_INDEX + 1, MAX_INDEX);
-        target = getCurrentWindowHeight() * CURRENT_INDEX;
+    if ([34, 35, 40].includes(kc) || (kc == 32 && !e.shiftKey)) {
+        if (kc == 35){
+            scroll(1, MAX_INDEX);
+        } else {
+            scroll(1);
+        }
+        e.preventDefault();
+    } else if ([33, 36, 38].includes(kc) || (kc == 32 && e.shiftKey)) {
+        if (kc == 36){
+            scroll(-1, MAX_INDEX);
+        } else {
+            scroll(-1);
+        }
+        
+        e.preventDefault();
     }
+});
 
-    console.log(SCROLL_TARGET.scrollTop);
-    console.log(target);
-    smooth_scroll_to(SCROLL_TARGET, target, 0);
-};
+SCROLL_TARGET.addEventListener('mousedown', function (e) {
+    if (e.which == 2) {
+        LAST_Y_POS = e.clientY;
+        e.preventDefault();
+    }
+});
+
+SCROLL_TARGET.addEventListener('mousemove', function (e) {
+    if (e.which == 2) {
+        scroll(e.clientY - LAST_Y_POS);
+        e.preventDefault();
+        LAST_Y_POS = e.clientY;
+    }
+});
+
+
+window.addEventListener("resize", function (e) {
+    ZS.stop();
+    id = "s" + CURRENT_INDEX;
+    ZS.to(document.getElementById(id), 100);
+});
