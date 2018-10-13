@@ -24,6 +24,12 @@ body {
     overflow: hidden;
 }
 
+a {
+    text-decoration: none;
+}
+
+/* Classes */
+
 h2.top {
     margin: 20px 10px 10px 10px;
     padding: 0;
@@ -31,8 +37,6 @@ h2.top {
     color: #fff;
     word-break: keep-all;
 }
-
-/* Classes */
 
 .page-outer {
     height: 100%;
@@ -51,16 +55,21 @@ h2.top {
     height: 100vh;
     padding: 0;
     width: 100vw;
+    display: flex;
+    color: white;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0);
+    position: relative;
 }
 
 .section-top {
-    display: flex;
     flex-direction: column;
     justify-content: flex-start;
     text-decoration: none;
     writing-mode: vertical-rl;
     -ms-writing-mode: tb-rl;
-    background-color: black;
+
+    background-color: rgb(0, 0, 0);
 }
 
 .section-about {
@@ -75,8 +84,211 @@ h2.top {
     background-color: rgb(5, 34, 36);
 }
 
-@media only screen and (max-height: 930px) {     
+.vn-textbox {
+    border: solid 3px white;
+    width: 100%;
+    padding: 40px;   
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: relative;
+    font-size: 40px;
+    font-weight: bold;
+    height: 20%;
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+    align-items: flex-start;
+}
+
+.vn-text {
+    transition: visibility 0s, opacity 1s ease-in;
+}
+
+
+.vn-arrows {
+    font-size: 40px;
+    position: absolute;
+    right: 10px;
+    bottom: -5px;
+    display: flex;
+}
+
+.vn-arrow {
+    cursor: pointer;
+}
+
+.vn-arrow:active {
+    color: rgb(0, 255, 242);
+}
+
+.vn-name {
+    text-align: center;
+    top: 0;
+    width: 100%;
+    font-size: 35px;
+    margin: 15px 15px 0 15px;
+}
+
+.vn-image img {
+    max-width: 80vw;
+    max-height: 60vh;
+}
+
+.link-ffbox {
+    color: rgb(255, 208, 0);
+    font-weight: bold;
+}
+
+.content-wrapper {
+    width: 1200px;
+    max-width: 80%;
+    height: 100%;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.content-indicator {
+    position: absolute;
+    font-size: 40px;
+    color: white;
+    z-index: 10;
+    margin: 0 20px;
+    writing-mode: horizontal-tb;
+    -ms-writing-mode: lr-tb;
+}
+
+/* Utility */
+.non-active {
+    opacity: 0;
+    pointer-events: none;
+    cursor: default;
+}
+
+.hidden {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.anchor-top-left {
+    top: 0;
+    left: 0;
+}
+
+.anchor-bottom-left {
+    bottom: 0;
+    left: 0;
+}
+
+/* Media queries */
+
+@supports (-ms-ime-align:auto) {
+    .content-wrapper {
+        justify-content: space-around;
+    }
+}
+
+@media only screen and (max-height: 850px) {     
+    h2.top {
+        font-size: 50px;
+    }
+
+}
+
+@media only screen and (max-width: 700px), (max-height: 600px) {     
     h2.top {
         font-size: 40px;
     }
+
+    .section-content {
+        width: 90vw;
+        padding: 4px 8px;   
+    }
+
+    .content-wrapper {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 1000px), (max-height: 700px) {     
+    .vn-name {
+        font-size: 25px;
+        margin: 10px 10px 0 10px;
+    }
+
+    .vn-textbox {
+        font-size: 30px;
+        padding: 20px;   
+    }
+}
+
+@media only screen and (max-width: 750px){     
+    .vn-name {
+        font-size: 15px;
+        margin: 5px 5px 0 5px;
+    }
+
+    .vn-textbox {
+        font-size: 20px;
+        padding: 10px;   
+    }
+}
+
+@media only screen and (max-width: 500px), (max-height: 600px) {     
+    .vn-name {
+        font-size: 15px;
+        margin: 5px 5px 0 5px;
+    }
+    .vn-image img {
+        max-height: 50vh;
+    }
+    .vn-textbox {
+        font-size: 12px;
+        padding: 5px;   
+    }
+}
+
+@media (max-aspect-ratio: 5/4) {
+    .content-indicator {
+        display: none;
+    }
+}
+
+@media (max-aspect-ratio: 5/8) {
+    .vn-textbox {
+        height: 25%;
+    }
+}
+
+@keyframes fadeInOut {
+    0%   { opacity:1; }
+    50%  { opacity:0.1; }
+    100% { opacity:1; }
+}
+@-o-keyframes fadeInOut{
+    0%   { opacity:1; }
+    50%  { opacity:0.1; }
+    100% { opacity:1; }
+}
+@-moz-keyframes fadeInOut{
+    0%   { opacity:1; }
+    50%  { opacity:0.1; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes fadeInOut{
+    0%   { opacity:1; }
+    50%  { opacity:0.1; }
+    100% { opacity:1; }
+}
+
+.fade-in-out {
+    -webkit-animation: fadeInOut 2s infinite;
+    -moz-animation: fadeInOut 2s infinite;
+    -o-animation: fadeInOut 2s infinite;
+    animation: fadeInOut 2s infinite;
 }
