@@ -1,9 +1,93 @@
+// Classes TODO babel for IE
+class Typewriter {
+    constructor() {
+        this.currentElement = null;
+        this.typing = false;
+        this.index = 0;
+        this.loopSleep = 0;
+        this.innerHTML = null;
+        this.currentID = 0;
+        this.forceFinish = false;
+    }
+
+    recursiveType(id, tag) {
+        if (this.currentID != id || !this.typing || this.index > this.endIndex) {
+            this.typing = false;
+            return;
+        }
+
+        if (this.forceFinish) {
+            this.currentElement.innerHTML = this.innerHTML;
+            this.forceFinish = false;
+            this.typing = false;
+            return;
+        }
+
+        setTimeout(() => {
+            if (this.innerHTML.charAt(this.index) == "<") {
+                var htmltag = "";
+                while (this.innerHTML.charAt(this.index) != ">") {
+                    htmltag += this.innerHTML.charAt(this.index);
+                    this.index++;
+                }
+                this.currentElement.innerHTML += htmltag + ">";
+                this.index++;
+                tag = "</" + htmltag.charAt(1) + ">";
+            }
+            else {
+                if (tag) {
+                    this.currentElement.innerHTML = this.currentElement.innerHTML.replace(tag, "") + this.innerHTML.charAt(this.index);
+                } else {
+                    this.currentElement.innerHTML += this.innerHTML.charAt(this.index);
+                }
+                this.index++;
+            }
+
+            this.recursiveType(id, tag);
+        }, this.loopSleep);
+    };
+
+    resetPreviousElement() {
+        if (!this.currentElement) return;
+        this.currentElement.innerHTML = this.innerHTML;
+    }
+
+    type(element, charsPerSecond) {
+        this.stop();
+        this.currentID++;
+        var id = this.currentID;
+        this.typing = true;
+        this.currentElement = element;
+        this.index = 0;
+        this.loopSleep = Math.floor(1000 / charsPerSecond);
+        this.innerHTML = element.innerHTML.trim();
+        this.endIndex = this.innerHTML.length;
+        this.currentElement.textContent = "";
+
+        this.recursiveType(id, null);
+    }
+
+    stop() {
+        this.typing = false;
+        this.resetPreviousElement();
+    }
+
+    isTyping() {
+        return this.typing;
+    }
+
+    finish() {
+        this.forceFinish = true;
+    }
+}
+
+// Globals (sorry!)
 var SCROLL_TARGET = document.getElementById("scroll-target");
-var PAGES = Array.prototype.slice.call(document.getElementsByClassName("section-base")).sort(function(a, b) {return a.id > b.id});
+var PAGES = Array.prototype.slice.call(document.getElementsByClassName("section-base")).sort(function (a, b) { return a.id > b.id });
 var MAX_INDEX = Math.max(PAGES.length - 1, 0);
 var CURRENT_INDEX = 0;
 var CONTENT_INDICATOR = document.getElementById("content-indicator");
-var VN_TEXT_BLOCKS = Array.prototype.slice.call(document.getElementsByClassName("vn-text")).sort(function(a, b) {return a.id > b.id});
+var VN_TEXT_BLOCKS = Array.prototype.slice.call(document.getElementsByClassName("vn-text")).sort(function (a, b) { return a.id > b.id });
 var CURRENT_VN_TEXT_INDEX = 0;
 var MAX_VN_TEXT_INDEX = Math.max(VN_TEXT_BLOCKS.length - 1, 0);
 var VN_ARROW_LEFT = document.getElementById("vn-arrow-left");
@@ -11,6 +95,8 @@ var VN_ARROW_RIGHT = document.getElementById("vn-arrow-right");
 
 const TIME_PER_PAGE = 500;
 const ZS = zenscroll.createScroller(SCROLL_TARGET, 500, 0);
+const TYPEWRITER = new Typewriter();
+const SPLASH_VIDEO = document.getElementById("splash-video");
 
 // Helpers
 function clamp(a, min, max) {
@@ -21,13 +107,21 @@ function getScrollbarWidth() {
     return window.innerWidth - SCROLL_TARGET.clientWidth;
 }
 
-function vnStep(evant, delta) {
+function vnStep(event, delta) {
     if (event) event.preventDefault();
-    previousIndex = CURRENT_VN_TEXT_INDEX;
-    CURRENT_VN_TEXT_INDEX = clamp(CURRENT_VN_TEXT_INDEX + delta, 0, MAX_VN_TEXT_INDEX);
-    VN_TEXT_BLOCKS[previousIndex].classList.toggle("hidden");
-    VN_TEXT_BLOCKS[CURRENT_VN_TEXT_INDEX].classList.toggle("hidden");
-    
+    var previousIndex = CURRENT_VN_TEXT_INDEX;
+    var nextIndex = clamp(CURRENT_VN_TEXT_INDEX + delta, 0, MAX_VN_TEXT_INDEX);
+    if (previousIndex != nextIndex) {
+        if (TYPEWRITER.isTyping()) {
+            TYPEWRITER.finish();
+        } else {
+            CURRENT_VN_TEXT_INDEX = nextIndex;
+            VN_TEXT_BLOCKS[previousIndex].classList.toggle("hidden");
+            TYPEWRITER.type(VN_TEXT_BLOCKS[CURRENT_VN_TEXT_INDEX], 16);
+            VN_TEXT_BLOCKS[CURRENT_VN_TEXT_INDEX].classList.toggle("hidden");
+        }
+    }
+
     if (CURRENT_VN_TEXT_INDEX == 0) {
         VN_ARROW_LEFT.classList.add("non-active");
         VN_ARROW_RIGHT.classList.remove("non-active");
@@ -46,10 +140,7 @@ function scrollToSection(sectionIndex) {
     difference = sectionIndex - CURRENT_INDEX;
     LAST_SCROLL_DELTA = clamp(difference, -1, 1);
 
-    CURRENT_INDEX = clamp(CURRENT_INDEX + difference, 0, MAX_INDEX);
-
-    time = TIME_PER_PAGE * Math.ceil((Math.abs(difference) / 2));
-    ZS.to(PAGES[sectionid], time);
+    scroll(difference, difference);
 }
 
 function scroll(deltaY, hops) {
@@ -60,7 +151,12 @@ function scroll(deltaY, hops) {
     LAST_SCROLL_DELTA = clamp(deltaY, -1, 1);
     CURRENT_INDEX = clamp(CURRENT_INDEX + LAST_SCROLL_DELTA * hops, 0, MAX_INDEX);
     time = TIME_PER_PAGE * Math.ceil((Math.abs(hops) / 2));
-    ZS.to(PAGES[CURRENT_INDEX], time);
+    if (CURRENT_INDEX == 0) SPLASH_VIDEO.play();
+    ZS.to(PAGES[CURRENT_INDEX], time, function () {
+        if (CURRENT_INDEX != 0) {
+            SPLASH_VIDEO.pause();
+        }
+    });
 }
 
 function scrollWrap(deltaY, hops) {
@@ -74,34 +170,34 @@ function init() {
         scroll(e.deltaY, 1);
         e.preventDefault();
     });
-    
+
     SCROLL_TARGET.addEventListener('touchstart', function (e) {
         LAST_Y_POS = e.targetTouches[0].clientY;
     });
-    
+
     SCROLL_TARGET.addEventListener('touchmove', function (e) {
         scroll(LAST_Y_POS - e.targetTouches[0].clientY, 1);
         e.preventDefault();
         LAST_Y_POS = e.targetTouches[0].clientY;
     });
-    
+
     window.addEventListener('keydown', function (e) {
         kc = e.keyCode;
-    
+
         if ([34, 35, 40].includes(kc) || (kc == 32 && !e.shiftKey)) {
-            if (kc == 35){
+            if (kc == 35) {
                 scroll(1, MAX_INDEX);
             } else {
                 scroll(1, 1);
             }
             e.preventDefault();
         } else if ([33, 36, 38].includes(kc) || (kc == 32 && e.shiftKey)) {
-            if (kc == 36){
+            if (kc == 36) {
                 scroll(-1, MAX_INDEX);
             } else {
                 scroll(-1, 1);
             }
-            
+
             e.preventDefault();
         }
 
@@ -113,14 +209,14 @@ function init() {
             }
         }
     });
-    
+
     SCROLL_TARGET.addEventListener('mousedown', function (e) {
         if (e.button == 1) {
             LAST_Y_POS = e.clientY;
             e.preventDefault();
         }
     });
-    
+
     SCROLL_TARGET.addEventListener('mousemove', function (e) {
         if (e.button == 1) {
             scroll(e.clientY - LAST_Y_POS, 1);
@@ -146,7 +242,7 @@ function init() {
         e.stopPropagation();
         e.preventDefault();
     });
-    
+
     window.addEventListener("resize", function (e) {
         ZS.stop();
         ZS.to(PAGES[CURRENT_INDEX], 0);

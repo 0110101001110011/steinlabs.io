@@ -11,14 +11,19 @@
     <link rel="mask-icon" href="{{ url_for('static', filename='icons/favicon/safari-pinned-tab.svg') }}" color="#087dff">
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="theme-color" content="#d03d3d">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/entry.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/onepage.css')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-
 <body>
     <div class="page-outer">
         <div class="page-inner" id="scroll-target">
             <div id="s0" class="section-base section-top">
+                    <div class="video-wrapper" center no-repeat>
+                        <video id="splash-video" autoplay muted loop>
+                            <source src="{{ url_for('static', filename='video/demo-720-2000kbps.mp4') }}" type="video/mp4">
+                        </video>
+                        <div class="color-fade-out"></div>
+                    </div>
                 <div class="content-indicator anchor-bottom-left noselect" id="content-indicator">▼</div>
                 <h2 class="top noselect">スタントン<span style="font-size: 0;"> </span>ジェームズ<span style="font-size: 0;"> </span>瑛之助</h2>
                 <h2 class="top noselect">ゲーム開発者</h2>
@@ -27,7 +32,7 @@
                 <div class="content-indicator anchor-bottom-left noselect" id="content-indicator">▼</div>
                 <div class="content-wrapper">
                     <div class="vn-image">
-                        <img src="{{ url_for('static', filename='images/headshot_placeholder.png') }}">
+                        <img src="{{ url_for('static', filename='images/headshot-1.jpg') }}">
                     </div>
                     <div class="vn-name">スタントン ジェームズ 瑛之助</div>
                     <div class="vn-textbox noselect">
@@ -47,13 +52,13 @@
                             なお、物語の展開、キャラの創造、アートディレクションとサウンドデザインの仕事を経験させて頂ければ嬉しいと思っております。
                         </div>
                         <div class="vn-text hidden" id="vnt-5">
-                            イギリスのキングストン大学<a class="link-ffbox" href="https://www.kingston.ac.uk/undergraduate-course/computer-games-programming/">科学、エンジニアリングとコンピューティング学部</a>コンピューターゲームプログラミング科の学生です。
+                            イギリスのキングストン大学<a class="link-ffbox" href="https://www.kingston.ac.uk/undergraduate-course/computer-games-programming/">「科学、エンジニアリングとコンピューティング」</a>学部コンピューターゲームプログラミング科の学生です。
                         </div>
                         <div class="vn-text hidden" id="vnt-6">
                             現在ソニー・インタラクティブエンタテインメントの本社でインターンシップを勤めて頂いております。
                         </div>
                         <div class="vn-text hidden" id="vnt-7">
-                            プログラミング言語の専門はC++、C#とPythonでゲームエンジンの専門はUnrealとUnityです。
+                            プログラミング言語の専門はＣ＋＋、Ｃ＃とＰＹＴＨＯＮでゲームエンジンの専門はＵＮＲＥＡＬとＵＮＩＴＹです。
                         </div>
                         <div class="vn-text hidden" id="vnt-8">
                             ゲームを遊んだり、考えたり、作ったりしていない時には<a class="link-ffbox" href="http://utsunomiya.hatenadiary.jp/entry/2017/10/18/222800">見ず知らずの音楽</a>を聴いたり、美味しいものを食べたりすることを楽しんでおります。
