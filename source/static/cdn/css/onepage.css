@@ -68,10 +68,6 @@ h2.top {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    /* writing-mode: vertical-rl;
-    -ms-writing-mode: tb-rl; */
-
     background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -81,10 +77,46 @@ h2.top {
 
 .section-contact {
     background-color: rgb(36, 5, 33);
+    justify-content: center;
+    align-items: center;
 }
 
 .section-projects1 {
     background-color: rgb(5, 34, 36);
+}
+
+.contacts-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contacts-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: solid 3px white;
+    margin: 20px; 
+    min-width: 50vw;
+    max-width: 90vw;
+    border-radius: 500px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
+.contacts-text {
+    margin-right: 50px;
+    font-size: 80px;
+    font-weight: bold;
+}
+
+.contacts-image {
+    padding: 10px;
+    width: 140px;
+    height: 140px;
 }
 
 .vn-textbox {
@@ -159,9 +191,10 @@ h2.top {
     font-size: 40px;
     color: white;
     z-index: 10;
-    margin: 0 20px;
-    writing-mode: horizontal-tb;
-    -ms-writing-mode: lr-tb;
+    margin: 20px 0;
+    text-shadow: 0.05em 0.05em 2px rgb(23, 24, 16);
+    writing-mode: vertical-rl;
+    -ms-writing-mode: tb-rl;
 }
 
 .video-wrapper {
@@ -198,9 +231,6 @@ h2.top {
 }
 
 .hidden {
-    /* position: fixed;
-    visibility: hidden;
-    opacity: 0; */
     display: none;
 }
 
@@ -215,7 +245,6 @@ h2.top {
 }
 
 /* Media queries */
-
 @supports (-ms-ime-align:auto) {
     .content-wrapper {
         justify-content: space-around;
@@ -226,7 +255,6 @@ h2.top {
     h2.top {
         font-size: 50px;
     }
-
 }
 
 @media only screen and (max-width: 700px), (max-height: 600px) {     
@@ -254,6 +282,18 @@ h2.top {
         font-size: 30px;
         padding: 20px;   
     }    
+
+    .contacts-text {
+        margin-right: 15px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    
+    .contacts-image {
+        padding: 10px;
+        width: 32px;
+        height: 32px;
+    }
 }
 
 @media only screen and (max-width: 750px){     
