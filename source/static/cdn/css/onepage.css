@@ -83,6 +83,7 @@ h2.top {
     background-color: rgb(50, 50, 50);
     justify-content: center;
     align-items: center;
+    height: 15vh;
 }
 
 .porfolio-wrapper {
@@ -136,34 +137,42 @@ h2.top {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
 }
 
 .contacts-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: solid 3px white;
-    margin: 20px; 
-    min-width: 50vw;
-    max-width: 90vw;
-    border-radius: 500px;
-    overflow: hidden;
-    background: rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-    text-decoration: none;
     color: white;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
 }
 
-.contacts-text {
-    margin-right: 50px;
-    font-size: 80px;
-    font-weight: bold;
+.contacts-section p {
+    margin: 0px;
+    font-size: 14px;
 }
+
 
 .contacts-image {
-    padding: 10px;
-    width: 140px;
-    height: 140px;
+    width: 32px;
+    height: 32px;   
+}
+
+.contacts-link {
+    width: 32px;
+    height: 32px;   
+    margin: 0 5px; 
+}
+
+.contacts-link-text {
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    color: rgb(255, 43, 167);
 }
 
 .vn-textbox {
@@ -176,7 +185,7 @@ h2.top {
     background-color: rgba(0, 0, 0, 0.5);
     position: relative;
     font-size: 40px;
-    font-weight: bold;
+    /* font-weight: bold; */
     height: 20%;
     display: flex;
     visibility: visible;
@@ -330,16 +339,20 @@ h2.top {
         padding: 20px;   
     }    
 
-    .contacts-text {
-        margin-right: 15px;
-        font-size: 20px;
-        font-weight: bold;
+    .contacts-section p {
+        font-size: 12px;
     }
     
+    
     .contacts-image {
-        padding: 10px;
-        width: 32px;
-        height: 32px;
+        width: 16px;
+        height: 16px;   
+    }
+    
+    .contacts-link {
+        width: 16px;
+        height: 16px;    
+        margin: 0 4px; 
     }
 }
 
