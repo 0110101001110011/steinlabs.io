@@ -83,18 +83,21 @@ class Typewriter {
 
 // Globals (sorry!)
 var SCROLL_TARGET = document.getElementById("scroll-target");
-var PAGES = Array.prototype.slice.call(document.getElementsByClassName("section-base")).sort(function (a, b) { return a.id > b.id });
+var PAGES = [].slice.call(document.getElementsByClassName("section-base")).sort(function (a, b) { return a.id > b.id });
 var MAX_INDEX = Math.max(PAGES.length - 1, 0);
 var CURRENT_INDEX = 0;
 var CONTENT_INDICATOR = document.getElementById("content-indicator");
-var VN_TEXT_BLOCKS = Array.prototype.slice.call(document.getElementsByClassName("vn-text")).sort(function (a, b) { return a.id > b.id });
+var VN_TEXT_BLOCKS = [].slice.call(document.getElementsByClassName("vn-text")).sort(function (a, b) { return a.id > b.id });
 var CURRENT_VN_TEXT_INDEX = 0;
 var MAX_VN_TEXT_INDEX = Math.max(VN_TEXT_BLOCKS.length - 1, 0);
 var VN_ARROW_LEFT = document.getElementById("vn-arrow-left");
 var VN_ARROW_RIGHT = document.getElementById("vn-arrow-right");
+var PORTFOLIO_THUMBNAILS = document.getElementsByClassName("portfolio-thumbnail");
+var PORTFOLIO_PAGES = [].slice.call(document.getElementsByClassName("portfolio-page-wrapper")).reduce(function(map, obj) {map[obj.id] = obj; return map;}, {});
+var PORTFOLIO_X_BUTTONS = document.getElementsByClassName("portfolio-x-button");
 
 const TIME_PER_PAGE = 500;
-const ZS = zenscroll.createScroller(SCROLL_TARGET, 500, 0);
+const ZS = zenscroll.createScroller(SCROLL_TARGET, TIME_PER_PAGE, 0);
 const TYPEWRITER = new Typewriter();
 const SPLASH_VIDEO = document.getElementById("splash-video");
 
@@ -161,6 +164,14 @@ function scroll(deltaY, hops) {
 
 function scrollWrap(deltaY, hops) {
     scroll(deltaY, hops);
+}
+
+function togglePortfolioPage(pageID, activate) {
+    if (activate) {
+        PORTFOLIO_PAGES[pageID].classList.add("portfolio-page-visible");
+    } else {
+        PORTFOLIO_PAGES[pageID].classList.remove("portfolio-page-visible");
+    }
 }
 
 function init() {
@@ -247,6 +258,18 @@ function init() {
         ZS.stop();
         ZS.to(PAGES[CURRENT_INDEX], 0);
     });
+
+    for (let index = 0; index < PORTFOLIO_THUMBNAILS.length; index++) {
+        PORTFOLIO_THUMBNAILS[index].addEventListener("click", function (e) {
+            togglePortfolioPage(PORTFOLIO_THUMBNAILS[index].id.replace("tn-", ""), true);
+        });
+    }
+
+    for (let index = 0; index < PORTFOLIO_X_BUTTONS.length; index++) {
+        PORTFOLIO_X_BUTTONS[index].addEventListener("click", function (e) {
+            togglePortfolioPage(PORTFOLIO_THUMBNAILS[index].id.replace("tn-", ""), false);
+        });
+    }
 }
 
 init();

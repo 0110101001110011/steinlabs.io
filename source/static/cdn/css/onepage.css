@@ -93,17 +93,108 @@ h2.top {
     display: grid;
     grid-template-columns: auto auto auto auto;
     grid-template-rows: auto auto auto;
-    /* border-top: 1px solid white;
-    border-right: 1px solid white; */
-
 }
 
 .portfolio-thumbnail {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    /* border-bottom: 1px solid white;
-    border-left: 1px solid white; */
+    cursor: pointer;
+}
+
+.portfolio-page-wrapper {
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 100%;
+    transition: visibility ease-out 0.5s, opacity 0.5s;
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.portfolio-page-inner {
+    background-color: rgb(24, 24, 24);
+    border: solid 2px black;
+    width: calc(100% - 150px);
+    height: calc(100% - 150px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.portfolio-page-visible {
+    visibility: visible;
+    transition: visibility ease-out 0s, opacity 0.5s;
+    opacity: 1;
+}
+
+.portfolio-page-section {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+}
+
+_:-ms-lang(x), .portfolio-page-section {
+    justify-content: space-around;
+    padding: 0 50px;
+    box-sizing: border-box;
+}
+
+.portfolio-x-button {
+    position: absolute;
+    top: 100px;
+    right: 100px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-size: 40px;
+    line-height: 40px;
+    transition: all 0.1s ease-in-out;
+}
+
+.portfolio-x-button:hover {
+    transition: all 0.1s ease-in-out;
+    color: rgb(149, 239, 255);
+}
+
+.height-60 {height: 60%;}
+.height-40 {height: 40%;}
+.flex-60 {flex-basis: 55%;}
+.flex-40 {flex-basis: 35%;}
+.clamp-width-80 {
+    width: 80%;
+}
+
+.portfolio-video-wrapper {
+    max-width: 800px;
+    border: solid 2px black;
+}
+
+.portfolio-info-wrapper {
+    height: calc(100% - 50px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.portfolio-info-section {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: solid 2px black;
+    padding: 10px 15px;
+    box-sizing: border-box;
+}
+
+.portfolio-info-section h3 {
+    margin: 0;
+    border-bottom: 2px solid white;
 }
 
 .overlay-lighten {
@@ -112,26 +203,25 @@ h2.top {
     width: 100%;
     height: 100%;
     transition: all 0.2s ease-in-out;
-    cursor: pointer;
 }
 
 .overlay-lighten:hover {
-    background-color: rgba(0, 0, 0, 0.0);
+    background-color: rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease-in-out;
 }
 
-.tn-sk {background-image: url('/cdn/images/thumbs/sk_thumb.jpg')}
-.tn-fma {background-image: url('/cdn/images/thumbs/fma_thumb.jpg')}
-.tn-rr {background-image: url('/cdn/images/thumbs/rr_thumb.jpg')}
-.tn-3js {background-image: url('/cdn/images/thumbs/3js_thumb.jpg')}
-.tn-ts {background-image: url('/cdn/images/thumbs/ts_thumb.jpg')}
-.tn-mt {background-image: url('/cdn/images/thumbs/mt_thumb.jpg')}
-.tn-pc {background-image: url('/cdn/images/thumbs/pc_thumb.jpg')}
-.tn-za {background-image: url('/cdn/images/thumbs/za_thumb.jpg')}
-.tn-gvn {background-image: url('/cdn/images/thumbs/gvn_thumb.jpg')}
-.tn-jf {background-image: url('/cdn/images/thumbs/jf_thumb.jpg')}
-.tn-ip {background-image: url('/cdn/images/thumbs/ip_thumb.jpg')}
-.tn-pn{background-image: url('/cdn/images/thumbs/pn_thumb.jpg')}
+#tn-sk {background-image: url('/cdn/images/thumbs/sk_thumb.jpg')}
+#tn-fma {background-image: url('/cdn/images/thumbs/fma_thumb.jpg')}
+#tn-rr {background-image: url('/cdn/images/thumbs/rr_thumb.jpg')}
+#tn-3js {background-image: url('/cdn/images/thumbs/3js_thumb.jpg')}
+#tn-ts {background-image: url('/cdn/images/thumbs/ts_thumb.jpg')}
+#tn-mt {background-image: url('/cdn/images/thumbs/mt_thumb.jpg')}
+#tn-pc {background-image: url('/cdn/images/thumbs/pc_thumb.jpg')}
+#tn-za {background-image: url('/cdn/images/thumbs/za_thumb.jpg')}
+#tn-gvn {background-image: url('/cdn/images/thumbs/gvn_thumb.jpg')}
+#tn-jf {background-image: url('/cdn/images/thumbs/jf_thumb.jpg')}
+#tn-ip {background-image: url('/cdn/images/thumbs/ip_thumb.jpg')}
+#tn-pn{background-image: url('/cdn/images/thumbs/pn_thumb.jpg')}
 
 .contacts-box {
     display: flex;
@@ -179,9 +269,6 @@ h2.top {
     border: solid 2px black;
     width: 100%;
     padding: 40px;   
-    /* -webkit-border-radius: 7px;
-    -moz-border-radius: 7px;
-    border-radius: 7px; */
     background-color: rgba(0, 0, 0, 0.5);
     position: relative;
     font-size: 40px;
@@ -228,7 +315,6 @@ h2.top {
 
 .link-ffbox {
     color: rgb(255, 208, 0);
-    font-weight: bold;
 }
 
 .content-wrapper {

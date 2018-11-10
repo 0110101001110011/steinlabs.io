@@ -12,6 +12,8 @@
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="theme-color" content="#d03d3d">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/onepage.css')}}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.plyr.io/3.4.7/plyr.css">
+    <script src="https://cdn.plyr.io/3.4.7/plyr.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -78,41 +80,67 @@
             </div>
             <div id="s2" class="section-base section-projects1">
                 <div class="content-indicator anchor-bottom-left noselect" id="content-indicator">情報▼</div>
+                <div class="portfolio-page-wrapper" id="sk">
+                    <div class="portfolio-x-button noselect">🗙</div>
+                    <div class="portfolio-page-inner">
+                        <div class="portfolio-page-section clamp-width-80 height-60">
+                            <div class="portfolio-video-wrapper">
+                                <video poster="" class="vid" id="vp-sk">
+                                    <source src="{{ url_for('static', filename='video/sktd.mp4') }}" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        <div class="portfolio-page-section height-40">
+                            <div class="portfolio-info-wrapper flex-60">
+                                <div class="portfolio-info-section">
+                                    <h3>SILENT KNIGHT「サイレント・ナイト」とは？</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                </div>
+                            </div>
+                            <div class="portfolio-info-wrapper flex-40">
+                                <div class="portfolio-info-section">
+                                    <h3>技術の詳細</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="porfolio-wrapper">
-                    <div class="portfolio-thumbnail tn-sk">
+                    <div class="portfolio-thumbnail" id="tn-sk">
                         <div class="overlay-lighten noselect"></div>
                     </div>
-                    <div class="portfolio-thumbnail tn-fma">
+                    <div class="portfolio-thumbnail" id="tn-fma">
                         <div class="overlay-lighten noselect"></div>
                     </div>
-                    <div class="portfolio-thumbnail tn-rr">
+                    <div class="portfolio-thumbnail" id="tn-rr">
                         <div class="overlay-lighten noselect"></div>
                     </div>
-                    <div class="portfolio-thumbnail tn-3js">
+                    <div class="portfolio-thumbnail" id="tn-3js">
                         <div class="overlay-lighten noselect"></div>
                     </div>
-                    <div class="portfolio-thumbnail tn-ts">
+                    <div class="portfolio-thumbnail" id="tn-ts">
                         <div class="overlay-lighten noselect"></div>
                     </div>
-                    <div class="portfolio-thumbnail tn-mt">
+                    <div class="portfolio-thumbnail" id="tn-mt">
                         <div class="overlay-lighten noselect"></div>
                     </div>
-                    <div class="portfolio-thumbnail tn-pc">
+                    <div class="portfolio-thumbnail" id="tn-pc">
                         <div class="overlay-lighten noselect"></div>
                     </div>
-                    <div class="portfolio-thumbnail tn-za">
+                    <div class="portfolio-thumbnail" id="tn-za">
                         <div class="overlay-lighten noselect"></div>
                     </div>
-                    <div class="portfolio-thumbnail tn-gvn">
+                    <div class="portfolio-thumbnail" id="tn-gvn">
                         <div class="overlay-lighten noselect"></div>
                     </div>
-                    <div class="portfolio-thumbnail tn-jf">
+                    <div class="portfolio-thumbnail" id="tn-jf">
                         <div class="overlay-lighten noselect"></div>
                     </div>
-                    <div class="portfolio-thumbnail tn-ip">
+                    <div class="portfolio-thumbnail" id="tn-ip">
                         <div class="overlay-lighten noselect"></div>
                     </div>
-                    <div class="portfolio-thumbnail tn-pn">
+                    <div class="portfolio-thumbnail" id="tn-pn">
                         <div class="overlay-lighten noselect"></div>
                     </div>
                 </div>
@@ -145,6 +173,7 @@
     </div>
     <script src="{{ url_for('static', filename='js/zenscroll.js') }}"></script>
     <script src="{{ url_for('static', filename='js/onepage.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plyr-helper.js') }}"></script>
 </body>
 
 </html>
