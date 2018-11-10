@@ -117,7 +117,6 @@ h2.top {
 }
 
 .portfolio-page-inner {
-    background-color: rgb(24, 24, 24);
     border: solid 2px black;
     width: calc(100% - 150px);
     height: calc(100% - 150px);
@@ -126,6 +125,19 @@ h2.top {
     align-items: center;
     flex-direction: column;
 }
+
+.bg-sk {background-color: rgb(57, 47, 36);}
+.bg-fma {background-color: rgb(78, 80, 82);}
+.bg-rr {background-color: rgb(123, 102, 88);}
+.bg-3js {background-color: rgb(67, 42, 41);}
+.bg-ts {background-color: rgb(35, 57, 108);}
+.bg-mt {background-color: rgb(95, 113, 136);}
+.bg-pc {background-color: rgb(91, 115, 55);}
+.bg-za {background-color: rgb(54, 63, 47);}
+.bg-gvn {background-color: rgb(37, 33, 40);}
+.bg-jf {background-color: rgb(86, 88, 114);}
+.bg-ip {background-color: rgb(136, 110, 89);}
+.bg-pn {background-color: rgb(5, 5, 5);}
 
 .portfolio-page-visible {
     visibility: visible;
@@ -151,7 +163,7 @@ _:-ms-lang(x), .portfolio-page-section {
     position: absolute;
     top: 100px;
     right: 100px;
-    color: rgb(255, 255, 255);
+    color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
     font-size: 40px;
     line-height: 40px;
@@ -160,7 +172,7 @@ _:-ms-lang(x), .portfolio-page-section {
 
 .portfolio-x-button:hover {
     transition: all 0.1s ease-in-out;
-    color: rgb(149, 239, 255);
+    color: rgb(255, 255, 255);
 }
 
 .height-60 {height: 60%;}
@@ -172,7 +184,7 @@ _:-ms-lang(x), .portfolio-page-section {
 }
 
 .portfolio-video-wrapper {
-    max-width: 800px;
+    max-width: 750px;
     border: solid 2px black;
 }
 
@@ -188,13 +200,24 @@ _:-ms-lang(x), .portfolio-page-section {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.2);
     border: solid 2px black;
-    padding: 10px 15px;
+    padding: 10px 12px;
     box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.portfolio-info-section p {
+    margin: 0.4em 0;
+}
+
+.portfolio-info-section a {
+    color: rgb(0, 255, 234);
 }
 
 .portfolio-info-section h3 {
     margin: 0;
     border-bottom: 2px solid white;
+    line-height: 1.17em;
+    margin-bottom: 0.8em;
 }
 
 .overlay-lighten {
@@ -268,11 +291,10 @@ _:-ms-lang(x), .portfolio-page-section {
 .vn-textbox {
     border: solid 2px black;
     width: 100%;
-    padding: 40px;   
+    padding: 40px 45px;   
     background-color: rgba(0, 0, 0, 0.5);
     position: relative;
     font-size: 40px;
-    /* font-weight: bold; */
     height: 20%;
     display: flex;
     visibility: visible;
