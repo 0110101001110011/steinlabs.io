@@ -1,8 +1,6 @@
 class ImgGallery {
     constructor(container) {
         this.container = container;
-        this.container.addEventListener("dblclick", e => this.fullScreenToggle(e));
-        this.index = 0;
 
         for (var i = 0; i < container.childNodes.length; i++) {
             if (container.childNodes[i].className && container.childNodes[i].className.includes("left-button")) {
@@ -21,6 +19,11 @@ class ImgGallery {
 
             if (container.childNodes[i].className && container.childNodes[i].className.includes("img-gallery-inner")) {
                 this.images = container.childNodes[i].getElementsByTagName("img");
+
+                for (let index = 0; index < this.images.length; index++) {
+                    this.images[index].loaded = false;
+                }
+
                 this.images[0].style.backgroundImage = "url('" + this.images[0].dataset.source + "')";
                 this.images[0].loaded = true;
                 continue;
@@ -28,8 +31,21 @@ class ImgGallery {
 
         }
 
-        this.loadImages();
         this.busy = false;
+        this.index = 0;
+        this.controlTimeout = 0;
+        this.controlTimeoutMax = 100;
+        this.isMouseOver = false;
+
+        if (!Date.now) {Date.now = function() {return new Date().getTime();}}
+
+        this.container.addEventListener("dblclick", e => this.fullScreenToggle(e));
+        this.container.addEventListener("mousemove", e => this.triggerControls(e)); 
+        this.container.addEventListener("mouseenter", e => this.toggleMouseOver(true)); 
+        this.container.addEventListener("mouseleave", e => this.toggleMouseOver(false)); 
+        this.container.addEventListener("contextmenu", e => e.preventDefault()); 
+
+        this.loadNeighbours(this.index);
     }
 
     traverse(e, left) {
@@ -40,16 +56,10 @@ class ImgGallery {
         this.busy = true;
 
         var mod = left ? -1 : 1;
+        this.images[this.index].classList.remove("show-element");
         this.index = this.incRotary(this.index, mod, 0, this.images.length - 1)
-
-        for (let index = 0; index < this.images.length; index++) {
-            if (index == this.index) {
-                this.images[index].classList.add("show-img");
-            } else {
-                this.images[index].classList.remove("show-img");
-            }
-        }
-
+        this.images[this.index].classList.add("show-element");
+        this.loadNeighbours(this.index);
         this.busy = false;
     }
 
@@ -65,14 +75,46 @@ class ImgGallery {
         }
     }
 
-    loadImages() {
-        var asyncLoad = async function (element) {
-            element.style.backgroundImage = "url('" + element.dataset.source + "')";
+    triggerControls(e) {
+        this.controlTimeout = Date.now() + this.controlTimeoutMax;
+        var delayHide = async function (elements, obj) {
+            setTimeout(() => {
+                if (!obj.isMouseOver && Date.now() - obj.controlTimeout >= 0) {
+                    for (let index = 0; index < elements.length; index++) {
+                        elements[index].classList.remove("show-element");
+                    }
+                }
+            }, obj.controlTimeoutMax);
+        }    
+        
+        var controls = [this.rightButton, this.leftButton];
+        for (let index = 0; index < controls.length; index++) {
+            controls[index].classList.add("show-element");
         }
 
-        for (let index = 0; index < this.images.length; index++) {
-            asyncLoad(this.images[index]);
+        delayHide(controls, this);
+    }
+
+    loadNeighbours(index) { 
+        var asyncLoadNeighbours = async function (rotaryIncFunc, images, numImages) {
+            var PrevNeighbourIndex = rotaryIncFunc(index, -1, 0, numImages - 1);
+            if (!images[PrevNeighbourIndex].loaded) {
+                images[PrevNeighbourIndex].style.backgroundImage = "url('" + images[PrevNeighbourIndex].dataset.source + "')";
+                images[PrevNeighbourIndex].loaded = true;
+            }
+
+            var NextNeighbourIndex = rotaryIncFunc(index, 1, 0, numImages - 1);
+            if (!images[NextNeighbourIndex].loaded) {
+                images[NextNeighbourIndex].style.backgroundImage = "url('" + images[NextNeighbourIndex].dataset.source + "')";
+                images[NextNeighbourIndex].loaded = true;
+            }
         }
+
+        asyncLoadNeighbours(this.incRotary, this.images, this.images.length);
+    }
+
+    toggleMouseOver (isOver) {
+        this.isMouseOver = isOver;
     }
 
     // (floor 0 and max 5 means 0, 2, 3, 4, 5)
