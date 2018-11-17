@@ -85,7 +85,7 @@
                     <div class="portfolio-page-inner bg-sk">
                         <div class="portfolio-page-section clamp-width-80 height-60">
                             <div class="portfolio-video-wrapper">
-                                <video poster="" class="vid" id="vp-sk">
+                                <video poster="" class="vid" id="vp-sk" poster="">
                                     <source src="{{ url_for('static', filename='video/sktd.mp4') }}" type="video/mp4">
                                 </video>
                             </div>
@@ -95,6 +95,7 @@
                                 <div class="portfolio-info-section">
                                     <h3>Silent Knight「サイレント・ナイト」とは？</h3>
                                     <p>Silent KnightはUnityとC#で創造したスマホ「特にアンドロイド」ゲームである。</p>
+                                    <p>影響はDiablo 3、Nonstop-Knight、Dungeon Siege II、イースシリーズのようなゲーム。</p>
                                     <p>果てしないダンジョンを自動的に探検し、ナイトはプレイヤさんの指導と入力に操られ色んなモンスターと闘いながらダンジョンの奧を目指す。各ステージはシートを用いる疑似ランダム手続き的ダンジョンなので、数多くで独特である。</p>
                                     <p>Silent Knightには沢山なRPGゲーム的な機能「経験値システム、普通と必殺技、<a target="_blank" href="https://gfycat.com/tediousconsideratebeagle">画面は鏡のように壊されるエフェクト</a>等」を含めている。</p>
                                 </div>
@@ -103,8 +104,8 @@
                                 <div class="portfolio-info-section">
                                     <h3>技術の詳細</h3>
                                     <div class="portfolio-info-section-text">
-                                        <p><b>Unity「C#・ShaderLab」</b></p>
-                                        <p>マルチスレッドのA*パスファインダーシステム、シードで手続き的ステージ生成、日本語と英語のローカライズ、経験値とレベルシステ、アンドロイド最適化と一層。</p>
+                                        <p><b>Unity</b>「C#・ShaderLab」</p>
+                                        <p><b>機能</b>「ルチスレッドのA*パスファインダー・シードで手続き的ステージ生成・日本語と英語のローカライズ・経験値とレベルシステ・アンドロイド最適化」</p>
                                     </div>
                                 </div>
                             </div>
@@ -124,15 +125,21 @@
                         <div class="portfolio-page-section height-40">
                             <div class="portfolio-info-wrapper flex-60">
                                 <div class="portfolio-info-section">
-                                    <h3>Full Metal Arnold「フルメタル・アーノルド」とは？</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    <h3>Heavy Metal Arnold「ヘビーメタル・アーノルド」とは？</h3>
+                                    <p>Heavy Metal ArnoldはUnreal Engine 4、C++とブループリントで創造したプラットフォームゲームである。</p>
+                                    <p>影響はクラッシュバンディクー3、レイマン、スーパーマリオ64のようなゲーム。</p>
+                                    <p>主人公のHeavy Metal Arnoldはプラットフォームを越えモンスターを排除しながら様々なレベルをクリア。倒したモンスターや壊した箱などから得たガラクタを集めながら自分の母性に帰るよう戦い続けている。</p>
+                                    <p>Heavy Metal Arnoldは沢山なプラットフォームゲーム的な機能「AIで動いている的、スコアにつながるライフシステム、チェックポイントでの復活システム、動いているプラットフォーム、砕けられる箱等」を含めている。</p>
                                 </div>
                             </div>
                             <div class="portfolio-info-wrapper flex-40">
                                 <div class="portfolio-info-section">
                                     <h3>技術の詳細</h3>
+                                    <div class="portfolio-info-section-text">
+                                        <p><b>Unreal Engine 4</b>「C++・Blueprints・UMG・スケルタルメッシュのアニメーション システム」</p>
+                                        <p><b>Maya 2018</b>「3Dモデル」</p>
+                                        <p><b>機能</b>「ブラックボードAI、スプライン曲線カメラ、カメラからテクスチャへのレンダリング、ゲームセーブオブジェクトで進歩を保存、インタラクティブ設定メニュー、全体アニメーションのある主人公モデル」</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -141,45 +148,53 @@
                 <div class="portfolio-page-wrapper" id="rr">
                     <div class="portfolio-x-button noselect">🗙</div>
                     <div class="portfolio-page-inner bg-rr">
-                        <div class="portfolio-page-section clamp-width-80 height-60">
+                        <div class="portfolio-page-section flex-dir-column flex-just-center clamp-width-80 height-60">
                             <div class="img-gallery noselect" id="ig-rr">
                                 <script src="{{ url_for('static', filename='js/img-gallery.js') }}" async></script>
-                                <div class="img-gallery-button noselect left-button show-element">‹<div style="width: 80px;"></div></div>
-                                <div class="img-gallery-button noselect right-button show-element"><div style="width: 80px;"></div>›</div>
+                                <div class="img-gallery-button noselect left-button show-element">‹<div style="width: 80px;"></div>
+                                </div>
+                                <div class="img-gallery-button noselect right-button show-element">
+                                    <div style="width: 80px;"></div>›
+                                </div>
                                 <div class="img-gallery-inner">
-                                    <img src="{{ url_for('static', filename='icons/1x1.png') }}" class="show-element" data-source="https://lh3.googleusercontent.com/3tQEGR3IH5VxJe1kBBCT7YTDjVSDptdim9R7joHcs0ORTs1ykVclP5nXCm5gdCElujqaw-QMIYRmjPpW2NuoFvBN21QQcy7EwVulUrbGjT37K6Ca1MwM8Jl59cMJE38y_aEJfYUarg=w1280-h720">
-                                    <img src="{{ url_for('static', filename='icons/1x1.png') }}" data-source="https://lh3.googleusercontent.com/7XBJ1zzy0p_1hhIMZOOJ8a3tuLAYs3Sbdi_T9ZwzjhowH1YAxW5W2tChZFqNUylrTz2q-frenY_ZVpGJES3Xcf112qexSgwECm395sEL-_u_qZi8GU_iQk_0pgznsmTn4Qs5lM9jbw=w1280-h720">
-                                    <img src="{{ url_for('static', filename='icons/1x1.png') }}" data-source="https://lh3.googleusercontent.com/a7nJcJJC-UdLl4Iw_B3BJquN9o7hlnLxKERLkxVWnKh7ZgLSr4HcO5bTzn_o0PhA3asGrrrTHvX6UuylePlJ0IRaoiYr1ZRURdm6-ETMC4FElaihK4Z5UCYmLGYT6kMK2__s6nBmHg=w1280-h720">
-                                    <img src="{{ url_for('static', filename='icons/1x1.png') }}" data-source="https://lh3.googleusercontent.com/GApTWB1kDQ_6VTzXdLYejj8F0hJDL9N3QUFp1apEFPLdX2JlVZlI4bk1mRb-gwurzCnVyXBz-_maKV81pR1p8gR7OzRMwCU-hJKDYmNUsr3GIDgcOt_3RuOYH5mJYT17PGxcC6QwCg=w1280-h720">
-                                    <img src="{{ url_for('static', filename='icons/1x1.png') }}" data-source="https://lh3.googleusercontent.com/LFO4BpL2aLTU1XNXafOdBRBj6TO1G81NqkgG_-m-CkRKn-8GiqUkZIMCD3pU1RebRIPBNVR8Klq4_Ln96fNAe6B_5MzUsOln6TzcrpIp9funeilQbJGgTmr0nat4ZGrHWxFstOxP7w=w1280-h720">
-                                    <img src="{{ url_for('static', filename='icons/1x1.png') }}" data-source="https://lh3.googleusercontent.com/-g_zonLcjb5IMSKIm8eVBgBBdDxVRhwgUQDP9CDarsHl_aaFVhCuuV59dhVE27X7KUrrvzGtLiQCuXNocFYSf_yUC4_pqD8AyLt01DVbMJ8vev3nqfmLMCOGi4HXBVKizyv3OFifKQ=w1280-h720">
-                                    <img src="{{ url_for('static', filename='icons/1x1.png') }}" data-source="https://lh3.googleusercontent.com/gsoz3cZtRFhHtOGKAH_RApjQSEZUHpr5VFUx-eyhViEj3ljR5s9L6XLxq5gK0n3jCedAQrauwaFTYaO7ZTsTvJIl5C2UOaWzURMfD51NasdMJVwg2TgccMU9rHYkzxBrPZ9k6vQoOw=w1280-h720">
-                                    <img src="{{ url_for('static', filename='icons/1x1.png') }}" data-source="https://lh3.googleusercontent.com/b38dy2tsq5BnpfMacIahp1-rpMJD9R1H0x9JQsccxqVEH55sdtcOtoclzPix5I_LQYRubUdlkIlq8ui7oQ11UQfG1UAXNtRhkndytojNpNzYbZvnDtHyUPu8e9sH6K7DK0qGd3aBlA=w1280-h720">
-                                    <img src="{{ url_for('static', filename='icons/1x1.png') }}" data-source="https://lh3.googleusercontent.com/nD0FS3n3wM7eCKUoCUMF-odHKYCx1UJUwja3aHLqjipuhrIekwcSJIgJ2uC8eXf_aM3akgfqByzqF_lPdx0r1r8dUbq6sULCI6i5gS_H1kdh4YSqmi5Euufj9e2YyfSp2I_zhepJrw=w1280-h720">
-                                    <img src="{{ url_for('static', filename='icons/1x1.png') }}" data-source="https://lh3.googleusercontent.com/8ypWzEVGZ8-P1yA-1b-NoZbxcGpkVnNFctMeeYMsa3Wq0VrwE1KGunQLw6Q6E62qcuEWYoU1x7f7SF7-prpxDtwdqyi2I5TxQScY91b4HE5DXt7nru9eZSgVO9OOWtPi8EbHfzdSBQ=w1280-h720">
-                                    <img src="{{ url_for('static', filename='icons/1x1.png') }}" data-source="https://lh3.googleusercontent.com/fVgXIDoffuP5IIUlur6NPFPYOlQCa6jlDOMke4mrT_4lOLAUJvadEc1tFCZpjl0Wo0Riu4poG6QKfnXXaWtCML4o5gUMuxlVpyOYfRA1eZFCSfiU5vUi0LqIezfNekz_lkCrvm282A=w1280-h720">
-                                    <img src="{{ url_for('static', filename='icons/1x1.png') }}" data-source="https://lh3.googleusercontent.com/Iy7IoEUipge4Yl8cDDv_u5u1lmtyQT6EfhK0XpQhyOoClsoKxJVhlT_d8GsOusDzi8zUmgN5gqFy-suORjdbYxkE1YJI8ZxC_6oTOCLI8JBi_EkgL5DqpQOJlUrhRbckJumE-lrRZg=w1280-h720">
-                                    <img src="{{ url_for('static', filename='icons/1x1.png') }}" data-source="https://lh3.googleusercontent.com/BjJ1RflcGeziK_VQsSF4gui694uskY0sCpZGq_PNOLzAZxmToZwp9r8civUGJ5JBY0RT5_VxCilvTWPuebhfYm9bBSA0-U-7ZXctwelkAJzL2-BP2syB-mL6VoR7YFH8EJbFkG2d3g=w1280-h720">
-                                    <img src="{{ url_for('static', filename='icons/1x1.png') }}" data-source="https://lh3.googleusercontent.com/k71-OnxwhwSJEm_eWCeaBQbqFDBsaeNwXCXklJdd2RaBRVdEk7jf1JYnZyqSU2W3Fc1JL80wWQ9GNiG6V9Gz6-3O5YIxhev_4pCjv27O2JjRCoVA9C7Rb2QGNOkc3nNqeJ1QM4Pc6A=w1280-h720">
-                                    <img src="{{ url_for('static', filename='icons/1x1.png') }}" data-source="https://lh3.googleusercontent.com/jPbm8Mncsi36OL-AZ9gCYsoJiij_sT0q6v-VuM5j2vVKi0NcBTvMAEqYbV-S3zPz4PyejTNwaD4D5lmn3ql_yNn6OOWPgDQDjsNZsRaWJwOjCs1mkNxAlFvAbIu0RfKFyyT_GZ7ptA=w1280-h720">
-                                    <img src="{{ url_for('static', filename='icons/1x1.png') }}" data-source="https://lh3.googleusercontent.com/6fh2w2xhiuHQ6ULJS92ZCa-4LUnTdCvnmY3wyKheRLAyDyITlL_aHZSQh2708gJkwSobipNmcCuYlr0XVUl3crLsXA-NS8cOq-GFOZv462falP5Y8uXtSnIUmWRC3woPmqmwgreetQ=w1280-h720">
-                                    <img src="{{ url_for('static', filename='icons/1x1.png') }}" data-source="https://lh3.googleusercontent.com/XVdBjmxPEUKmAcDC3FTtbSuUpeNQz0rXUg91TzcI5hKRoQ2HQlOVG4fJ98Y4Xe7dFyQ7sFvnFfPYvStieQ3xfk6C_v7AkZ9syyFcTiQ-ThtGe346PYlIQ3SnSWakaxXMSB0TNyX9ew=w1280-h720">
-                                    <img src="{{ url_for('static', filename='icons/1x1.png') }}" data-source="https://lh3.googleusercontent.com/1UXu_gNYtECxC2a99wmtU0yA0hHKyBld2K_2km2DZ956-1dIZSPGCAp24zAcM3FmzflzGP6DRNl35cMj3OaNavF4IBRQoJw2SMh3S1JnCkAgz035bD1k07P_DRm-xwxqV6ZVgRtrnw=w1280-h720">
+                                    <img class="show-element" data-source="https://lh3.googleusercontent.com/3tQEGR3IH5VxJe1kBBCT7YTDjVSDptdim9R7joHcs0ORTs1ykVclP5nXCm5gdCElujqaw-QMIYRmjPpW2NuoFvBN21QQcy7EwVulUrbGjT37K6Ca1MwM8Jl59cMJE38y_aEJfYUarg=w1280-h720">
+                                    <img data-source="https://lh3.googleusercontent.com/7XBJ1zzy0p_1hhIMZOOJ8a3tuLAYs3Sbdi_T9ZwzjhowH1YAxW5W2tChZFqNUylrTz2q-frenY_ZVpGJES3Xcf112qexSgwECm395sEL-_u_qZi8GU_iQk_0pgznsmTn4Qs5lM9jbw=w1280-h720">
+                                    <img data-source="https://lh3.googleusercontent.com/a7nJcJJC-UdLl4Iw_B3BJquN9o7hlnLxKERLkxVWnKh7ZgLSr4HcO5bTzn_o0PhA3asGrrrTHvX6UuylePlJ0IRaoiYr1ZRURdm6-ETMC4FElaihK4Z5UCYmLGYT6kMK2__s6nBmHg=w1280-h720">
+                                    <img data-source="https://lh3.googleusercontent.com/GApTWB1kDQ_6VTzXdLYejj8F0hJDL9N3QUFp1apEFPLdX2JlVZlI4bk1mRb-gwurzCnVyXBz-_maKV81pR1p8gR7OzRMwCU-hJKDYmNUsr3GIDgcOt_3RuOYH5mJYT17PGxcC6QwCg=w1280-h720">
+                                    <img data-source="https://lh3.googleusercontent.com/LFO4BpL2aLTU1XNXafOdBRBj6TO1G81NqkgG_-m-CkRKn-8GiqUkZIMCD3pU1RebRIPBNVR8Klq4_Ln96fNAe6B_5MzUsOln6TzcrpIp9funeilQbJGgTmr0nat4ZGrHWxFstOxP7w=w1280-h720">
+                                    <img data-source="https://lh3.googleusercontent.com/-g_zonLcjb5IMSKIm8eVBgBBdDxVRhwgUQDP9CDarsHl_aaFVhCuuV59dhVE27X7KUrrvzGtLiQCuXNocFYSf_yUC4_pqD8AyLt01DVbMJ8vev3nqfmLMCOGi4HXBVKizyv3OFifKQ=w1280-h720">
+                                    <img data-source="https://lh3.googleusercontent.com/gsoz3cZtRFhHtOGKAH_RApjQSEZUHpr5VFUx-eyhViEj3ljR5s9L6XLxq5gK0n3jCedAQrauwaFTYaO7ZTsTvJIl5C2UOaWzURMfD51NasdMJVwg2TgccMU9rHYkzxBrPZ9k6vQoOw=w1280-h720">
+                                    <img data-source="https://lh3.googleusercontent.com/b38dy2tsq5BnpfMacIahp1-rpMJD9R1H0x9JQsccxqVEH55sdtcOtoclzPix5I_LQYRubUdlkIlq8ui7oQ11UQfG1UAXNtRhkndytojNpNzYbZvnDtHyUPu8e9sH6K7DK0qGd3aBlA=w1280-h720">
+                                    <img data-source="https://lh3.googleusercontent.com/nD0FS3n3wM7eCKUoCUMF-odHKYCx1UJUwja3aHLqjipuhrIekwcSJIgJ2uC8eXf_aM3akgfqByzqF_lPdx0r1r8dUbq6sULCI6i5gS_H1kdh4YSqmi5Euufj9e2YyfSp2I_zhepJrw=w1280-h720">
+                                    <img data-source="https://lh3.googleusercontent.com/8ypWzEVGZ8-P1yA-1b-NoZbxcGpkVnNFctMeeYMsa3Wq0VrwE1KGunQLw6Q6E62qcuEWYoU1x7f7SF7-prpxDtwdqyi2I5TxQScY91b4HE5DXt7nru9eZSgVO9OOWtPi8EbHfzdSBQ=w1280-h720">
+                                    <img data-source="https://lh3.googleusercontent.com/fVgXIDoffuP5IIUlur6NPFPYOlQCa6jlDOMke4mrT_4lOLAUJvadEc1tFCZpjl0Wo0Riu4poG6QKfnXXaWtCML4o5gUMuxlVpyOYfRA1eZFCSfiU5vUi0LqIezfNekz_lkCrvm282A=w1280-h720">
+                                    <img data-source="https://lh3.googleusercontent.com/Iy7IoEUipge4Yl8cDDv_u5u1lmtyQT6EfhK0XpQhyOoClsoKxJVhlT_d8GsOusDzi8zUmgN5gqFy-suORjdbYxkE1YJI8ZxC_6oTOCLI8JBi_EkgL5DqpQOJlUrhRbckJumE-lrRZg=w1280-h720">
+                                    <img data-source="https://lh3.googleusercontent.com/BjJ1RflcGeziK_VQsSF4gui694uskY0sCpZGq_PNOLzAZxmToZwp9r8civUGJ5JBY0RT5_VxCilvTWPuebhfYm9bBSA0-U-7ZXctwelkAJzL2-BP2syB-mL6VoR7YFH8EJbFkG2d3g=w1280-h720">
+                                    <img data-source="https://lh3.googleusercontent.com/k71-OnxwhwSJEm_eWCeaBQbqFDBsaeNwXCXklJdd2RaBRVdEk7jf1JYnZyqSU2W3Fc1JL80wWQ9GNiG6V9Gz6-3O5YIxhev_4pCjv27O2JjRCoVA9C7Rb2QGNOkc3nNqeJ1QM4Pc6A=w1280-h720">
+                                    <img data-source="https://lh3.googleusercontent.com/jPbm8Mncsi36OL-AZ9gCYsoJiij_sT0q6v-VuM5j2vVKi0NcBTvMAEqYbV-S3zPz4PyejTNwaD4D5lmn3ql_yNn6OOWPgDQDjsNZsRaWJwOjCs1mkNxAlFvAbIu0RfKFyyT_GZ7ptA=w1280-h720">
+                                    <img data-source="https://lh3.googleusercontent.com/6fh2w2xhiuHQ6ULJS92ZCa-4LUnTdCvnmY3wyKheRLAyDyITlL_aHZSQh2708gJkwSobipNmcCuYlr0XVUl3crLsXA-NS8cOq-GFOZv462falP5Y8uXtSnIUmWRC3woPmqmwgreetQ=w1280-h720">
+                                    <img data-source="https://lh3.googleusercontent.com/XVdBjmxPEUKmAcDC3FTtbSuUpeNQz0rXUg91TzcI5hKRoQ2HQlOVG4fJ98Y4Xe7dFyQ7sFvnFfPYvStieQ3xfk6C_v7AkZ9syyFcTiQ-ThtGe346PYlIQ3SnSWakaxXMSB0TNyX9ew=w1280-h720">
+                                    <img data-source="https://lh3.googleusercontent.com/1UXu_gNYtECxC2a99wmtU0yA0hHKyBld2K_2km2DZ956-1dIZSPGCAp24zAcM3FmzflzGP6DRNl35cMj3OaNavF4IBRQoJw2SMh3S1JnCkAgz035bD1k07P_DRm-xwxqV6ZVgRtrnw=w1280-h720">
                                 </div>
                             </div>
+                            <p class="subtext">★フルスクリーンはダブルクリックで★</p>
                         </div>
                         <div class="portfolio-page-section height-40">
                             <div class="portfolio-info-wrapper flex-60">
                                 <div class="portfolio-info-section">
                                     <h3>Rapture Records「ラプチャー・レコード」とは？</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    <p>Rapture RecordsはMaya 2018で創造した3Dシーンである。</p>
+                                    <p>影響はゲームの<a target="_blank" href="https://www.youtube.com/watch?v=BcxHZNS5kaU">Bioshock InfiniteのDLC、Burial at Sea Part 1</a>にあるRapture Recordsの現場。</p>
+                                    <p>モデルは全てMaya 2018で創造でレンダリングは全てArnold 5。</p>
                                 </div>
                             </div>
                             <div class="portfolio-info-wrapper flex-40">
                                 <div class="portfolio-info-section">
                                     <h3>技術の詳細</h3>
+                                    <div class="portfolio-info-section-text">
+                                        <p><b>Maya 2018</b>「3Dモデル・Arnold 5・UVエディタ」</p>
+                                        <p><b>Photoshop CC</b>「ブルームエフェクト・テクスチャの調整」</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -199,14 +214,18 @@
                             <div class="portfolio-info-wrapper flex-60">
                                 <div class="portfolio-info-section">
                                     <h3>THREEJS OpenGL Demo「3JS・オープンジーエル・デモ」とは？</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    <p>Silent KnightはUnityとC#で創造したスマホ「特にアンドロイド」ゲームである。</p>
+                                    <p>果てしないダンジョンを自動的に探検し、ナイトはプレイヤさんの指導と入力に操られ色んなモンスターと闘いながらダンジョンの奧を目指す。各ステージはシートを用いる疑似ランダム手続き的ダンジョンなので、数多くで独特である。</p>
+                                    <p>Silent Knightには沢山なRPGゲーム的な機能「経験値システム、普通と必殺技、<a target="_blank" href="https://gfycat.com/tediousconsideratebeagle">画面は鏡のように壊されるエフェクト</a>等」を含めている。</p>
                                 </div>
                             </div>
                             <div class="portfolio-info-wrapper flex-40">
                                 <div class="portfolio-info-section">
                                     <h3>技術の詳細</h3>
+                                    <div class="portfolio-info-section-text">
+                                        <p><b>Unity「C#・ShaderLab」</b></p>
+                                        <p>マルチスレッドのA*パスファインダーシステム、シードで手続き的ステージ生成、日本語と英語のローカライズ、経験値とレベルシステ、アンドロイド最適化と一層。</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -258,7 +277,7 @@
                             <img class="contacts-image" src="{{ url_for('static', filename='icons/linkedin_light.png') }}"
                                 alt="LinkedIn">
                         </a>
-                        <a href="https://github.com/SteinLabs" class="contacts-link">
+                        <a href="https://github.com/6a" class="contacts-link">
                             <img class="contacts-image" src="{{ url_for('static', filename='icons/github_light.png') }}"
                                 alt="GitHub">
                         </a>
