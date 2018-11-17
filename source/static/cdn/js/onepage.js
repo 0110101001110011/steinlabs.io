@@ -148,7 +148,16 @@ function scrollToSection(sectionIndex) {
 }
 
 function scroll(deltaY, hops) {
-    if (ZS.moving() || PORTFOLIO_OPEN) {
+    if (ZS.moving()) {
+        return;
+    }
+
+    var isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
+    (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
+    (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
+    (document.msFullscreenElement && document.msFullscreenElement !== null);
+
+    if (isInFullScreen) {
         return;
     }
 
@@ -171,12 +180,14 @@ function togglePortfolioPage(pageID, activate) {
     if (activate) {
         PORTFOLIO_PAGES[pageID].classList.add("portfolio-page-visible");
         PORTFOLIO_PAGES[pageID].style.pointerEvents = "";
-        PORTFOLIO_OPEN = true;
+        PORTFOLIO_OPEN = pageID;
+        toggleGalleries(true, 0, pageID);
     } else{
         PORTFOLIO_PAGES[pageID].classList.remove("portfolio-page-visible");
         PORTFOLIO_PAGES[pageID].style.pointerEvents = "none";
         [].slice.call(VIDEO_PLAYERS).forEach(function(element) {element.pause();});
-        PORTFOLIO_OPEN = false;
+        PORTFOLIO_OPEN = null;
+        toggleGalleries(false, 500);
     }
 }
 
@@ -225,10 +236,22 @@ function init() {
                 vnStep(null, 1);
             }
         }
+
+        if (CURRENT_INDEX == 2) {
+            if ([8, 37].includes(kc)) {
+                traverseActiveGallery(e, true);
+            } else if ([13, 39].includes(kc)) {
+                traverseActiveGallery(e, false);
+            }
+
+            if (kc == 27 && PORTFOLIO_OPEN) {
+                togglePortfolioPage(PORTFOLIO_OPEN, false);
+            }
+        }
     });
 
     SCROLL_TARGET.addEventListener('mousedown', function (e) {
-        if (e.button == 1) {
+        if (e.button == 2) {
             LAST_Y_POS = e.clientY;
             e.preventDefault();
         }

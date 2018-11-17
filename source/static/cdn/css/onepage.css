@@ -141,7 +141,7 @@ h2.top {
 
 .portfolio-page-visible {
     visibility: visible;
-    transition: visibility ease-out 0s, opacity 0.5s;
+    transition: display linear 1s, visibility ease-out 0s, opacity 0.5s;
     opacity: 1;
 }
 
@@ -532,20 +532,14 @@ _:-ms-lang(x), .portfolio-page-section {
 
 /* img-gallery */
 
-.img-gallery-section-wrapper {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .img-gallery {
     width: 750px;
     height: 422px;
     background-color: rgb(1, 4, 10);
+    border: 2px solid black;
     overflow: hidden;
     position: relative;
+    display: none;
 }
 
 .img-gallery-inner {
@@ -554,27 +548,31 @@ _:-ms-lang(x), .portfolio-page-section {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    overflow: auto;
     position: relative;
+    overflow: hidden;
 }
 
 .img-gallery img {
-    height: 422px;
-    width: 750px;
+    display: block;
+    height: auto;
+    width: 100%;
     position: absolute;
     visibility: hidden;
     opacity: 0;
     transition: all 0.2s ease-in-out;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     border-style: none;
 }
 
-.show-element {
-    visibility: visible !important;
-    opacity: 1 !important;
-    transition: all 0.2s ease-in-out !important;
+img.show-element {
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.2s ease-in-out;
+}
+
+.img-gallery-button.show-element {
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.2s ease-in-out;
 }
 
 .img-gallery-button {
@@ -589,7 +587,6 @@ _:-ms-lang(x), .portfolio-page-section {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.2s ease-in-out;
     cursor: pointer;
     visibility: hidden;
     opacity: 0;
@@ -605,34 +602,6 @@ _:-ms-lang(x), .portfolio-page-section {
 
 .img-gallery-button.right-button {
     right: 0;
-}
-
-.img-gallery:-webkit-full-screen img {
-    width: 100%;
-    height: 100%;
-    background-size: contain;
-    background-color: black;
-}
-
-.img-gallery:-moz-full-screen img {
-    width: 100%;
-    height: 100%;
-    background-size: contain;
-    background-color: black;
-}
-
-.img-gallery:-ms-full-screen img {
-    width: 100%;
-    height: 100%;
-    background-size: contain;
-    background-color: black;
-}
-
-.img-gallery:fullscreen img {
-    width: 100%;
-    height: 100%;
-    background-size: contain;
-    background-color: black;
 }
 
 .img-gallery:-webkit-full-screen .img-gallery-button {font-size: 120px; line-height: 120px;}
