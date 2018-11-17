@@ -137,6 +137,10 @@ class ImgGallery {
 
     toggleMouseOver (isOver) {
         this.isMouseOver = isOver;
+
+        if (!isOver) {
+            this.controlTimeout = 0;
+        }
     }
 
     // (floor 0 and max 5 means 0, 2, 3, 4, 5)
