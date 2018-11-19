@@ -3,3 +3,4 @@ __pycache__
 .vscode/
 source/static/cdn/big/
 unix_files/
+CNAME
