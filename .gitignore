@@ -1,6 +1,5 @@
 env/
 __pycache__
 .vscode/
-source/static/cdn/video/
-source/static/cdn/images/
+source/static/cdn/big/
 unix_files/
