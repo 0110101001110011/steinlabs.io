@@ -344,6 +344,7 @@ _:-ms-lang(x), .portfolio-page-section {
     background-color: rgba(0, 0, 0, 0.5);
     position: relative;
     font-size: 40px;
+    line-height: 40px;
     height: 20%;
     display: flex;
     visibility: visible;
@@ -359,16 +360,28 @@ _:-ms-lang(x), .portfolio-page-section {
     font-size: 40px;
     position: absolute;
     right: 10px;
-    bottom: -5px;
+    bottom: 5px;
     display: flex;
+}
+
+#vn-arrow-right {
+    margin-left: 10px;
+}
+
+#vn-arrow-left {
+    margin-right: 10px;
 }
 
 .vn-arrow {
     cursor: pointer;
 }
 
+.vn-arrow:hover {
+    text-shadow: 0 0 22px rgb(255, 0, 98);
+}
+
 .vn-arrow:active {
-    color: rgb(0, 255, 242);
+    color: rgb(255, 0, 98);
 }
 
 .vn-name {
@@ -382,6 +395,34 @@ _:-ms-lang(x), .portfolio-page-section {
 .vn-image img {
     max-width: 80vw;
     max-height: 60vh;
+}
+
+@keyframes fadeInOut {
+    0%   { opacity:1; }
+    50%  { opacity:0.1; }
+    100% { opacity:1; }
+}
+@-o-keyframes fadeInOut{
+    0%   { opacity:1; }
+    50%  { opacity:0.1; }
+    100% { opacity:1; }
+}
+@-moz-keyframes fadeInOut{
+    0%   { opacity:1; }
+    50%  { opacity:0.1; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes fadeInOut{
+    0%   { opacity:1; }
+    50%  { opacity:0.1; }
+    100% { opacity:1; }
+}
+
+.fade-in-out {
+    -webkit-animation: fadeInOut 2s infinite;
+    -moz-animation: fadeInOut 2s infinite;
+    -o-animation: fadeInOut 2s infinite;
+    animation: fadeInOut 2s infinite;
 }
 
 .link-ffbox {

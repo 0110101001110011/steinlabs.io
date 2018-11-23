@@ -25,6 +25,7 @@ var Typewriter = function () {
 
             if (this.currentID != id || !this.typing || this.index > this.endIndex) {
                 this.typing = false;
+                VN_ARROW_CONTAINER.classList.add("fade-in-out");
                 return;
             }
 
@@ -32,6 +33,7 @@ var Typewriter = function () {
                 this.currentElement.innerHTML = this.innerHTML;
                 this.forceFinish = false;
                 this.typing = false;
+                VN_ARROW_CONTAINER.classList.add("fade-in-out");
                 return;
             }
 
@@ -112,6 +114,7 @@ var CURRENT_VN_TEXT_INDEX = 0;
 var MAX_VN_TEXT_INDEX = Math.max(VN_TEXT_BLOCKS.length - 1, 0);
 var VN_ARROW_LEFT = document.getElementById("vn-arrow-left");
 var VN_ARROW_RIGHT = document.getElementById("vn-arrow-right");
+var VN_ARROW_CONTAINER = document.getElementById("vn-arrow-container");
 var PORTFOLIO_THUMBNAILS = document.getElementsByClassName("portfolio-thumbnail");
 var PORTFOLIO_PAGES = [].slice.call(document.getElementsByClassName("portfolio-page-wrapper")).reduce(function (map, obj) {map[obj.id] = obj;return map;}, {});
 var PORTFOLIO_X_BUTTONS = document.getElementsByClassName("portfolio-x-button");
@@ -144,6 +147,7 @@ function vnStep(event, delta) {
             VN_TEXT_BLOCKS[previousIndex].classList.toggle("hidden");
             TYPEWRITER.type(VN_TEXT_BLOCKS[CURRENT_VN_TEXT_INDEX], 16);
             VN_TEXT_BLOCKS[CURRENT_VN_TEXT_INDEX].classList.toggle("hidden");
+            VN_ARROW_CONTAINER.classList.remove("fade-in-out");
         }
     }
 
