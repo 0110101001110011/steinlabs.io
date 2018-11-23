@@ -1,0 +1,6 @@
+[
+  {
+    "get": "/*.html",
+    "push": "/cdn/small/**/*.{js,css,jpg,jpeg,webp,png,mp4,xcf,xml,ico,svg,webmanifest}"
+  }
+]
