@@ -121,6 +121,7 @@ var ZS = zenscroll.createScroller(SCROLL_TARGET, TIME_PER_PAGE, 0);
 var TYPEWRITER = new Typewriter();
 var SPLASH_VIDEO = document.getElementById("splash-video");
 var LAST_SCROLL_DELTA = 0;
+var LAST_HASH = window.location.hash;
 
 // Helpers
 function clamp(a, min, max) {
@@ -184,7 +185,8 @@ function scroll(deltaY, hops) {
         if (CURRENT_INDEX != 0) {
             SPLASH_VIDEO.pause();
         }
-        window.location.hash = "s" + CURRENT_INDEX
+        history.pushState(null, null, document.location.pathname + "#s" + CURRENT_INDEX);
+        LAST_HASH = window.location.hash;
     });
 }
 
@@ -212,6 +214,8 @@ function togglePortfolioPage(pageID, activate) {
 function updateIndexByHash() {
     if (window.location.hash && window.location.hash.match("^#s[0-9]$")) {
         CURRENT_INDEX = parseInt(window.location.hash.replace("#s", ""));
+    } else {
+        CURRENT_INDEX = 0;
     }
 
     if (CURRENT_INDEX == 0) SPLASH_VIDEO.play();
@@ -341,7 +345,14 @@ function init() {
     }
 
     window.addEventListener("hashchange", function (e) {
-        updateIndexByHash();
+        if (PORTFOLIO_OPEN && CURRENT_INDEX == 2) {
+            togglePortfolioPage(PORTFOLIO_OPEN, false);
+            history.pushState(null, null, document.location.pathname + LAST_HASH);
+            e.stopPropagation();
+            e.preventDefault();
+        } else {
+            updateIndexByHash();
+        }
     });
 }
 
