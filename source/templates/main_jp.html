@@ -22,7 +22,7 @@
 
 <body>
     <div class="page-outer">
-        <div class="page-inner" id="scroll-target">
+        <div class="page-inner" id="scroll-target" style="padding-right: 17px;">
             <div id="s0" class="section-base section-top">
                 <div class="video-wrapper" center no-repeat>
                     <video id="splash-video" autoplay muted loop>
@@ -318,7 +318,7 @@
                         </a>
                     </div>
                     <div class="contacts-section">
-                        <p>このサイトは<a href="http://flask.pocoo.org/" class="contacts-link-text">Flask</a>で作成しました</p>
+                        <p>Powered by <a href="http://flask.pocoo.org/" class="contacts-link-text">Flask</a> | <a href="https://www.nginx.com/" class="contacts-link-text">NGINX</a> | <a href="https://www.cloudflare.com/" class="contacts-link-text">Cloudflare</a></p>
                     </div>
                     <div class="contacts-section">
                         <p>&copy; Copyright 2018 James Einosuke Stanton</p>
@@ -327,8 +327,8 @@
             </div>
         </div>
     </div>
-    <script src="{{ url_for('static', filename='small/js/zenscroll-min.js') }}"></script>
-    <script src="{{ url_for('static', filename='small/js/onepage.js') }}"></script>
+    <script data-cfasync="false" src="{{ url_for('static', filename='small/js/zenscroll-min.js') }}"></script>
+    <script data-cfasync="false" src="{{ url_for('static', filename='small/js/onepage.js') }}"></script>
     <script src="{{ url_for('static', filename='small/js/plyr-helper.js') }}"></script>
 </body>
 

@@ -192,8 +192,6 @@ function togglePortfolioPage(pageID, activate) {
 }
 
 function init() {
-    SCROLL_TARGET.style.paddingRight = getScrollbarWidth().toString() + "px";
-
     SCROLL_TARGET.addEventListener('wheel', function (e) {
         scroll(e.deltaY, 1);
         e.preventDefault();
