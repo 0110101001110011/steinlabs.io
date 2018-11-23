@@ -82,7 +82,8 @@ h2.top {
     background-color: rgb(50, 50, 50);
     justify-content: center;
     align-items: center;
-    height: 15vh;
+    height: 30vh;
+    font-family : 'Consolas', 'Courier New', Courier, 'Lucida Console', 'Monaco', 'Andale Mono', monospace;
 }
 
 .porfolio-wrapper {
@@ -199,7 +200,7 @@ _:-ms-lang(x), .portfolio-page-section {
 
 .portfolio-x-button:hover {
     transition: all 0.1s ease-in-out;
-    color: rgb(255, 255, 255);
+    color: rgb(255, 0, 98);
 }
 
 .height-60 {height: 60%;}
@@ -283,12 +284,12 @@ _:-ms-lang(x), .portfolio-page-section {
 }
 
 .contacts-section {
-    color: white;
+    color: rgb(218, 218, 218);
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 5px;
+    margin: 12px;
 }
 
 .contacts-section p {
@@ -296,15 +297,19 @@ _:-ms-lang(x), .portfolio-page-section {
     font-size: 14px;
 }
 
-
 .contacts-image {
-    width: 32px;
-    height: 32px;   
+    width: 26px;
+    height: 26px;   
 }
 
+.contacts-image:hover {
+    filter: sepia() saturate(10000%) hue-rotate(30deg);
+}
+
+
 .contacts-link {
-    width: 32px;
-    height: 32px;   
+    width: 26px;
+    height: 26px;   
     margin: 0 5px; 
     backface-visibility: hidden;
 }
@@ -313,6 +318,17 @@ _:-ms-lang(x), .portfolio-page-section {
     text-decoration: none;
     margin: 0;
     padding: 0;
+    color: rgb(255, 0, 98);
+}
+
+.contacts-link-text-white {
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    color: rgb(218, 218, 218);
+}
+
+.contacts-link-text-white:hover {
     color: rgb(255, 0, 98);
 }
 
@@ -387,6 +403,7 @@ _:-ms-lang(x), .portfolio-page-section {
     text-shadow: 0.05em 0.05em 2px rgb(23, 24, 16);
     writing-mode: vertical-rl;
     -ms-writing-mode: tb-rl;
+    pointer-events: none;
 }
 
 .video-wrapper {
@@ -434,128 +451,6 @@ _:-ms-lang(x), .portfolio-page-section {
 .anchor-bottom-left {
     bottom: 0;
     left: 0;
-}
-
-/* Media queries */
-@supports (-ms-ime-align:auto) {
-    .content-wrapper {
-        justify-content: space-around;
-    }
-}
-
-@media only screen and (max-height: 850px) {     
-    h2.top {
-        font-size: 50px;
-    }
-}
-
-@media only screen and (max-width: 700px), (max-height: 600px) {     
-    h2.top {
-        font-size: 40px;
-    }
-
-    .section-content {
-        width: 90vw;
-        padding: 4px 8px;   
-    }
-
-    .content-wrapper {
-        width: 100%;
-    }
-}
-
-@media only screen and (max-width: 1000px), (max-height: 700px) {     
-    .vn-name {
-        font-size: 25px;
-        margin: 10px 10px 0 10px;
-    }
-
-    .vn-textbox {
-        font-size: 30px;
-        padding: 20px;   
-    }    
-
-    .contacts-section p {
-        font-size: 12px;
-    }
-    
-    
-    .contacts-image {
-        width: 16px;
-        height: 16px;   
-    }
-    
-    .contacts-link {
-        width: 16px;
-        height: 16px;    
-        margin: 0 4px; 
-    }
-}
-
-@media only screen and (max-width: 750px){     
-    .vn-name {
-        font-size: 15px;
-        margin: 5px 5px 0 5px;
-    }
-
-    .vn-textbox {
-        font-size: 20px;
-        padding: 10px;   
-    }
-}
-
-@media only screen and (max-width: 500px), (max-height: 600px) {     
-    .vn-name {
-        font-size: 15px;
-        margin: 5px 5px 0 5px;
-    }
-    .vn-image img {
-        max-height: 50vh;
-    }
-    .vn-textbox {
-        font-size: 16px;
-        padding: 10px;   
-    }
-}
-
-@media (max-aspect-ratio: 5/4) {
-    .content-indicator {
-        display: none;
-    }
-}
-
-@media (max-aspect-ratio: 5/8) {
-    .vn-textbox {
-        height: 25%;
-    }
-}
-
-@keyframes fadeInOut {
-    0%   { opacity:1; }
-    50%  { opacity:0.1; }
-    100% { opacity:1; }
-}
-@-o-keyframes fadeInOut{
-    0%   { opacity:1; }
-    50%  { opacity:0.1; }
-    100% { opacity:1; }
-}
-@-moz-keyframes fadeInOut{
-    0%   { opacity:1; }
-    50%  { opacity:0.1; }
-    100% { opacity:1; }
-}
-@-webkit-keyframes fadeInOut{
-    0%   { opacity:1; }
-    50%  { opacity:0.1; }
-    100% { opacity:1; }
-}
-
-.fade-in-out {
-    -webkit-animation: fadeInOut 2s infinite;
-    -moz-animation: fadeInOut 2s infinite;
-    -o-animation: fadeInOut 2s infinite;
-    animation: fadeInOut 2s infinite;
 }
 
 /* img-gallery */
