@@ -579,3 +579,74 @@ img.show-element {
 .img-gallery:-moz-full-screen .img-gallery-button {font-size: 120px; line-height: 120px;}
 .img-gallery:-ms-full-screen .img-gallery-button {font-size: 120px; line-height: 120px;}
 .img-gallery:fullscreen .img-gallery-button {font-size: 120px; line-height: 120px;}
+
+/* 404 Page */
+.body-404 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(16, 21, 31);
+}
+
+.body-404-img {
+    max-height: 100%;
+}
+
+.body-404-wrapper {
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1;
+}
+
+.body-404-wrapper h2 {
+    width: 100%;
+    font-weight: bold;
+    color: rgb(197, 197, 197);
+    margin: 15px 0;
+    text-align: center;
+    font-size: 32px;
+}
+
+.speech {
+    width: 100%;
+    font-weight: bold;
+    margin: 1px 0;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    color: rgb(248, 217, 255);
+}
+
+a.speech {
+    width: 100%;
+    font-weight: bold;
+    margin: 1px 0;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    color: rgb(248, 217, 255);
+}
+
+.speech:hover {
+    color: rgb(255, 0, 98);
+}
+
+.monkey-404 {
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+.body-404-highlight {
+    background-color: rgb(7, 8, 17);
+    -webkit-transform: skewY(-5deg);
+    -moz-transform: skewY(-5deg);
+    -ms-transform: skewY(-5deg);
+    -o-transform: skewY(-5deg);
+    transform: skewY(-5deg);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
