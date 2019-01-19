@@ -1,11 +1,13 @@
 /* Variables */
 :root {
     --col-bg-main: rgb(0, 4, 8);
+    --col-bg-main-op07: rgba(0, 4, 8, 0.7);
     --col-bg-overlay: rgb(4, 9, 14);
     --col-bg-header: rgba(1, 9, 15, 0.95);
 
     --col-pre-offwhite: rgb(245, 245, 245);
     --col-pre-lightgrey: rgb(128, 128, 128);
+    --col-highlight: rgb(241, 52, 194);
 
     --num-header-height: 60px;
     --num-header-height-mob: 80px;
@@ -18,14 +20,19 @@ html {
     margin: 0;
     padding: 0;
     background-color: var(--col-bg-main);
-    font-family: 'Kosugi Maru', 'ヒラギノ角ゴ ProN' , 'Hiragino Kaku Gothic ProN' , '游ゴシック' , '游ゴシック体' , YuGothic , 'Yu Gothic' , 'メイリオ' , Meiryo , 'ＭＳ ゴシック' , 'MS Gothic' , HiraKakuProN-W3 , 'TakaoExゴシック' , TakaoExGothic , 'MotoyaLCedar' , 'Droid Sans Japanese' , sans-serif;
+    font-family: 'Noto Sans TC', 'ヒラギノ角ゴ ProN' , 'Hiragino Kaku Gothic ProN' , '游ゴシック' , '游ゴシック体' , YuGothic , 'Yu Gothic' , 'メイリオ' , Meiryo , 'ＭＳ ゴシック' , 'MS Gothic' , HiraKakuProN-W3 , 'TakaoExゴシック' , TakaoExGothic , 'MotoyaLCedar' , 'Droid Sans Japanese' , sans-serif;
     overflow-x: hidden;
     overflow-y: scroll;
     scroll-behavior: smooth;
+    position: relative;
 }
 
 body {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100%;
     margin: 0;
+    padding: 0;
     overflow-x: hidden;
     padding-top: var(--num-header-height);
 }
@@ -60,9 +67,8 @@ body {
     font-family: 'メイリオ' , Meiryo , 'ヒラギノ角ゴ ProN' , 'Hiragino Kaku Gothic ProN' , '游ゴシック' , '游ゴシック体' , YuGothic , 'Yu Gothic' , 'ＭＳ ゴシック' , 'MS Gothic' , HiraKakuProN-W3 , 'TakaoExゴシック' , TakaoExGothic , 'MotoyaLCedar' , 'Droid Sans Japanese' , sans-serif !important;
 }
 
-.h-text-col-white {
-    color: var(--col-pre-offwhite);
-}
+.h-text-col-white { color: var(--col-pre-offwhite) !important; }
+.h-text-col-highlight { color: var(--col-highlight) !important; }
 
 .h-fade-out-easein-1s {
     visibility: hidden;
@@ -76,6 +82,33 @@ body {
 
 .h-noselect {
     user-select: none;
+}
+
+.h-blackfade-bottomtop {
+    background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, var(--col-bg-main-op07) 70%, var(--col-bg-main) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, var(--col-bg-main-op07) 70%, var(--col-bg-main) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--col-bg-main-op07) 70%, var(--col-bg-main) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000408',GradientType=0 ); /* IE6-9 */
+}
+
+.h-absolute {
+    position: absolute;
+}
+
+.h-bold {
+    font-weight: 500;
+}
+
+.d-grain::after {
+    content: "";
+    background-image: url("../images/mask.png");
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1; 
+    opacity: 0.1;
 }
 
 /* IDs */
@@ -100,7 +133,7 @@ body {
     background-color: var(--col-bg-header);
     border-color: var(--col-pre-offwhite);
     border-bottom: 1px solid var(--col-pre-lightgrey);
-
+    z-index: 2;
     font-size: 24px;
 }
 
@@ -110,22 +143,69 @@ body {
 
 #header a {
     text-decoration: none;
-
+    text-align: center;
     color: var(--col-pre-offwhite);
-    margin: 0 15px;
+    margin: -5px 15px 0 15px;
+}
+
+#video-wrapper {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90vh;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+#video-wrapper video {
+    width: 100vw;
+    height: 56.25vw; 
+    min-height: 100vh;
+    min-width: 177.77vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -o-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+#scroll-down-indicator-wrapper {
+    bottom: 0;
+    width: 100%;
+}
+
+#scroll-down-indicator {
+    width: 80px;
+    animation: kf-flash linear 3s infinite;
+}
+
+/* Animation frames */
+@keyframes kf-flash {
+    0% { opacity: 0.8; } 
+    50% { opacity: 0; } 
+    100% { opacity: 0.8; }
 }
 
 /* Media queries */
 @media screen and (max-width: 500px) /* Mobile */ {
+    body {
+        padding-top: var(--num-header-height-mob);
+    }
+
     #header {
         height: var(--num-header-height-mob);
         flex-direction: column;
         justify-content: center;
-        font-size: 22px;
+        font-size: 20px;
     }
 
     #header-links {
         font-size: 18px;
+        margin: 5px 0;
     }
     
 }

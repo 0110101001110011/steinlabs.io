@@ -19,7 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="./cdn/small/css/styles.css">
-    <script> const GLOBAL_FONTS = ["Noto Sans TC"]; const QUICKLOAD = false; </script>
+    <script> const GLOBAL_FONTS = ["Noto Sans TC"]; const QUICKLOAD = true; </script>
     <script src="./cdn/small/js/jsio-load-tracker.js"></script>
     <script src="./cdn/small/js/jsio-preload.js"></script>
 </head>
@@ -32,19 +32,24 @@
     </div>
 
     <!-- Header -->
-    <div id="header" class="h-fixed f-header-special h-noselect">
-        <a href="." class="f-alignself-fstart h-force-25">jstanton.io</a>
+    <div id="header" class="h-fixed f-header-special h-noselect d-grain">
+        <a href="." class="f-alignself-fstart h-force-25 h-text-col-highlight">jstanton.io</a>
         <div id="header-links" class="f-center h-force-25"><a href="">自己紹介</a><a href="">作品一覧</a><a href="">情報</a></div>
     </div>
 
     <!-- Hero video -->
-    
+    <div id="video-wrapper" center no-repeat>
+        <video id="splash-video"  class="lazy" src="" data-src="./cdn/big/video/splash-veryslow-cr22-720.mp4" type="video/mp4" xautoplay muted loop></video>
+        <div class="p-overlay-fill h-blackfade-bottomtop h-absolute"></div>
+        <div id="scroll-down-indicator-wrapper" class="h-absolute f-center">
+            <img id="scroll-down-indicator" class="lazy" src="" data-src="./cdn/small/images/down-arrow.svg" alt="Scroll Down!">
+        </div>
+    </div>
 
     <video class="lazy" src="" data-src="http://techslides.com/demos/sample-videos/small.mp4">VIDEO</video>
     <img class="lazy" src="" data-src="https://upload.wikimedia.org/wikipedia/commons/3/38/JPEG_example_JPG_RIP_001.jpg" alt="SMALL IMAGE">
     <img class="lazy" src="" data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Water_drop_001.jpg/1280px-Water_drop_001.jpg" alt="SMALL IMAGE">
     <img class="lazy" src="" data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Gainsborough%2C_Thomas_-_Thomas_Linley_the_elder_-_Google_Art_Project.jpg/800px-Gainsborough%2C_Thomas_-_Thomas_Linley_the_elder_-_Google_Art_Project.jpg" alt="SMALL IMAGE">
-    <img class="lazy" src="" data-src="http://www.velassaru.com/imagebank/02-aerial/pix/Aerial%20Jetty.jpg" alt="">
 </body>
 
 </html>

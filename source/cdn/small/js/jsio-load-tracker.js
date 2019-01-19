@@ -22,9 +22,12 @@
     let progressCallback = null;
 
     const preCallBack = function (element) {
-        if (element) element.classList.remove(CLASSNAME_LAZYLOAD);
         ++currentLoadedItemCount;
-        if (progressCallback) progressCallback(Math.min(currentLoadedItemCount / itemsToLoad, 1));
+
+        if (element) element.classList.remove(CLASSNAME_LAZYLOAD);
+   
+        let outElement = element && element.hasAttribute("xautoplay") ? element : null;
+        if (progressCallback) progressCallback(Math.min(currentLoadedItemCount / itemsToLoad, 1), outElement);
     }
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -35,18 +38,20 @@
         itemsToLoad = allMediaElements.length + (customFontsSpecified ? GLOBAL_FONTS.length : 0);
 
         for (let index = 0; index < allMediaElements.length; ++index) {
-            if (allMediaElements[index].nodeName.toLowerCase() == MEDIA_TAGS[1]) {
-                allMediaElements[index].onloadeddata = function () { preCallBack(allMediaElements[index]) };
-            } else if (allMediaElements[index].nodeName.toLowerCase() == MEDIA_TAGS[2]) {
+            let element = allMediaElements[index];
+
+            if (element.nodeName.toLowerCase() == MEDIA_TAGS[1]) {
+                element.onloadeddata = function () { preCallBack(element) };
+            } else if (element.nodeName.toLowerCase() == MEDIA_TAGS[2]) {
                 let script = document.createElement(MEDIA_TAGS[2]);
-                script.onload = function () { preCallBack(allMediaElements[index]) };
-                script.setAttribute("src", allMediaElements[index].dataset.src);
-                allMediaElements[index].parentNode.replaceChild(script, allMediaElements[index]);
+                script.onload = function () { preCallBack(element) };
+                script.setAttribute("src", element.dataset.src);
+                element.parentNode.replaceChild(script, element);
             } else {
-                allMediaElements[index].onload = function () { preCallBack(allMediaElements[index]) };
+                element.onload = function () { preCallBack(element) };
             }
 
-            allMediaElements[index].src = allMediaElements[index].dataset.src;
+            element.src = element.dataset.src;
         }
 
         allMediaElements = [];

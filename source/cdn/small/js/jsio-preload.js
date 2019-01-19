@@ -8,7 +8,8 @@
     const ELEM = {
         LOADINGBAR: null,
         LOADINGOVERLAY: null,
-        LOADINGTEXT: null
+        LOADINGTEXT: null,
+        VIDEOS_TO_AUTOPLAY: [],
     }
 
     const VAL = {
@@ -80,9 +81,10 @@
         }
 
         // Page load progress event listener
-        document.loadTracker.registerProgressCallback(function (progress) {
+        document.loadTracker.registerProgressCallback(function (progress, autoplayVideoElement) {
             ELEM.LOADINGBAR.style.backgroundColor = colorToString(lerpColor(VAL.COL_GREY, VAL.COL_WHITE, progress));
             ELEM.LOADINGBAR.style.width = lerpNum(0, VAL.NUM_LOADINGBAR_WIDTH_MAX, progress) + STR.LOADINGBAR_WIDTH_UNITS;
+            if (autoplayVideoElement) ELEM.VIDEOS_TO_AUTOPLAY.push(autoplayVideoElement);
 
             if (progress >= 1) {
                 ELEM.LOADINGTEXT.classList.add(STR.CCLASS_FADE_OUT_LOADINGOVERLAY);
@@ -94,6 +96,8 @@
 
                     setTimeout(() => {
                         ELEM.LOADINGOVERLAY.classList.add(STR.CCLASS_FADE_OUT_LOADINGOVERLAY);
+                        ELEM.VIDEOS_TO_AUTOPLAY.forEach(element => { element.play(); });
+
                     }, VAL.DELAY_FADEOUTS[1]);
                 }, VAL.DELAY_FADEOUTS[0]);
             }
