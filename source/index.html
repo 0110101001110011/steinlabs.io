@@ -19,12 +19,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="./cdn/small/css/styles.css">
-    <script> const GLOBAL_FONTS = ["Noto Sans TC"]; const QUICKLOAD = true; </script>
-    <script src="./cdn/small/js/jsio-load-tracker.js"></script>
-    <script src="./cdn/small/js/jsio-preload.js"></script>
+    <script> const GLOBAL_FONTS = ["Noto Sans JP"]; const QUICKLOAD = true; </script>
+    <script data-cfasync="false" src="./cdn/small/js/jsio-load-tracker.js"></script>
+    <script data-cfasync="false" src="./cdn/small/js/jsio-preload.js"></script>
 </head>
 
-<body class="h-clamp-tomax-container">
+<body>
     <!-- Loading overlay -->
     <div id="loading-overlay" class="p-overlay-fill h-fixed f-center f-s-vertical">
         <h3 id="loading-overlay-text" class="h-force-system-font h-text-col-white">読み込み中</h3>
@@ -33,23 +33,109 @@
 
     <!-- Header -->
     <div id="header" class="h-fixed f-header-special h-noselect d-grain">
-        <a href="." class="f-alignself-fstart h-force-25 h-text-col-highlight">jstanton.io</a>
-        <div id="header-links" class="f-center h-force-25"><a href="">自己紹介</a><a href="">作品一覧</a><a href="">情報</a></div>
+        <a href="." class="f-alignself-fstart h-force-25 h-text-col-white f-center h-link-hl">スタントン　ジェームズ　瑛之助</a>
+        <div id="header-links" class="f-center h-force-25">
+            <a class="f-center h-link-hl" href="">自己紹介</a>
+            <a class="f-center h-link-hl" href="#work-section-anchor">作品一覧</a>
+            <a class="f-center h-link-hl" href="#info">情報</a>
+            <a class="f-center h-link-hl" href="">ENG</a>
+        </div>
     </div>
 
     <!-- Hero video -->
     <div id="video-wrapper" center no-repeat>
-        <video id="splash-video"  class="lazy" src="" data-src="./cdn/big/video/splash-veryslow-cr22-720.mp4" type="video/mp4" xautoplay muted loop></video>
+        <video id="splash-video" class="lazy" src="" data-src="./cdn/big/video/splash-veryslow-cr22-720.mp4" type="video/mp4"
+            xautoplay muted loop></video>
         <div class="p-overlay-fill h-blackfade-bottomtop h-absolute"></div>
         <div id="scroll-down-indicator-wrapper" class="h-absolute f-center">
-            <img id="scroll-down-indicator" class="lazy" src="" data-src="./cdn/small/images/down-arrow.svg" alt="Scroll Down!">
+            <img id="scroll-down-indicator" class="lazy" src="" data-src="./cdn/small/images/down-arrow.svg" alt="もっと見る">
         </div>
     </div>
 
-    <video class="lazy" src="" data-src="http://techslides.com/demos/sample-videos/small.mp4">VIDEO</video>
-    <img class="lazy" src="" data-src="https://upload.wikimedia.org/wikipedia/commons/3/38/JPEG_example_JPG_RIP_001.jpg" alt="SMALL IMAGE">
-    <img class="lazy" src="" data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Water_drop_001.jpg/1280px-Water_drop_001.jpg" alt="SMALL IMAGE">
-    <img class="lazy" src="" data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Gainsborough%2C_Thomas_-_Thomas_Linley_the_elder_-_Google_Art_Project.jpg/800px-Gainsborough%2C_Thomas_-_Thomas_Linley_the_elder_-_Google_Art_Project.jpg" alt="SMALL IMAGE">
+    <!-- Work section -->
+    <div id="work" class="work-style h-text-col-white">
+        <div id="work-section-anchor"></div>
+        <div id="work-inner" class="">
+            <div class="work-item" href="">
+                <div class="work-item-wrapper">
+                    <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/sk_thumb.jpg" alt="">
+                </div>
+            </div>
+            <div class="work-item" href="">
+                <div class="work-item-wrapper">
+                    <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/rr_thumb.jpg" alt="">
+                </div>
+            </div>
+            <div class="work-item" href="">
+                <div class="work-item-wrapper">
+                    <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/hma_thumb.jpg" alt="">
+                </div>
+            </div>
+            <div class="work-item" href="">
+                <div class="work-item-wrapper">
+                    <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/3js_thumb.jpg" alt="">
+                </div>
+            </div>
+            <div class="work-item" href="">
+                <div class="work-item-wrapper">
+                    <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/ts_thumb.jpg" alt="">
+                </div>
+            </div>
+            <div class="work-item" href="">
+                <div class="work-item-wrapper">
+                    <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/mt_thumb.jpg" alt="">
+                </div>
+            </div>
+            <div class="work-item" href="">
+                <div class="work-item-wrapper">
+                    <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/pc_thumb.jpg" alt="">
+                </div>
+            </div>
+            <div class="work-item" href="">
+                <div class="work-item-wrapper">
+                    <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/za_thumb.jpg" alt="">
+                </div>
+            </div>
+            <div class="work-item" href="">
+                <div class="work-item-wrapper">
+                    <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/gvn_thumb.jpg" alt="">
+                </div>
+            </div>
+            <div class="work-item" href="">
+                <div class="work-item-wrapper">
+                    <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/jf_thumb.jpg" alt="">
+                </div>
+            </div>
+            <div class="work-item" href="">
+                <div class="work-item-wrapper">
+                    <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/ip_thumb.jpg" alt="">
+                </div>
+            </div>
+            <div class="work-item" href="">
+                <div class="work-item-wrapper">
+                    <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/pn_thumb.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer (info) section -->
+    <div id="info" class="info-style d-grain h-noselect">
+        <div id="info-details" class="f-center f-s-vertical f-align-start">
+            <p class="info-subsection h-link-hl"><a href="./about-site">このサイトについて</a></p>
+            <p class="info-subsection h-link-hl"><a href="./privacy-policy">個人情報の取り扱いについて</a></p>
+            <p class="info-subsection">&copy; copyright 2018 James Einosuke Stanton. All rights reserved.</p>
+        </div>
+        <div id="info-contact" class="f-center f-s-vertical f-align-end">
+            <p class="info-subsection h-link-hl"><a href="https://www.linkedin.com/in/james-stanton/" class="f-center">LinkedIn<img
+                        class="lazy info-img" src="" data-src="./cdn/small/icons/external-link.svg" alt="リンクトイン"></a></p>
+            <p class="info-subsection h-link-hl"><a href="mailto:hello@jstanton.io" class="f-center">メール<img class="lazy info-img"
+                        src="" data-src="./cdn/small/icons/external-link.svg" alt="メール"></a></p>
+            <p class="info-subsection h-link-hl"><a href="line://ti/p/stantonjames" class="f-center">LINE<img class="lazy info-img"
+                        src="" data-src="./cdn/small/icons/external-link.svg" alt="ライン"></a></p>
+            <!-- <p class="info-subsection"><a href="https://api.whatsapp.com/send?phone=447794991194" class="f-center">WhatsApp<img class="lazy info-img" src="" data-src="./cdn/small/icons/mail.svg" alt="ワッツアップ"></a></p>  -->
+        </div>
+    </div>
 </body>
 
 </html>

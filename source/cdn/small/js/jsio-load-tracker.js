@@ -42,13 +42,16 @@
 
             if (element.nodeName.toLowerCase() == MEDIA_TAGS[1]) {
                 element.onloadeddata = function () { preCallBack(element) };
+                element.onerror = function () { preCallBack(null) };
             } else if (element.nodeName.toLowerCase() == MEDIA_TAGS[2]) {
                 let script = document.createElement(MEDIA_TAGS[2]);
                 script.onload = function () { preCallBack(element) };
+                script.onerror = function () { preCallBack(null) };
                 script.setAttribute("src", element.dataset.src);
                 element.parentNode.replaceChild(script, element);
             } else {
                 element.onload = function () { preCallBack(element) };
+                element.onerror = function () { preCallBack(null) };
             }
 
             element.src = element.dataset.src;
