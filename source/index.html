@@ -19,7 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="./cdn/small/css/styles.css">
-    <script> const GLOBAL_FONTS = ["Noto Sans JP"]; const QUICKLOAD = false; </script>
+    <script> const GLOBAL_FONTS = ["Noto Sans JP"]; const QUICKLOAD = true; </script>
     <script data-cfasync="false" src="./cdn/small/js/jsio-load-tracker.js"></script>
     <script data-cfasync="false" src="./cdn/small/js/jsio-preload.js"></script>
 </head>
@@ -59,6 +59,15 @@
             <div class="work-item" href="">
                 <div class="work-item-wrapper">
                     <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/sk_thumb.jpg" alt="">
+                    <div class="work-page f-align-start f-center">
+                        <div class="work-page-xbutton">&times;</div>
+                        <div class="work-vid-wrapper">
+                            <video poster="" class="work-vid" id="vp-sk" controls onloadstart="this.volume=0.4">
+                                <source src="./cdn/big/video/sktd.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-play-button h-centered-axis-xy">▶</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="work-item" href="">
@@ -127,10 +136,11 @@
             <p class="info-subsection">&copy; copyright 2018 James Einosuke Stanton. All rights reserved.</p>
         </div>
         <div id="info-contact" class="f-center f-s-vertical f-align-end">
-            <p class="info-subsection h-link-hl"><a href="https://www.linkedin.com/in/james-stanton/" class="f-center">LinkedIn・James Einosuke Stanton<img
-                        class="lazy info-img" src="" data-src="./cdn/small/icons/external-link.svg" alt="リンクトイン"></a></p>
-            <p class="info-subsection h-link-hl"><a href="mailto:hello@jstanton.io" class="f-center">メール・jestanton@outlook.com<img class="lazy info-img"
-                        src="" data-src="./cdn/small/icons/external-link.svg" alt="メール"></a></p>
+            <p class="info-subsection h-link-hl"><a href="https://www.linkedin.com/in/james-stanton/" class="f-center">LinkedIn・James
+                    Einosuke Stanton<img class="lazy info-img" src="" data-src="./cdn/small/icons/external-link.svg"
+                        alt="リンクトイン"></a></p>
+            <p class="info-subsection h-link-hl"><a href="mailto:hello@jstanton.io" class="f-center">メール・jestanton@outlook.com<img
+                        class="lazy info-img" src="" data-src="./cdn/small/icons/external-link.svg" alt="メール"></a></p>
             <p class="info-subsection h-link-hl"><a href="./line" class="f-center">LINE・stantonjames<img class="lazy info-img"
                         src="" data-src="./cdn/small/icons/external-link.svg" alt="ライン"></a></p>
             <!-- <p class="info-subsection"><a href="https://api.whatsapp.com/send?phone=447794991194" class="f-center">WhatsApp<img class="lazy info-img" src="" data-src="./cdn/small/icons/mail.svg" alt="ワッツアップ"></a></p>  -->

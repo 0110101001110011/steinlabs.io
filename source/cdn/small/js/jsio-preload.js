@@ -22,6 +22,8 @@
     const STR = {
         LOADINGBAR_WIDTH_UNITS: "vw",
         CCLASS_FADE_OUT_LOADINGOVERLAY: "h-fade-out-easein-1s",
+        CCLASS_HIDDEN: "h-hidden",
+        CCLASS_WORKVIDEO_WRAPPER: "work-vid-wrapper",
         FLEXEND: "flex-end",
         LOADINGBAR_TRANSITION_POSTLOAD: "width 1s ease-in, visibility 1s, opacity 1s ease-in",
         ALLTRANS_INSTANT: "all 0s",
@@ -103,5 +105,22 @@
             }
         });
 
+        // Add callbacks for all videos
+        let videos = [].slice.call(document.getElementsByClassName(STR.CCLASS_WORKVIDEO_WRAPPER));
+        for (let index = 0; index < videos.length; index++) {
+            let vid = videos[index].children[0];
+            let playbutton = videos[index].children[1];
+
+            videos[index].addEventListener("click", function (e) {
+                if (vid.paused) {
+                    vid.play();
+                    playbutton.classList.add(STR.CCLASS_HIDDEN);
+                } else {
+                    vid.pause();
+                    playbutton.classList.remove(STR.CCLASS_HIDDEN);
+                }
+            });
+
+        }
     });
 })(document);
