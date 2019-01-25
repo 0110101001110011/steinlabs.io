@@ -10,6 +10,7 @@
         LOADINGOVERLAY: null,
         LOADINGTEXT: null,
         VIDEOS_TO_AUTOPLAY: [],
+        CURRENT_WORKPAGE: null
     }
 
     const VAL = {
@@ -18,12 +19,15 @@
         NUM_LOADINGBAR_WIDTH_MAX: 100,
         DELAY_FADEOUTS: [500, 1000, 1000],
         SCROLL_BLOCK_KEYCODES: [32, 33, 34, 34, 35, 36, 38, 40],
+        ESC_KEYCODE: 27,
         SCROLLBAR_WIDTH: "-" + (window.innerWidth - document.documentElement.clientWidth) + "px"
     }
 
     const STR = {
         LOADINGBAR_WIDTH_UNITS: "vw",
         CCLASS_FADE_OUT_LOADINGOVERLAY: "h-fade-out-easein-1s",
+        CCLASS_SMOOTHSCROLL_OFF: "h-scrollauto",
+        CCLASS_PFIXED: "h-fixed",
         CCLASS_HIDDEN: "h-hidden",
         CCLASS_WORKVIDEO_WRAPPER: "work-vid-wrapper",
         CCLASS_WORKPAGE_EXITBUTTON: "work-page-xbutton",
@@ -158,6 +162,17 @@
         }
 
         // Add callbacks for work pages
+        document.documentElement.addEventListener("keydown", function (e) {
+           if (e.which == VAL.ESC_KEYCODE && ELEM.CURRENT_WORKPAGE) {
+                ELEM.CURRENT_WORKPAGE.classList.add(STR.CCLASS_WORKPAGE_HIDDEN); 
+                document.body.classList.remove(STR.CCLASS_PFIXED);
+                document.documentElement.scroll(0, lastScrollPos);
+                toggleScrolling(true);
+                document.documentElement.classList.remove(STR.CCLASS_SMOOTHSCROLL_OFF);
+                ELEM.CURRENT_WORKPAGE = null;
+           } 
+        });
+
         let lastScrollPos = 0;
 
         let workpageExitButtons = [].slice.call(document.getElementsByClassName(STR.CCLASS_WORKPAGE_EXITBUTTON));
@@ -171,15 +186,13 @@
             workpageExitButtons[index].addEventListener("click", function (e) {
                 e.preventDefault();
                 e.stopPropagation();
-               workpage.classList.add(STR.CCLASS_WORKPAGE_HIDDEN); 
-               document.body.style.position = "unset";
-               document.documentElement.scroll({
-                   top: lastScrollPos,
-                   left: 0,
-                   behavior: "auto"
-               });
-               toggleScrolling(true);
-               document.documentElement.style.scrollBehavior = "smooth";
+
+                ELEM.CURRENT_WORKPAGE = null;
+                workpage.classList.add(STR.CCLASS_WORKPAGE_HIDDEN); 
+                document.body.classList.remove(STR.CCLASS_PFIXED);
+                document.documentElement.scroll(0, lastScrollPos);
+                toggleScrolling(true);
+                document.documentElement.classList.remove(STR.CCLASS_SMOOTHSCROLL_OFF);
             });
         }
 
@@ -189,10 +202,11 @@
             let workpage = workpageTiles[index].children[1];
             if (workpage) {
                 workpageTiles[index].addEventListener("click", function (e) {
+                    ELEM.CURRENT_WORKPAGE = workpage;
                     workpage.classList.remove(STR.CCLASS_WORKPAGE_HIDDEN);
-                    document.documentElement.style.scrollBehavior = "auto";
+                    document.documentElement.classList.add(STR.CCLASS_SMOOTHSCROLL_OFF);
                     lastScrollPos = document.documentElement.scrollTop;
-                    document.body.style.position = "fixed";
+                    document.body.classList.add(STR.CCLASS_PFIXED);
 
                     toggleScrolling(false);
                 });
