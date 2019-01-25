@@ -28,10 +28,10 @@ html {
     overflow-y: scroll;
     scroll-behavior: smooth;
     position: relative;
+    box-sizing: content-box;
 }
 
 body {
-    box-sizing: border-box;
     width: 100%;
     min-height: 100%;
     margin: 0;
@@ -198,6 +198,7 @@ body {
 }
 
 .work-page {
+    box-sizing: border-box;
     cursor: default;
     position: fixed;
     top: calc(0px + var(--num-header-height));
@@ -206,17 +207,30 @@ body {
     right: 0;
     background-color: var(--col-work-page);
     z-index: 1;
+    opacity: 1;
+    visibility: visible;
+    padding: 0 20px 20px 20px;
+    transition: none;
+}
+
+.work-page-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    
+    transition: opacity 0.2s ease-out, visibility 0.2s linear;
 }
 
 .work-page-xbutton {
     position: fixed;
-    top: calc(15px + var(--num-header-height));
-    right: 15px;
+    top: calc(35px + var(--num-header-height));
+    right: 35px;
     line-height: 1em;
     font-size: 32px;
     cursor: pointer;
     text-shadow: 2px 2px 1px black;
     z-index: 2;
+    margin: 0 2px;
 }
 
 .work-page-xbutton:hover {
@@ -226,15 +240,16 @@ body {
 }
 
 .work-vid-wrapper {
-    width: 1000px;
+    width: 800px;
     max-width: 100%;
     position: relative;
 }
 
 .work-vid {
-    width: 100%;
+    max-width: 100%;
     display: block;
     cursor: pointer;
+    margin: auto;
 }
 
 .video-play-button {
@@ -253,6 +268,11 @@ body {
     text-shadow: 0 0 20px var(--col-pre-highlight-overred);
     font-size: 52px;
     line-height: 0;
+}
+
+.work-header {
+    text-align: left;
+    margin: 15px 0 15px 0;
 }
 
 /* IDs */
@@ -359,7 +379,7 @@ body {
     height: 100%;
     display: flex;
     flex-wrap: wrap;
-    padding: 0 2%;
+    justify-content: center;
 }
 
 #work-section-anchor {
@@ -439,6 +459,10 @@ body {
         margin: 5px;
     }
 
+    .work-img:hover {
+        transform: none;
+    }
+
     .work-item:before {
         content: '';
         display: block;
@@ -447,10 +471,16 @@ body {
 
     .work-page {
         top: calc(0px + var(--num-header-height-mob));
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 0;
+        border: none;
     }
 
     .work-page-xbutton {
-        top: calc(15px + var(--num-header-height-mob));
+        top: calc(8px + var(--num-header-height-mob));
+        right: 8px;
         font-size: calc((100vw + 100vh) * 0.03);
     }
 
@@ -472,5 +502,12 @@ body {
         text-shadow: none;
         font-size: 36px;
         line-height: 0;
+    }
+
+    .work-header {
+        text-align: center;
+        margin: 10px;
+        line-height: calc((100vw + 100vh) * 0.025);
+        font-size: calc((100vw + 100vh) * 0.025);
     }
 }
