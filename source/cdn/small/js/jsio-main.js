@@ -32,7 +32,7 @@
         CCLASS_SMOOTHSCROLL_OFF: "h-scrollauto",
         CCLASS_PFIXED: "h-fixed",
         CCLASS_HIDDEN: "h-hidden",
-        CCLASS_WORKVIDEO_WRAPPER: "work-vid-wrapper",
+        CCLASS_WORKVIDEO: "work-vid",
         CCLASS_WORKPAGE: "work-page",
         CCLASS_WORKPAGE_HIDDEN: "work-page-hidden",
         CCLASS_WORKPAGE_TILE: "work-item",
@@ -142,27 +142,14 @@
         });
 
         // Add callbacks for all videos
-        let videos = [].slice.call(document.getElementsByClassName(STR.CCLASS_WORKVIDEO_WRAPPER));
+        let videos = [].slice.call(document.getElementsByClassName(STR.CCLASS_WORKVIDEO));
         for (let index = 0; index < videos.length; index++) {
-            let vid = videos[index].children[0];
-            let playbutton = videos[index].children[1];
-
             videos[index].addEventListener("click", function (e) {
-                if (vid.paused) {
-                    vid.play();
-                    playbutton.classList.add(STR.CCLASS_HIDDEN);
+                if (videos[index].paused) {
+                    videos[index].play();
                 } else {
-                    vid.pause();
-                    playbutton.classList.remove(STR.CCLASS_HIDDEN);
+                    videos[index].pause();
                 }
-            });
-
-            vid.addEventListener("play", function (e) {
-                playbutton.classList.add(STR.CCLASS_HIDDEN);
-            });
-
-            vid.addEventListener("pause", function (e) {
-                playbutton.classList.remove(STR.CCLASS_HIDDEN);
             });
         }
 
@@ -173,12 +160,27 @@
                 return;
             }
 
+            if (document.getElementById("wt" + id).classList.contains(STR.CCLASS_THUMBNAILACTIVE)) {
+                if (!force) {
+                    let workAnchor = document.getElementById("work-section-anchor");
+                    if (workAnchor.getBoundingClientRect().top >= 0) {
+                        workAnchor.scrollIntoView();
+                    }
+                }
+                return;
+            }
+
             localStorage.setItem("currentWorkPageId", id);
 
             if (!force) {
                 ELEM.WORK_FADER.classList.remove(STR.CCLASS_WORK_FADERFLASH);
                 void ELEM.WORK_FADER.offsetWidth;
                 ELEM.WORK_FADER.classList.add(STR.CCLASS_WORK_FADERFLASH);
+
+                let workAnchor = document.getElementById("work-section-anchor");
+                if (workAnchor.getBoundingClientRect().top >= 0) {
+                    workAnchor.scrollIntoView();
+                }
             }
 
             for (let index = 0; index < ELEM.WORK[0].length; index++) {

@@ -19,7 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="./cdn/small/css/styles.css">
-    <script> const GLOBAL_FONTS = ["Noto Sans JP:100", "Noto Sans JP:300", "Noto Sans JP:400"]; const QUICKLOAD = true; </script>
+    <script> const GLOBAL_FONTS = ["Noto Sans JP:100", "Noto Sans JP:300", "Noto Sans JP:400"]; const QUICKLOAD = false; </script>
     <script data-cfasync="false" src="./cdn/small/js/jsio-load-tracker.js"></script>
     <script data-cfasync="false" src="./cdn/small/js/jsio-main.js"></script>
     <script async src="./cdn/small/js/img-gallery.js"></script>
@@ -120,13 +120,12 @@
         </div>
         <div class="work-page-wrapper">
             <div id="work-fader" class=""></div>
+
             <!-- Silent Knight (wp-sk) -->
             <div id="wp-sk" class="work-page">
                 <h2 class="work-header">SILENT KNIGHT</h2>
                 <div class="work-media-wrapper">
-                    <video poster="" class="work-vid" id="vp-sk" controls onloadstart="this.volume=0.4">
-                        <source src="./cdn/big/video/sktd.mp4" type="video/mp4">
-                    </video>
+                    <video poster="./cdn/small/images/thumbs/sk_thumb.jpg" src="" data-src="./cdn/big/video/sktd.mp4" class="lazy work-vid" id="vp-sk" controls onloadstart="this.volume=0.4"></video>
                 </div>
                 <p class="work-media-meta">奪還 / 英雄伝説 空の軌跡 FC Evolution オリジナルサウンドトラック / Copyright (c) Nihon Falcom </p>
                 <div class="work-text-area">
@@ -171,9 +170,7 @@
             <!-- Rapture Records (wp-rr) -->
             <div id="wp-rr" class="work-page work-page-hidden">
                 <h2 class="work-header">RAPTURE RECORDS</h2>
-                <div class="work-media-wrapper">
-                    <div class="img-gallery h-noselect" id="ig-rr">
-
+                <div class="img-gallery h-noselect" id="ig-rr">
                         <div class="img-gallery-button h-noselect left-button show-element">‹<div style="width: 80px;"></div>
                         </div>
                         <div class="img-gallery-button h-noselect right-button show-element">
@@ -201,7 +198,6 @@
                             <img data-source="./cdn/small/images/hi-res/rr/rr018.png">
                         </div>
                     </div>
-                </div>
                 <p class="work-media-meta">フルスクリーンにはダブルクリック</p>
                 <div class="work-text-area">
                     <h4>概要</h4>
@@ -233,6 +229,52 @@
                     <p class="work-para">ゲームの <a target="_blank" href="https://www.youtube.com/watch?v=BcxHZNS5kaU">Bioshock
                             Infinite の DLC、Burial at Sea Part 1</a>の Rapture Records という現場から刺激を受けた、Maya 2018、Arnold 5 と
                         Photoshop CC で創造された 3D シーンであります。</p>
+                </div>
+            </div>
+
+            <!-- Full Metal Arnold (wp-hma) -->
+            <div id="wp-hma" class="work-page">
+                <h2 class="work-header">HEAVY METAL ARNOLD</h2>
+                <div class="work-media-wrapper">
+                    <video poster="./cdn/small/images/thumbs/hma_thumb.jpg" src="" data-src="./cdn/big/video/hma.mp4" class="lazy work-vid" id="vp-hma" controls onloadstart="this.volume=0.4"></video>
+                </div>
+                <p class="work-media-meta">Dark Prince (Final Cut) / Dark Prince / ℗ Tasteless © Atrey </p>
+                <div class="work-text-area">
+                    <h4>概要</h4>
+                    <div class="work-summary-area">
+                        <div class="work-summary-line f-center">
+                            <div class="work-summary-l">プロジェクト種類</div>
+                            <div class="work-summary-separator"></div>
+                            <div class="work-summary-r">大学　グループプロジェクト</div>
+                        </div>
+                        <div class="work-summary-line f-center">
+                            <div class="work-summary-l">ソフトウェア</div>
+                            <div class="work-summary-separator"></div>
+                            <div class="work-summary-r">Unreal Engine 4・Maya 2018</div>
+                        </div>
+                        <div class="work-summary-line f-center">
+                            <div class="work-summary-l">プログラミング言語</div>
+                            <div class="work-summary-separator"></div>
+                            <div class="work-summary-r">C++・ブループリント</div>
+                        </div>
+                        <div class="work-summary-line f-center">
+                            <div class="work-summary-l">責任</div>
+                            <div class="work-summary-separator"></div>
+                            <div class="work-summary-r">全てのプログラミング、3D モデリング</div>
+                        </div>
+                    </div>
+                    <h4>技術</h4>
+                    <p class="work-tech-list-item">スケルタルメッシュのアニメーションで全体アニメーションのキャラクターモデル</p>
+                    <p class="work-tech-list-item">UMG UI デザイナで UI や 2D ゲームオブジェクト</p>
+                    <p class="work-tech-list-item">ブラックボードAI</p>
+                    <p class="work-tech-list-item">プライン曲線カメラ</p>
+                    <p class="work-tech-list-item">レンダーターゲットで 3D UI</p>
+                    <p class="work-tech-list-item">ゲームセーブオブジェクトで進行状況保存</p>
+                    <p class="work-tech-list-item">インタラクティブ設定メニュー</p>
+
+                    <h4>HEAVY METAL ARNOLD とは？</h4>
+                    <p class="work-para">クラッシュバンディクー3、レイマン、スーパーマリオから刺激を受けた、Unreal Engine 4、C++、ブループリントと Maya 2018 で創造されたプラットフォームゲームであります。</p>
+                    <p class="work-para">主人公のHeavy Metal Arnoldはプラットフォームを越えモンスターを排除しながら様々なレベルにチャレンジを受けます。倒したモンスターや壊した箱などから得たガラクタを集めながら自分の母性に帰るよう戦い続けます。</p>
                 </div>
             </div>
         </div>

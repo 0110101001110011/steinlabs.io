@@ -174,11 +174,11 @@ body {
 
 .work-item {
     position: relative;
-    flex-basis: calc((100% / 6) - 20px);
-    margin: 10px;
+    flex-basis: calc((100% / 12) - 10px);
+    margin: 5px;
     box-sizing: border-box;
     border: 1px solid var(--col-pre-lightgrey);
-    border-radius: 1em;
+    border-radius: 100em;
     overflow: hidden;
     cursor: pointer;
     box-shadow: 1px 1px #e7dfe7,
@@ -194,7 +194,8 @@ body {
 .work-item:before {
     content: '';
     display: block;
-    padding-top: 56.498%;
+    /* padding-top: 56.498%; */
+    padding-top: 100%;
 }
 
 .work-item-wrapper {
@@ -263,6 +264,13 @@ body {
     position: relative;
     margin: 0 auto;
     border: 1px solid var(--col-pre-lightgrey);
+    box-shadow: 1px 1px #e7dfe7,
+              -1px -1px #e7dfe7,
+              1px -1px #e7dfe7,
+              -1px 1px #e7dfe7,
+              0 -2px #9c9a9c,
+              -2px 0 #7b757b,
+              0 2px #424542;
 }
 
 .work-vid {
@@ -347,11 +355,21 @@ body {
 
 /* IMG gallery special */
 .img-gallery {
-    width: 100%;
+    width: 800px;
     height: 450px;
+    max-height: calc(100vw / 1.77777);
     background-color: rgb(1, 4, 10);
     overflow: hidden;
     position: relative;
+    margin: 0 auto;
+    border: 1px solid var(--col-pre-lightgrey);
+    box-shadow: 1px 1px #e7dfe7,
+              -1px -1px #e7dfe7,
+              1px -1px #e7dfe7,
+              -1px 1px #e7dfe7,
+              0 -2px #9c9a9c,
+              -2px 0 #7b757b,
+              0 2px #424542;
 }
 
 .img-gallery-inner {
@@ -575,7 +593,7 @@ img.show-element, .img-gallery-button.show-element {
     70% { transform:translate(0%, 15%) }
     80% { transform:translate(3%, 35%) }
     90% { transform:translate(-10%, 10%) }
-  }
+}
 
 /* Media queries */
 
@@ -585,6 +603,13 @@ img.show-element, .img-gallery-button.show-element {
         margin: 5px;
     }
 }
+
+@media screen and (max-width: 1040px) {
+    .work-page {
+        border: none;
+    }
+}
+
 @media screen and (max-width: 650px) /* Mobile */ {
     body {
         padding-top: var(--num-header-height-mob);
