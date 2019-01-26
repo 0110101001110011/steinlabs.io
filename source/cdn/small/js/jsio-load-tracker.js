@@ -35,7 +35,7 @@
 
         let customFontsSpecified = (Array.isArray(GLOBAL_FONTS) && GLOBAL_FONTS.length);
 
-        itemsToLoad = allMediaElements.length + (customFontsSpecified ? GLOBAL_FONTS.length : 0);
+        itemsToLoad = allMediaElements.length + (customFontsSpecified ? 1 : 0);
 
         for (let index = 0; index < allMediaElements.length; ++index) {
             let element = allMediaElements[index];

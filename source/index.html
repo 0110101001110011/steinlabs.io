@@ -19,14 +19,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="./cdn/small/css/styles.css">
-    <script> const GLOBAL_FONTS = ["Noto Sans JP"]; const QUICKLOAD = true; </script>
+    <script> const GLOBAL_FONTS = ["Noto Sans JP:100", "Noto Sans JP:300", "Noto Sans JP:400"]; const QUICKLOAD = true; </script>
     <script data-cfasync="false" src="./cdn/small/js/jsio-load-tracker.js"></script>
-    <script data-cfasync="false" src="./cdn/small/js/jsio-preload.js"></script>
+    <script data-cfasync="false" src="./cdn/small/js/jsio-main.js"></script>
+    <script async src="./cdn/small/js/img-gallery.js"></script>
 </head>
 
 <body>
     <!-- Loading overlay -->
-    <div id="loading-overlay" class="p-overlay-fill h-fixed f-center f-s-vertical">
+    <div id="loading-overlay" class="p-overlay-fill h-fixed f-center f-s-vertical h-noselect">
         <h3 id="loading-overlay-text" class="h-force-system-font h-text-col-white">読み込み中</h3>
         <div id="loading-overlay-progressbar"></div>
     </div>
@@ -53,85 +54,185 @@
     </div>
 
     <!-- Work section -->
-    <div id="work" class="work-style h-text-col-white">
+    <div id="work" class="work-style">
         <div id="work-section-anchor"></div>
         <div id="work-inner" class="">
-            <div class="work-item" href="">
+            <div id="wt-sk" class="work-item work-item-active" href="">
                 <div class="work-item-wrapper">
                     <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/sk_thumb.jpg" alt="">
-                    <div class="work-page work-page-hidden">
-                        <div class="work-page-xbutton h-noselect">&times;</div>
-                        <h2 class="work-header">SILENT KNIGHT</h2>
-                        <div class="work-vid-wrapper">
-                            <video poster="" class="work-vid" id="vp-sk" controls onloadstart="this.volume=0.4">
-                                <source src="./cdn/big/video/sktd.mp4" type="video/mp4">
-                            </video>
-                            <div class="video-play-button h-centered-axis-xy h-noselect">▶</div>
-                        </div>
-                        <p class="work-vid-meta">奪還 / 英雄伝説 空の軌跡 FC Evolution オリジナルサウンドトラック / Copyright (c) Nihon Falcom </p>
-                        
-                        <p class="work-para-prim"><span class="work-para-deco">UNITY C#・SHADERLAB</span>　➡️　マルチスレッドでA*パスファインダー・シードで手続き的ステージ生成・日本語と英語のローカライズ・経験値とレベルシステ・アンドロイド最適化</p>
-                        <p class="work-para-sec">Silent KnightはUnityとC#で創造したスマホ「特にアンドロイド」ゲームである「ソロプロジェクト」。</p>
-                        <p class="work-para-sec">影響はDiablo 3、Nonstop-Knight、Dungeon Siege II、イースシリーズのようなゲーム。</p>
-                        <p class="work-para-sec">果てしないダンジョンを自動的に探検し、ナイトはプレイヤさんの指導と入力に操られ色んなモンスターと闘いながらダンジョンの奧を目指す。各ステージはシートを用いる疑似ランダム手続き的ダンジョンなので、数多くで独特である。</p>
-                        <p class="work-para-sec">Silent Knightには沢山なRPGゲーム的な機能「経験値システム、普通と必殺技、<a class="work-para-link" target="_blank" href="https://gfycat.com/tediousconsideratebeagle">画面は鏡のように壊れるエフェクト</a>等」を含めている。</p>
-
-                    </div>
                 </div>
             </div>
-            <div class="work-item" href="">
+            <div id="wt-rr" class="work-item" href="">
                 <div class="work-item-wrapper">
                     <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/rr_thumb.jpg" alt="">
                 </div>
             </div>
-            <div class="work-item" href="">
+            <div id="wt-hma" class="work-item" href="">
                 <div class="work-item-wrapper">
                     <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/hma_thumb.jpg" alt="">
                 </div>
             </div>
-            <div class="work-item" href="">
+            <div id="wt-3js" class="work-item" href="">
                 <div class="work-item-wrapper">
                     <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/3js_thumb.jpg" alt="">
                 </div>
             </div>
-            <div class="work-item" href="">
+            <div id="wt-ts" class="work-item" href="">
                 <div class="work-item-wrapper">
                     <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/ts_thumb.jpg" alt="">
                 </div>
             </div>
-            <div class="work-item" href="">
+            <div id="wt-mt" class="work-item" href="">
                 <div class="work-item-wrapper">
                     <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/mt_thumb.jpg" alt="">
                 </div>
             </div>
-            <div class="work-item" href="">
+            <div id="wt-pc" class="work-item" href="">
                 <div class="work-item-wrapper">
                     <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/pc_thumb.jpg" alt="">
                 </div>
             </div>
-            <div class="work-item" href="">
+            <div id="wt-za" class="work-item" href="">
                 <div class="work-item-wrapper">
                     <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/za_thumb.jpg" alt="">
                 </div>
             </div>
-            <div class="work-item" href="">
+            <div id="wt-gvn" class="work-item" href="">
                 <div class="work-item-wrapper">
                     <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/gvn_thumb.jpg" alt="">
                 </div>
             </div>
-            <div class="work-item" href="">
+            <div id="wt-jf" class="work-item" href="">
                 <div class="work-item-wrapper">
                     <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/jf_thumb.jpg" alt="">
                 </div>
             </div>
-            <div class="work-item" href="">
+            <div id="wt-ip" class="work-item" href="">
                 <div class="work-item-wrapper">
                     <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/ip_thumb.jpg" alt="">
                 </div>
             </div>
-            <div class="work-item" href="">
+            <div id="wt-pn" class="work-item" href="">
                 <div class="work-item-wrapper">
                     <img class="lazy work-img" src="" data-src="./cdn/small/images/thumbs/pn_thumb.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="work-page-wrapper">
+            <div id="work-fader" class=""></div>
+            <!-- Silent Knight (wp-sk) -->
+            <div id="wp-sk" class="work-page">
+                <h2 class="work-header">SILENT KNIGHT</h2>
+                <div class="work-media-wrapper">
+                    <video poster="" class="work-vid" id="vp-sk" controls onloadstart="this.volume=0.4">
+                        <source src="./cdn/big/video/sktd.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <p class="work-media-meta">奪還 / 英雄伝説 空の軌跡 FC Evolution オリジナルサウンドトラック / Copyright (c) Nihon Falcom </p>
+                <div class="work-text-area">
+                    <h4>概要</h4>
+                    <div class="work-summary-area">
+                        <div class="work-summary-line f-center">
+                            <div class="work-summary-l">プロジェクト種類</div>
+                            <div class="work-summary-separator"></div>
+                            <div class="work-summary-r">大学　ソロプロジェクト</div>
+                        </div>
+                        <div class="work-summary-line f-center">
+                            <div class="work-summary-l">ソフトウェア</div>
+                            <div class="work-summary-separator"></div>
+                            <div class="work-summary-r">UNITY</div>
+                        </div>
+                        <div class="work-summary-line f-center">
+                            <div class="work-summary-l">プログラミング言語</div>
+                            <div class="work-summary-separator"></div>
+                            <div class="work-summary-r">C#・ShaderLab</div>
+                        </div>
+                        <div class="work-summary-line f-center">
+                            <div class="work-summary-l">責任</div>
+                            <div class="work-summary-separator"></div>
+                            <div class="work-summary-r">全て</div>
+                        </div>
+                    </div>
+                    <h4>技術</h4>
+                    <p class="work-tech-list-item">マルチスレッドでA*パスファインダー</p>
+                    <p class="work-tech-list-item">シードで手続き的ステージ生成</p>
+                    <p class="work-tech-list-item">日本語と英語のローカライズ</p>
+                    <p class="work-tech-list-item">経験値とレベルシステ</p>
+                    <p class="work-tech-list-item">アンドロイド最適化</p>
+
+                    <h4>SILENT KNIGHT とは？</h4>
+                    <p class="work-para">Diablo 3、Nonstop-Knight、Dungeon Siege II、イース・フェルガナの誓いから刺激を受けた、Unity と C#
+                        で創造されたスマホ「特にアンドロイド」ゲームであります。</p>
+                    <p class="work-para">果てしないダンジョンを自動的に探検し、ナイトはプレイヤさんの指導と入力に操られ色んなモンスターと闘いながらダンジョンの奧を目指します。各ステージはシートを利用する疑似ランダム手続き的ダンジョンなので、数多くで独特であります。Silent
+                        Knight には沢山な RPG ゲーム的な機能「経験値システム、スキル、<a class="work-para-link" target="_blank" href="https://gfycat.com/tediousconsideratebeagle">画面は鏡のように壊れるエフェクト</a>等」を含まれています。</p>
+                </div>
+            </div>
+
+            <!-- Rapture Records (wp-rr) -->
+            <div id="wp-rr" class="work-page work-page-hidden">
+                <h2 class="work-header">RAPTURE RECORDS</h2>
+                <div class="work-media-wrapper">
+                    <div class="img-gallery h-noselect" id="ig-rr">
+
+                        <div class="img-gallery-button h-noselect left-button show-element">‹<div style="width: 80px;"></div>
+                        </div>
+                        <div class="img-gallery-button h-noselect right-button show-element">
+                            <div style="width: 80px;"></div>›
+                        </div>
+                        <div class="img-gallery-inner">
+                            <img class="show-element" data-source="./cdn/small/images/hi-res/rr/rr000.png">
+                            <img data-source="./cdn/small/images/hi-res/rr/rr001.png">
+                            <img data-source="./cdn/small/images/hi-res/rr/rr002.png">
+                            <img data-source="./cdn/small/images/hi-res/rr/rr003.png">
+                            <img data-source="./cdn/small/images/hi-res/rr/rr004.png">
+                            <img data-source="./cdn/small/images/hi-res/rr/rr005.png">
+                            <img data-source="./cdn/small/images/hi-res/rr/rr006.png">
+                            <img data-source="./cdn/small/images/hi-res/rr/rr007.png">
+                            <img data-source="./cdn/small/images/hi-res/rr/rr008.png">
+                            <img data-source="./cdn/small/images/hi-res/rr/rr009.png">
+                            <img data-source="./cdn/small/images/hi-res/rr/rr010.png">
+                            <img data-source="./cdn/small/images/hi-res/rr/rr011.png">
+                            <img data-source="./cdn/small/images/hi-res/rr/rr012.png">
+                            <img data-source="./cdn/small/images/hi-res/rr/rr013.png">
+                            <img data-source="./cdn/small/images/hi-res/rr/rr014.png">
+                            <img data-source="./cdn/small/images/hi-res/rr/rr015.png">
+                            <img data-source="./cdn/small/images/hi-res/rr/rr016.png">
+                            <img data-source="./cdn/small/images/hi-res/rr/rr017.png">
+                            <img data-source="./cdn/small/images/hi-res/rr/rr018.png">
+                        </div>
+                    </div>
+                </div>
+                <p class="work-media-meta">フルスクリーンにはダブルクリック</p>
+                <div class="work-text-area">
+                    <h4>概要</h4>
+                    <div class="work-summary-area">
+                        <div class="work-summary-line f-center">
+                            <div class="work-summary-l">プロジェクト種類</div>
+                            <div class="work-summary-separator"></div>
+                            <div class="work-summary-r">大学　ソロプロジェクト</div>
+                        </div>
+                        <div class="work-summary-line f-center">
+                            <div class="work-summary-l">ソフトウェア</div>
+                            <div class="work-summary-separator"></div>
+                            <div class="work-summary-r">Maya 2018・Arnold 5・Photoshop CC</div>
+                        </div>
+                        <div class="work-summary-line f-center">
+                            <div class="work-summary-l">責任</div>
+                            <div class="work-summary-separator"></div>
+                            <div class="work-summary-r">全て</div>
+                        </div>
+                    </div>
+                    <h4>技術</h4>
+                    <p class="work-tech-list-item">三次元モデリング</p>
+                    <p class="work-tech-list-item">専用シェーダー</p>
+                    <p class="work-tech-list-item">ノーマルマップ</p>
+                    <p class="work-tech-list-item">ポストプロセシング</p>
+                    <p class="work-tech-list-item">レンダリング</p>
+
+                    <h4>Rapture Records とは？</h4>
+                    <p class="work-para">ゲームの <a target="_blank" href="https://www.youtube.com/watch?v=BcxHZNS5kaU">Bioshock
+                            Infinite の DLC、Burial at Sea Part 1</a>の Rapture Records という現場から刺激を受けた、Maya 2018、Arnold 5 と
+                        Photoshop CC で創造された 3D シーンであります。</p>
                 </div>
             </div>
         </div>
@@ -146,13 +247,9 @@
         </div>
         <div id="info-contact" class="f-center f-s-vertical f-align-end">
             <p class="info-subsection h-link-hl"><a href="https://www.linkedin.com/in/james-stanton/" class="f-center">LinkedIn・James
-                    Einosuke Stanton<img class="lazy info-img" src="" data-src="./cdn/small/icons/external-link.svg"
-                        alt="リンクトイン"></a></p>
-            <p class="info-subsection h-link-hl"><a href="mailto:hello@jstanton.io" class="f-center">メール・jestanton@outlook.com<img
-                        class="lazy info-img" src="" data-src="./cdn/small/icons/external-link.svg" alt="メール"></a></p>
-            <p class="info-subsection h-link-hl"><a href="./line" class="f-center">LINE・stantonjames<img class="lazy info-img"
-                        src="" data-src="./cdn/small/icons/external-link.svg" alt="ライン"></a></p>
-            <!-- <p class="info-subsection"><a href="https://api.whatsapp.com/send?phone=447794991194" class="f-center">WhatsApp<img class="lazy info-img" src="" data-src="./cdn/small/icons/mail.svg" alt="ワッツアップ"></a></p>  -->
+                    Einosuke Stanton</a></p>
+            <p class="info-subsection h-link-hl"><a href="mailto:hello@jstanton.io" class="f-center">メール・jestanton@outlook.com</a></p>
+            <p class="info-subsection h-link-hl"><a href="./line" class="f-center">LINE・stantonjames</a></p>
         </div>
     </div>
 </body>
