@@ -84,29 +84,6 @@
         return (!isNaN(original) && !isNaN(target) && !isNaN(delta)) ? (original + ((target - original) * delta)) : 0;
     }
 
-    function consumeEvent(e) {
-        if (e.type === "keydown" && !VAL.SCROLL_BLOCK_KEYCODES.includes(e.which)) {
-            return;
-        } 
-
-        e.stopPropagation();
-        e.preventDefault();
-    }
-
-    function toggleScrolling(on) {
-        if (on) {
-            document.documentElement.removeEventListener("keydown", consumeEvent, {passive: false}); 
-            document.documentElement.removeEventListener("mousedown", consumeEvent, {passive: false}); 
-            document.documentElement.removeEventListener("touchmove", consumeEvent, {passive: false});  
-            document.documentElement.removeEventListener("wheel", consumeEvent, {passive: false});
-        } else {
-            document.documentElement.addEventListener("keydown", consumeEvent, {passive: false}); 
-            document.documentElement.addEventListener("mousedown", consumeEvent, {passive: false}, true); 
-            document.documentElement.addEventListener("touchmove", consumeEvent, {passive: false});   
-            document.documentElement.addEventListener("wheel", consumeEvent, {passive: false});  
-        }
-    }
-
     document.addEventListener("DOMContentLoaded", function () {
         // Get element references
         ELEM.LOADINGBAR = document.getElementById(EID.LOADINGBAR);
@@ -170,8 +147,6 @@
                 return;
             }
 
-            localStorage.setItem("currentWorkPageId", id);
-
             if (!force) {
                 ELEM.WORK_FADER.classList.remove(STR.CCLASS_WORK_FADERFLASH);
                 void ELEM.WORK_FADER.offsetWidth;
@@ -196,6 +171,9 @@
                     if (ELEM.WORK[1][index]) ELEM.WORK[1][index].classList.add(STR.CCLASS_WORKPAGE_HIDDEN);
                 }
                 document.getElementById("wp" + id).classList.remove(STR.CCLASS_WORKPAGE_HIDDEN);
+                let currentVideo = document.getElementById("vp" + localStorage.getItem("currentWorkPageId"));
+                if (currentVideo) currentVideo.pause();
+                localStorage.setItem("currentWorkPageId", id);
             }, delay);
         }
 
