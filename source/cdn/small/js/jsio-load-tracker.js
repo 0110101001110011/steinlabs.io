@@ -35,7 +35,11 @@
 
         let customFontsSpecified = (Array.isArray(GLOBAL_FONTS) && GLOBAL_FONTS.length);
 
-        itemsToLoad = allMediaElements.length + (customFontsSpecified ? 1 : 0);
+        let jicoprCount = document.jicopr.initLib();
+
+        itemsToLoad = allMediaElements.length + (customFontsSpecified ? 1 : 0) + jicoprCount; 
+        
+        document.jicopr.initEngine(preCallBack);
 
         for (let index = 0; index < allMediaElements.length; ++index) {
             let element = allMediaElements[index];
@@ -73,14 +77,16 @@
             };
 
             (function () {
-                var wf = document.createElement('script');
+                let wf = document.createElement('script');
                 wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
                 wf.type = 'text/javascript';
                 wf.async = 'true';
-                var s = document.getElementsByTagName('script')[0];
+                let s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(wf, s);
             })();
         }
+
+        document.jicopr.startEngine();
     });
 
     document.loadTracker = {
