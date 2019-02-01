@@ -6,9 +6,9 @@
         const comma = ",";
         let output = new String();
 
-        MEDIA_TAGS.forEach(element => {
-            output += element + period + CLASSNAME_LAZYLOAD + comma;
-        });
+        for (let index = 0; index < MEDIA_TAGS.length; index++) {
+            output += MEDIA_TAGS[index] + period + CLASSNAME_LAZYLOAD + comma;           
+        }
 
         return output.slice(0, -1);
     })()
