@@ -10,7 +10,7 @@
     const SHOW_TEST_IMAGE = false;
     const PIXEL_SIZE = 2;
     const AFPS = 10;
-    const TPAF = 60 / AFPS;
+    const TFPS = 60;
 
     const EVENT = Object.freeze({
         RESIZE: "resize",
@@ -33,19 +33,30 @@
     });
 
     const SPRITE_DATA = Object.freeze({
-        PLAYER: { 
+        PLAYER: {
             type: EGameObjectType.player,
             sprite: new Sprite("./cdn/small/jicopr/adol.png", new V2(32, 52), {
                 idle: new SpritesheetParams(0, 1, false),
                 run: new SpritesheetParams(1, 4, true),
                 attack: new SpritesheetParams(2, 9, true),
-            }), 
-            pos: new V2() 
+            }),
+            pos: new V2()
         },
     });
 
     // Engine
     let engine = null;
+
+    // Tools and helpers
+    tools = {
+        /**
+         * Round any number down into an integer (fast)
+         * @param {Number} val Number to round down to an integer
+         */
+        fastFloor: function (val) {
+            return (val << 0);
+        }
+    }
 
     // Old style class declarations
 
@@ -57,6 +68,10 @@
     function V2(x, y) {
         this.x = x ? x : 0;
         this.y = y ? y : 0;
+
+        this.equal = function (v2) {
+            return tools.fastFloor(this.x) == tools.fastFloor(v2.x) && tools.fastFloor(this.y) == tools.fastFloor(v2.y);
+        }
     }
 
     /**
@@ -65,7 +80,7 @@
      * @param {Number} [yOffset=0] - the starting row's index for this sprite (0 indexed, 0 is the top row)
      * @param {Number} frameCount - The number of frames for this animation
      * @param {Boolean} animated - Whether or not this sprite sheet is animated
-     */ 
+     */
     function SpritesheetParams(yOffset, frameCount, animated) {
         this.yOffset = yOffset;
         this.frameCount = frameCount;
@@ -103,14 +118,14 @@
                 this.img,
                 sx, sy,
                 this.size.x, this.size.y,
-                this.floor(pos.x - (this.size.x / 2)), this.floor(pos.y - (this.size.y / 2)),
+                tools.fastFloor(pos.x - (this.size.x / 2)), tools.fastFloor(pos.y - (this.size.y / 2)),
                 this.size.x, this.size.y);
         }
 
         this.animate = function () {
             let ca = this.animations[this.currentAnimation];
             if (ca.animated) {
-                if (engine.frame % TPAF == 0) {
+                if (engine.frame % (TFPS / AFPS) == 0) {
                     this.currentFrame++;
                     if (this.currentFrame == ca.frameCount) {
                         this.currentFrame = 0;
@@ -137,10 +152,6 @@
             this.state = EImageState.ready;
             imgLoadCallback(null);
         }
-     
-        this.floor = function (val) {
-            return (val << 0);
-        }
     }
 
     /**
@@ -152,7 +163,24 @@
     function GameObject(sprite, position) {
         this.sprite = sprite;
         this.position = position ? position : new V2();
+        this.previousPosition = this.position;
         this.state = EObjectState.active;
+
+        window.addEventListener("scroll", function (go, e) {
+            let pageHeight = document.documentElement.clientHeight / 2;
+
+            let topPos = Math.abs(Math.min(engine.canvas.canvas.getBoundingClientRect().top, 0));
+            let playerDiffy = topPos - (go.position.y * PIXEL_SIZE);
+
+            if (playerDiffy < pageHeight * -1) {
+
+            } else if (playerDiffy > 0) {
+                go.setPosition(go.position.x, go.position.y + playerDiffy);
+                console.log("!")
+            }
+
+
+        }.bind(null, this));
 
         this.init = function (onLoadCallback) {
             this.sprite.init(onLoadCallback);
@@ -167,9 +195,9 @@
         }
 
         // Utility
-        this.setPosition = function(x, y) {
-            this.position.x = x;
-            this.position.y = y;
+        this.setPosition = function (x, y) {
+            this.position.x = tools.fastFloor(x);
+            this.position.y = tools.fastFloor(y);
         }
 
         this.getPosition = function () {
@@ -192,12 +220,27 @@
         this.init = function (onLoadCallback) {
             this.gameObject.setPosition(engine.canvas.x / 2, document.documentElement.clientHeight / PIXEL_SIZE / 2);
             this.gameObject.init(onLoadCallback);
-            this.gameObject.setAnimation("attack");
+            this.gameObject.setAnimation("run");
         }
 
         this.update = function () {
+            let pageHeight = document.documentElement.clientHeight / 2;
+            let canvasTop = engine.canvas.canvas.getBoundingClientRect().top * -1 + pageHeight;
+            let delta = Math.min(Math.max(canvasTop / engine.canvas.canvas.height, 0), 1);
+
+            let newPos = new V2(this.gameObject.getPosition().x, engine.canvas.canvas.height / PIXEL_SIZE * delta)
+
+            this.gameObject.setPosition(newPos.x, newPos.y);
+
+            if (this.gameObject.previousPosition.equal(newPos)) {
+                this.gameObject.setAnimation("idle");
+            } else {
+                this.gameObject.setAnimation("run");
+            }
+
+            this.gameObject.previousPosition = newPos;
             this.sprite.animate();
-        }   
+        }
 
         this.draw = function (ctx) {
 
@@ -213,7 +256,7 @@
         }
 
         this.update = function () {
-            
+
         }
 
         this.draw = function (ctx) {
@@ -230,7 +273,7 @@
         }
 
         this.update = function () {
-            
+
         }
 
         this.draw = function (ctx) {
@@ -264,18 +307,18 @@
 
         this.redrawRegions = [];
 
-        this.addClearRectRegion = function(xy, wh) {
-            this.redrawRegions.push({xy: xy, wh: wh});
+        this.addClearRectRegion = function (xy, wh) {
+            this.redrawRegions.push({ xy: xy, wh: wh });
         }
 
         this.clear = function () {
             while (this.redrawRegions.length > 0) {
                 let region = this.redrawRegions.pop();
-                this.ctx.clearRect(region.xy.x, region.xy.y, region.wh.x, region.wh.y);  
+                this.ctx.clearRect(region.xy.x, region.xy.y, region.wh.x, region.wh.y);
             }
         }
 
-        this.draw = function () {         
+        this.draw = function () {
             this.clear();
 
             for (let index = 0; index < engine.gameObjects.length; index++) {
@@ -294,8 +337,10 @@
         this.gameObjects = [];
         this.canvas = canvas;
         this.state = EEngineState.loading;
-        this.startTime = Date.now();
+        this.startTime = window.performance.now();
         this.frame = 1;
+        this.previousFrameTime = window.performance.now();
+        this.deltaTime = 0;
 
         // Core
         this.start = function () {
@@ -305,12 +350,14 @@
                 console.log(V.S_INIT_OK_MESSAGE);
             } else {
                 console.log(V.S_INIT_FAIL_MESSAGE + this.state);
-            }         
+            }
 
             this.update();
         }
 
         this.update = function () {
+            engine.deltaTime = 1 / (window.performance.now() - engine.previousFrameTime);
+            engine.previousFrameTime = window.performance.now();
             if (engine.state != EEngineState.ready) {
                 return;
             }
