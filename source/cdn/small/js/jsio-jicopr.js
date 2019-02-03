@@ -8,7 +8,9 @@
     // Consts
     const VERSION = "0.1.0";
     const SHOW_TEST_IMAGE = false;
-    const PIXEL_SIZE = 4;
+    const PIXEL_SIZE = 2;
+    const AFPS = 10;
+    const TPAF = 60 / AFPS;
 
     const EVENT = Object.freeze({
         RESIZE: "resize",
@@ -24,14 +26,22 @@
     const V = Object.freeze({
         S_2D: "2d",
         V2_CANVAS_SIZE: new V2("1920px", "5000px"),
-        V2_CANVAS_RESOLUTION: new V2(1920 / PIXEL_SIZE, 5000 / PIXEL_SIZE),
+        V2_CANVAS_RESOLUTION: new V2(1920, 5000),
         S_INIT_OK_MESSAGE: "jicopr [V" + VERSION + "] started",
         S_INIT_FAIL_MESSAGE: "jicopr failed to start\nState: ",
         S_NOCANVAS_MESSAGE: "Canvas [" + EID.CANVAS + "] not found",
     });
 
     const SPRITE_DATA = Object.freeze({
-        PLAYER: { type: EGameObjectType.player, sprite: new Sprite("./cdn/small/jicopr/test.png", new V2(32, 32), 0, 0), pos: new V2() },
+        PLAYER: { 
+            type: EGameObjectType.player,
+            sprite: new Sprite("./cdn/small/jicopr/adol.png", new V2(32, 52), {
+                idle: new SpritesheetParams(0, 1, false),
+                run: new SpritesheetParams(1, 4, true),
+                attack: new SpritesheetParams(2, 9, true),
+            }), 
+            pos: new V2() 
+        },
     });
 
     // Engine
@@ -50,25 +60,31 @@
     }
 
     /**
+     * 
+     * @param {V2} size 
+     * @param {Number} [yOffset=0] - the starting row's index for this sprite (0 indexed, 0 is the top row)
+     * @param {Number} frameCount - The number of frames for this animation
+     * @param {Boolean} animated - Whether or not this sprite sheet is animated
+     */ 
+    function SpritesheetParams(yOffset, frameCount, animated) {
+        this.yOffset = yOffset;
+        this.frameCount = frameCount;
+        this.animated = animated;
+    }
+
+    /**
      * Sprite - A wrapper for an Image object
      * @param {String} imgPath - path for the spritesheet that this sprite will use
-     * @param {V2} size - this sprite's display width and height
-     * @param {Number} [yOffset=0] - the starting row's index for this sprite (0 indexed, 0 is the top row)
-     * @param {Number} [defaultFrame=0] - The starting frame
+     * @param {SpritesheetParams} spriteData - This should be an object with properties representing each SpriteSheetParams object
      */
-    function Sprite(imgPath, size, yOffset, defaultFrame) {
+    function Sprite(imgPath, imgSize, spriteData) {
         this.state = EImageState.loading;
-
-        this.size = size;
-        this.img = new Image(this.size.x, this.size.y);
-
+        this.img = new Image(imgSize.x, imgSize.y);
+        this.size = imgSize;
         this.src = imgPath;
-
-        this.currentFrame = defaultFrame ? defaultFrame : 0;
-        this.yOffset = yOffset ? yOffset * this.size.y : 0;
-        this.xOffsets = [];
-
-        this.animate = false;
+        this.currentFrame = 0;
+        this.animations = spriteData;
+        this.currentAnimation = Object.keys(spriteData)[0];
 
         this.init = function (imgLoadCallback) {
             let self = this;
@@ -78,12 +94,36 @@
         }
 
         this.draw = function (ctx, pos) {
+            let ca = this.animations[this.currentAnimation];
+
+            let sx = this.size.x * this.currentFrame;
+            let sy = ca.yOffset * this.size.y;
+
             ctx.drawImage(
                 this.img,
-                this.xOffsets[this.currentFrame], this.yOffset,
+                sx, sy,
                 this.size.x, this.size.y,
-                pos.x, pos.y,
+                this.floor(pos.x - (this.size.x / 2)), this.floor(pos.y - (this.size.y / 2)),
                 this.size.x, this.size.y);
+        }
+
+        this.animate = function () {
+            let ca = this.animations[this.currentAnimation];
+            if (ca.animated) {
+                if (engine.frame % TPAF == 0) {
+                    this.currentFrame++;
+                    if (this.currentFrame == ca.frameCount) {
+                        this.currentFrame = 0;
+                    }
+                }
+            }
+        }
+
+        this.setAnimation = function (name, startFrame) {
+            if (name != this.currentAnimation) {
+                this.currentAnimation = name;
+                this.currentFrame = startFrame ? startFrame : 0;
+            }
         }
 
         // Internal
@@ -94,14 +134,12 @@
                 return;
             }
 
-            let columns = Math.ceil((this.img.naturalWidth / this.size.x));
-
-            for (let index = 0; index < columns; index++) {
-                this.xOffsets.push(index * this.size.x);
-            }
-
             this.state = EImageState.ready;
             imgLoadCallback(null);
+        }
+     
+        this.floor = function (val) {
+            return (val << 0);
         }
     }
 
@@ -117,13 +155,15 @@
         this.state = EObjectState.active;
 
         this.init = function (onLoadCallback) {
-            this.setPosition(engine.canvas.x / 2, engine.canvas.y / 2);
             this.sprite.init(onLoadCallback);
         }
 
         this.draw = function (ctx) {
-            this.floorPos();
             this.sprite.draw(ctx, this.position);
+        }
+
+        this.setAnimation = function (name, startFrame) {
+            this.sprite.setAnimation(name, startFrame);
         }
 
         // Utility
@@ -132,24 +172,35 @@
             this.position.y = y;
         }
 
-        this.floorPos = function () {
-            this.position.x = (this.position.x << 0);
-            this.position.y = (this.position.y << 0);
+        this.getPosition = function () {
+            return this.position;
+        }
+
+        this.getSize = function () {
+            return this.sprite.size;
+        }
+
+        this.getClearRect = function () {
+            return { xy: new V2(this.position.x - (this.sprite.size.x / 2), this.position.y - (this.sprite.size.y / 2)), wh: this.sprite.size }
         }
     }
 
     function PlayerCharacter(gameObject) {
         this.gameObject = gameObject;
+        this.sprite = this.gameObject.sprite;
 
         this.init = function (onLoadCallback) {
+            this.gameObject.setPosition(engine.canvas.x / 2, document.documentElement.clientHeight / PIXEL_SIZE / 2);
             this.gameObject.init(onLoadCallback);
+            this.gameObject.setAnimation("attack");
         }
 
         this.update = function () {
-            // console.log("Updating player");
-        }
+            this.sprite.animate();
+        }   
 
         this.draw = function (ctx) {
+
             this.gameObject.draw(ctx);
         }
     }
@@ -199,45 +250,22 @@
         }
 
         this.ctx = this.canvas.getContext(V.S_2D);
-        this.ctx.webkitImageSmoothingEnabled = false;
-        this.ctx.mozImageSmoothingEnabled = false;
-        this.ctx.imageSmoothingEnabled = false;
 
         this.canvas.width = V.V2_CANVAS_RESOLUTION.x;
         this.canvas.height = V.V2_CANVAS_RESOLUTION.y;
 
-        this.canvas.style.width = V.V2_CANVAS_SIZE.x;
-        this.canvas.style.width = V.V2_CANVAS_SIZE.y;
-        // this.ctx.scale(PIXEL_SIZE, PIXEL_SIZE);
+        this.x = this.canvas.width / PIXEL_SIZE;
+        this.y = this.canvas.height / PIXEL_SIZE;
+
+        this.ctx.scale(PIXEL_SIZE, PIXEL_SIZE);
+        this.ctx.webkitImageSmoothingEnabled = false;
+        this.ctx.mozImageSmoothingEnabled = false;
+        this.ctx.imageSmoothingEnabled = false;
 
         this.redrawRegions = [];
 
-        this.x = this.canvas.width;
-        this.y = this.canvas.height;
-
-        this.offset = 0;
-
-        this.testShapeCircle = function () {
-            this.ctx.beginPath();
-            this.ctx.strokeStyle = "#FFaacc";
-            this.ctx.lineWidth = 10;
-            let x = this.x / 2 + (Math.sin(this.offset / 40) * 100);
-            let y = document.documentElement.clientHeight / 2 / PIXEL_SIZE;
-            let r = 40;
-            let sa = 0;
-            let ea = 2 * Math.PI;
-            this.ctx.arc(x, y, r, sa, ea);
-
-            r += 1;
-            let clearStartX = x - (r + this.ctx.lineWidth / 2);
-            let clearStartY = y - (r + this.ctx.lineWidth / 2);
-            this.addClearRectRegion(new V2(clearStartX, clearStartY), new V2(((r + this.ctx.lineWidth / 2) * 2), ((r + this.ctx.lineWidth / 2) * 2)));
-
-            this.offset++;
-        }
-
-        this.addClearRectRegion = function(xy, widthHeight) {
-            this.redrawRegions.push({xy: xy, wh: widthHeight});
+        this.addClearRectRegion = function(xy, wh) {
+            this.redrawRegions.push({xy: xy, wh: wh});
         }
 
         this.clear = function () {
@@ -252,6 +280,8 @@
 
             for (let index = 0; index < engine.gameObjects.length; index++) {
                 engine.gameObjects[index].draw(this.ctx);
+                let cr = engine.gameObjects[index].gameObject.getClearRect();
+                this.addClearRectRegion(cr.xy, cr.wh);
             }
 
             if (SHOW_TEST_IMAGE) this.testShapeCircle();
@@ -265,7 +295,7 @@
         this.canvas = canvas;
         this.state = EEngineState.loading;
         this.startTime = Date.now();
-        this.frame = 0;
+        this.frame = 1;
 
         // Core
         this.start = function () {
@@ -329,6 +359,7 @@
         },
         startEngine: function () {
             engine.start();
+            document.jicopr.p = engine.gameObjects[0];
         }
     }
 
